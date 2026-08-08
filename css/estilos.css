@@ -1,0 +1,415 @@
+/* estilos.css — Olimpíades Club de Begues. CSS propi, sense dependències. */
+
+:root {
+  --marro: #6b5344;
+  --marro-fosc: #4a382d;
+  --fosc: #1b1917;
+  --text: #1b1917;
+  --text-suau: #55504a;
+  --fons: #f6f4f1;
+  --paper: #ffffff;
+  --linia: #d6cec4;
+  --linia-forta: #9c9187;
+  --or: #b8860b;
+  --verd: #1e7d4f;
+  --vermell: #a32c2c;
+  --radi: 6px;
+  --ombra: 0 1px 3px rgba(27, 25, 23, 0.12);
+  --gap-quadre: 34px;
+  --amplada-ronda: 178px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--fons);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 { line-height: 1.15; margin: 0 0 0.4em; }
+h1 { font-size: 2rem; letter-spacing: -0.02em; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.05rem; }
+a { color: var(--marro-fosc); }
+
+.contenidor { width: min(1180px, 100% - 32px); margin-inline: auto; }
+
+/* ---------- Capçalera i peu ---------- */
+
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--marro);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+.barra .contenidor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  flex-wrap: wrap;
+  padding-block: 8px;
+}
+.barra img { height: 44px; display: block; }
+.barra nav { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.barra nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 8px 14px;
+  border-radius: var(--radi);
+  border: 2px solid transparent;
+}
+.barra nav a:hover { background: rgba(255, 255, 255, 0.14); }
+.barra nav a[aria-current="page"] { background: #fff; color: var(--marro-fosc); }
+
+.peu {
+  margin-top: 56px;
+  background: var(--fosc);
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 16px;
+}
+.peu p { color: rgba(255, 255, 255, 0.72); font-size: 0.85rem; text-transform: uppercase; margin: 0 0 10px; }
+.peu img { display: block; margin: 0 auto 22px; }
+.peu hr { border: 0; border-top: 1px solid #3a3733; margin: 24px 0 16px; }
+.peu .credit { text-transform: none; margin: 0; }
+
+/* ---------- Caps de pàgina ---------- */
+
+.titol-pagina { padding: 28px 0 4px; }
+.titol-pagina .sobretitol {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-suau);
+  margin: 0 0 6px;
+}
+
+.seccio { margin-top: 40px; }
+.seccio > h2 {
+  border-bottom: 3px solid var(--fosc);
+  padding-bottom: 6px;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Avisos ---------- */
+
+.avis {
+  border: 2px solid var(--vermell);
+  border-left-width: 8px;
+  background: #fdf3f3;
+  border-radius: var(--radi);
+  padding: 14px 16px;
+  margin: 20px 0;
+}
+.avis h3 { margin: 0 0 6px; font-size: 1rem; color: var(--vermell); }
+.avis ul { margin: 6px 0 0; padding-left: 20px; font-size: 0.92rem; }
+.avis li + li { margin-top: 4px; }
+.avis .ajuda { margin: 10px 0 0; font-size: 0.88rem; color: var(--text-suau); }
+
+.buit {
+  background: var(--paper);
+  border: 2px dashed var(--linia-forta);
+  border-radius: var(--radi);
+  padding: 22px;
+  text-align: center;
+  color: var(--text-suau);
+}
+
+.carregant { padding: 40px 0; text-align: center; color: var(--text-suau); }
+
+/* ---------- Taules ---------- */
+
+.taula-scroll { overflow-x: auto; background: var(--paper); border: 2px solid var(--fosc); border-radius: var(--radi); }
+table { border-collapse: collapse; width: 100%; background: var(--paper); }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--linia); white-space: nowrap; }
+thead th {
+  background: var(--fosc);
+  color: #fff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  position: sticky;
+  top: 0;
+}
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:nth-child(even) td { background: #faf8f6; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.pos { font-weight: 700; width: 1%; color: var(--text-suau); }
+td.punts { font-weight: 700; font-size: 1.05rem; }
+.apagat { color: var(--text-suau); font-weight: 400; }
+
+tr.lider td { background: #fdf6e0 !important; }
+tr.lider td.pos { color: var(--or); }
+tr.lider .nom-equip { font-weight: 800; }
+
+.equip-cel { display: flex; align-items: center; gap: 9px; }
+.punt-color { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+
+/* ---------- Filtres ---------- */
+
+.filtres { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.filtres button {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 15px;
+  border: 2px solid var(--fosc);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--fosc);
+  cursor: pointer;
+}
+.filtres button:hover { background: #eee9e3; }
+.filtres button[aria-pressed="true"] { background: var(--fosc); color: #fff; }
+
+/* ---------- Reixa d'esports ---------- */
+
+.reixa {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+}
+.targeta-esport {
+  display: block;
+  position: relative;
+  background: var(--paper);
+  border: 2px solid var(--fosc);
+  border-left: 8px solid var(--accent, var(--fosc));
+  border-radius: var(--radi);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--ombra);
+}
+.targeta-esport:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(27, 25, 23, 0.18); }
+.targeta-esport h3 { margin: 0 0 2px; font-size: 1.15rem; }
+.targeta-esport .meta { font-size: 0.8rem; color: var(--text-suau); text-transform: uppercase; letter-spacing: 0.04em; }
+.targeta-esport .campio { margin-top: 10px; font-weight: 700; font-size: 0.95rem; }
+.targeta-esport .campio span { color: var(--or); }
+.targeta-esport .sense-campio { margin-top: 10px; font-size: 0.9rem; color: var(--text-suau); }
+
+.progres { margin-top: 12px; }
+.progres .barra-fons { height: 8px; background: #e7e1da; border-radius: 999px; overflow: hidden; }
+.progres .barra-plena { height: 100%; background: var(--accent, var(--fosc)); }
+.progres .xifra { font-size: 0.78rem; color: var(--text-suau); margin-top: 4px; }
+
+/* ---------- Fitxa d'un esport ---------- */
+
+.etiquetes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px; }
+.etiqueta {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 2px solid var(--fosc);
+  background: var(--paper);
+}
+.etiqueta--grup { border-color: var(--accent); color: var(--accent-text, var(--fosc)); }
+
+.repartiment { font-size: 0.9rem; color: var(--text-suau); margin: 6px 0 0; }
+.repartiment b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* ---------- Quadre ---------- */
+
+.quadre-scroll {
+  overflow-x: auto;
+  padding: 4px 4px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.quadre {
+  display: flex;
+  gap: var(--gap-quadre);
+  min-width: min-content;
+  align-items: stretch;
+}
+.ronda {
+  flex: 1 1 var(--amplada-ronda);
+  min-width: var(--amplada-ronda);
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+.ronda > h3 {
+  text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-suau);
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--linia);
+}
+.ronda .caselles { flex: 1; display: flex; flex-direction: column; }
+.casella {
+  flex: 1 0 84px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.casella > .partit { width: 100%; }
+
+/* Connectors del quadre */
+.casella--surt::after,
+.casella--rep::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(var(--gap-quadre) / 2);
+  border-top: 2px solid var(--linia-forta);
+}
+.casella--surt::after { left: 100%; }
+.casella--rep::before { right: 100%; }
+.unio {
+  position: absolute;
+  left: calc(100% + var(--gap-quadre) / 2);
+  top: 50%;
+  height: 100%;
+  border-left: 2px solid var(--linia-forta);
+}
+
+/* Partit */
+.partit {
+  background: var(--paper);
+  border: 2px solid var(--fosc);
+  border-radius: var(--radi);
+  overflow: hidden;
+  box-shadow: var(--ombra);
+}
+.partit .cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  background: #efeae4;
+  border-bottom: 2px solid var(--fosc);
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-suau);
+}
+.partit .cap .marcador { color: var(--text); letter-spacing: 0; font-size: 0.8rem; }
+.partit .costat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  font-size: 0.95rem;
+}
+.partit .costat + .costat { border-top: 1px solid var(--linia); }
+.partit .costat .nom { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.partit .costat--guanya { background: #eaf6ef; font-weight: 800; }
+.partit .costat--guanya .nom::after { content: " ✓"; color: var(--verd); }
+.partit .costat--perd { color: var(--text-suau); }
+.partit .costat--incognita .nom { font-style: italic; color: var(--text-suau); font-size: 0.88rem; }
+.partit--bloquejat { border-color: var(--linia-forta); box-shadow: none; }
+.partit--bloquejat .cap { background: #f2efec; border-bottom-color: var(--linia-forta); }
+.partit--pendent .cap::after { content: "pendent"; }
+
+.partits-llocs { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+.partits-llocs > div { flex: 1 1 240px; max-width: 320px; }
+.partits-llocs h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-suau); margin-bottom: 6px; }
+
+.nota { font-size: 0.88rem; color: var(--text-suau); margin: 0 0 14px; }
+
+/* ---------- Portada ---------- */
+
+.portada { background: var(--paper); text-align: center; padding: 56px 0 64px; }
+.portada .aros { max-height: 120px; margin-bottom: 24px; }
+.portada h1 { font-size: clamp(2.8rem, 12vw, 5.5rem); font-weight: 800; margin: 0; letter-spacing: -0.03em; }
+.portada .any { font-size: clamp(2rem, 8vw, 3.6rem); font-weight: 400; margin: 0 0 28px; }
+.portada .dates {
+  display: inline-block;
+  border-top: 2px solid var(--fosc);
+  border-bottom: 2px solid var(--fosc);
+  background: var(--fons);
+  padding: 14px 22px;
+  margin-bottom: 34px;
+}
+.portada .dates p { margin: 0; font-weight: 700; text-transform: uppercase; font-size: 1.05rem; }
+.portada .dates p + p { margin-top: 4px; }
+
+.boto {
+  display: inline-block;
+  background: var(--fosc);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 42px;
+  border: 2px solid var(--fosc);
+}
+.boto:hover { background: var(--marro-fosc); border-color: var(--marro-fosc); }
+.boto--clar { background: transparent; color: var(--fosc); }
+.boto--clar:hover { background: var(--fosc); color: #fff; }
+
+.tornar { display: inline-block; margin: 18px 0 0; font-weight: 600; text-decoration: none; }
+.tornar:hover { text-decoration: underline; }
+
+.caixa-info {
+  background: var(--paper);
+  border: 2px solid var(--linia);
+  border-radius: var(--radi);
+  padding: 22px;
+  text-align: center;
+  margin-top: 40px;
+}
+.caixa-info h2 { font-size: 1.15rem; }
+.caixa-info p { margin: 0 auto; max-width: 62ch; }
+
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.fitxa {
+  background: var(--paper);
+  border: 2px solid var(--fosc);
+  border-radius: var(--radi);
+  padding: 26px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.fitxa h2 { margin-bottom: 4px; }
+.fitxa .dates-fitxa { color: var(--text-suau); font-weight: 600; }
+.fitxa .boto { margin-top: auto; }
+
+/* ---------- Mòbil ---------- */
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  :root { --gap-quadre: 26px; --amplada-ronda: 158px; }
+  .contenidor { width: calc(100% - 24px); }
+  h1 { font-size: 1.65rem; }
+  .barra .contenidor { min-height: 60px; }
+  .barra img { height: 38px; }
+  .barra nav a { padding: 7px 11px; font-size: 0.82rem; }
+  th, td { padding: 9px 10px; font-size: 0.92rem; }
+  .quadre-scroll { margin-inline: -12px; padding-inline: 12px; }
+  .taula-scroll { border-radius: 0; }
+}
+
+@media print {
+  .barra, .filtres, .peu, .tornar { display: none; }
+  body { background: #fff; }
+  .quadre-scroll { overflow: visible; }
+}

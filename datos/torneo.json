@@ -3,52 +3,52 @@
   "equipos": [
     {
       "id": "E1",
-      "nombre": "Equipo 1",
+      "nombre": "Equip 1",
       "color": null
     },
     {
       "id": "E2",
-      "nombre": "Equipo 2",
+      "nombre": "Equip 2",
       "color": null
     },
     {
       "id": "E3",
-      "nombre": "Equipo 3",
+      "nombre": "Equip 3",
       "color": null
     },
     {
       "id": "E4",
-      "nombre": "Equipo 4",
+      "nombre": "Equip 4",
       "color": null
     },
     {
       "id": "E5",
-      "nombre": "Equipo 5",
+      "nombre": "Equip 5",
       "color": null
     },
     {
       "id": "E6",
-      "nombre": "Equipo 6",
+      "nombre": "Equip 6",
       "color": null
     },
     {
       "id": "E7",
-      "nombre": "Equipo 7",
+      "nombre": "Equip 7",
       "color": null
     },
     {
       "id": "E8",
-      "nombre": "Equipo 8",
+      "nombre": "Equip 8",
       "color": null
     },
     {
       "id": "E9",
-      "nombre": "Equipo 9",
+      "nombre": "Equip 9",
       "color": null
     },
     {
       "id": "E10",
-      "nombre": "Equipo 10",
+      "nombre": "Equip 10",
       "color": null
     }
   ],

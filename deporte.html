@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classificació · Olimpíades 2026 - Club de Begues</title>
-    <meta name="description" content="Classificació general i quadres dels 20 esports de les Olimpíades 2026 del Club de Begues.">
+    <title>Quadre · Olimpíades 2026 - Club de Begues</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -13,7 +12,7 @@
         <div class="contenidor">
             <a href="index.html"><img src="img/logo_club.png" alt="Club de Begues"></a>
             <nav>
-                <a href="index.html" aria-current="page">Classificació</a>
+                <a href="index.html">Classificació</a>
                 <a href="portada.html">Les Olimpíades</a>
             </nav>
         </div>
@@ -21,9 +20,8 @@
 
     <main class="contenidor">
 
-        <div class="titol-pagina">
-            <p class="sobretitol">Olimpíades 2026 · Club de Begues</p>
-            <h1>Classificació general</h1>
+        <div id="capcalera" class="titol-pagina">
+            <h1>Carregant…</h1>
         </div>
 
         <div id="errors" hidden></div>
@@ -31,20 +29,13 @@
         <noscript>
             <div class="avis">
                 <h3>Cal activar el JavaScript</h3>
-                <p>Aquesta pàgina calcula la classificació al mateix navegador. Sense JavaScript no es pot mostrar.</p>
+                <p>Aquesta pàgina dibuixa el quadre al mateix navegador. Sense JavaScript no es pot mostrar.</p>
             </div>
         </noscript>
 
-        <section class="seccio">
-            <h2>Com van els equips</h2>
-            <div id="general"><p class="carregant">Carregant les dades…</p></div>
-        </section>
+        <div id="contingut"><p class="carregant">Carregant el quadre…</p></div>
 
-        <section class="seccio">
-            <h2>Els 20 esports</h2>
-            <div id="filtres" class="filtres"></div>
-            <div id="reixa" class="reixa"></div>
-        </section>
+        <a class="tornar" href="index.html">← Tots els esports</a>
 
     </main>
 
@@ -59,6 +50,6 @@
         </div>
     </footer>
 
-    <script type="module" src="js/general.js"></script>
+    <script type="module" src="js/cuadro.js"></script>
 </body>
 </html>
