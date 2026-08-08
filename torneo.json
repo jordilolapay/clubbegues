@@ -1,0 +1,270 @@
+{
+  "nombre": "Torneo Multideporte",
+  "equipos": [
+    {
+      "id": "E1",
+      "nombre": "Equipo 1",
+      "color": null
+    },
+    {
+      "id": "E2",
+      "nombre": "Equipo 2",
+      "color": null
+    },
+    {
+      "id": "E3",
+      "nombre": "Equipo 3",
+      "color": null
+    },
+    {
+      "id": "E4",
+      "nombre": "Equipo 4",
+      "color": null
+    },
+    {
+      "id": "E5",
+      "nombre": "Equipo 5",
+      "color": null
+    },
+    {
+      "id": "E6",
+      "nombre": "Equipo 6",
+      "color": null
+    },
+    {
+      "id": "E7",
+      "nombre": "Equipo 7",
+      "color": null
+    },
+    {
+      "id": "E8",
+      "nombre": "Equipo 8",
+      "color": null
+    },
+    {
+      "id": "E9",
+      "nombre": "Equipo 9",
+      "color": null
+    },
+    {
+      "id": "E10",
+      "nombre": "Equipo 10",
+      "color": null
+    }
+  ],
+  "categorias": {
+    "equipo": {
+      "etiqueta": "Deportes de equipo",
+      "puntos": [
+        70,
+        54,
+        48,
+        42,
+        30,
+        25,
+        20,
+        15,
+        10,
+        5
+      ]
+    },
+    "resistencia": {
+      "etiqueta": "Ciclismo / Atletismo / Natación",
+      "puntos": [
+        50,
+        37,
+        33,
+        29,
+        25,
+        21,
+        17,
+        13,
+        9,
+        5
+      ]
+    },
+    "individual": {
+      "etiqueta": "Deportes individuales",
+      "puntos": [
+        40,
+        32,
+        29,
+        26,
+        20,
+        17,
+        14,
+        11,
+        8,
+        5
+      ]
+    }
+  },
+  "gruposAfines": {
+    "voleibol": {
+      "etiqueta": "Voleibol",
+      "color": "#F5A623"
+    },
+    "futbol": {
+      "etiqueta": "Fútbol",
+      "color": "#4A90D9"
+    },
+    "raqueta": {
+      "etiqueta": "Raqueta y pala",
+      "color": "#9B6BC7"
+    },
+    "precision": {
+      "etiqueta": "Precisión",
+      "color": "#4CAF7D"
+    },
+    "mesa": {
+      "etiqueta": "Mesa y mente",
+      "color": "#D4B106"
+    },
+    "balonmano-waterpolo": {
+      "etiqueta": "Balonmano y waterpolo",
+      "color": "#E06C6C"
+    }
+  },
+  "deportes": [
+    {
+      "id": "petanca",
+      "nombre": "Petanca",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": null
+    },
+    {
+      "id": "voleibol-playa",
+      "nombre": "Voleibol playa",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "voleibol"
+    },
+    {
+      "id": "voleibol-pista",
+      "nombre": "Voleibol pista",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": "voleibol"
+    },
+    {
+      "id": "tenis",
+      "nombre": "Tenis",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "raqueta"
+    },
+    {
+      "id": "fronton",
+      "nombre": "Frontón",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "raqueta"
+    },
+    {
+      "id": "padel",
+      "nombre": "Pádel",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "raqueta"
+    },
+    {
+      "id": "ping-pong",
+      "nombre": "Ping-pong",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "raqueta"
+    },
+    {
+      "id": "futbol-sala",
+      "nombre": "Fútbol sala",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": "futbol"
+    },
+    {
+      "id": "futbol-siete",
+      "nombre": "Fútbol siete",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": "futbol"
+    },
+    {
+      "id": "balonmano",
+      "nombre": "Balonmano",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": "balonmano-waterpolo"
+    },
+    {
+      "id": "baloncesto",
+      "nombre": "Baloncesto",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": null
+    },
+    {
+      "id": "waterpolo",
+      "nombre": "Waterpolo",
+      "categoria": "equipo",
+      "formato": "cuadro",
+      "grupoAfin": "balonmano-waterpolo"
+    },
+    {
+      "id": "domino",
+      "nombre": "Dominó",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "mesa"
+    },
+    {
+      "id": "ajedrez",
+      "nombre": "Ajedrez",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "mesa"
+    },
+    {
+      "id": "dardos",
+      "nombre": "Dardos",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "precision"
+    },
+    {
+      "id": "futbolin",
+      "nombre": "Futbolín",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "precision"
+    },
+    {
+      "id": "billar",
+      "nombre": "Billar",
+      "categoria": "individual",
+      "formato": "cuadro",
+      "grupoAfin": "precision"
+    },
+    {
+      "id": "ciclismo",
+      "nombre": "Ciclismo",
+      "categoria": "resistencia",
+      "formato": "clasificacion",
+      "grupoAfin": null
+    },
+    {
+      "id": "atletismo",
+      "nombre": "Atletismo",
+      "categoria": "resistencia",
+      "formato": "clasificacion",
+      "grupoAfin": null
+    },
+    {
+      "id": "natacion",
+      "nombre": "Natación",
+      "categoria": "resistencia",
+      "formato": "clasificacion",
+      "grupoAfin": null
+    }
+  ]
+}

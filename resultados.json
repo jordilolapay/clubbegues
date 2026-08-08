@@ -1,0 +1,1098 @@
+{
+  "petanca": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "voleibol-playa": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "voleibol-pista": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "tenis": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "fronton": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "padel": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ping-pong": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbol-sala": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbol-siete": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "balonmano": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "baloncesto": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "waterpolo": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "domino": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ajedrez": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "dardos": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbolin": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "billar": {
+    "previa1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "previa2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "qf4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "sf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "final": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "tercerPuesto": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf1": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consSf2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consFinal": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "consTercero": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "puesto9": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ciclismo": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "atletismo": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "natacion": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+}
