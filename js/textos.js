@@ -74,6 +74,12 @@ export const NOMS_RONDES = {
   consFinal: 'Final consolació',
 };
 
+/** Nom de cada competició. */
+export const NOMS_COMPETICIONS = {
+  masculina: 'Masculí',
+  femenina: 'Femení',
+};
+
 const ORDINALS = ['1r', '2n', '3r', '4t', '5è', '6è', '7è', '8è', '9è', '10è'];
 
 export const ordinal = (posicio) => ORDINALS[posicio - 1] ?? `${posicio}è`;

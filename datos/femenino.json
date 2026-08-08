@@ -1,0 +1,138 @@
+{
+  "etiqueta": "Femení",
+  "equipos": [
+    {
+      "id": "F1",
+      "nombre": "Equip femení 1",
+      "color": null
+    },
+    {
+      "id": "F2",
+      "nombre": "Equip femení 2",
+      "color": null
+    },
+    {
+      "id": "F3",
+      "nombre": "Equip femení 3",
+      "color": null
+    },
+    {
+      "id": "F4",
+      "nombre": "Equip femení 4",
+      "color": null
+    },
+    {
+      "id": "F5",
+      "nombre": "Equip femení 5",
+      "color": null
+    }
+  ],
+  "categorias": {
+    "equipo": {
+      "etiqueta": "Deportes de equipo",
+      "puntos": [
+        70,
+        54,
+        48,
+        42,
+        30
+      ]
+    },
+    "resistencia": {
+      "etiqueta": "Ciclismo / Atletismo / Natación",
+      "puntos": [
+        50,
+        37,
+        33,
+        29,
+        25
+      ]
+    },
+    "individual": {
+      "etiqueta": "Deportes individuales",
+      "puntos": [
+        40,
+        32,
+        29,
+        26,
+        20
+      ]
+    }
+  },
+  "puntosLiga": {
+    "victoria": 1,
+    "derrota": 0
+  },
+  "jornadas": [
+    {
+      "jornada": 1,
+      "partidos": [
+        [
+          "F1",
+          "F2"
+        ],
+        [
+          "F4",
+          "F5"
+        ]
+      ],
+      "descansa": "F3"
+    },
+    {
+      "jornada": 2,
+      "partidos": [
+        [
+          "F2",
+          "F5"
+        ],
+        [
+          "F3",
+          "F4"
+        ]
+      ],
+      "descansa": "F1"
+    },
+    {
+      "jornada": 3,
+      "partidos": [
+        [
+          "F1",
+          "F5"
+        ],
+        [
+          "F2",
+          "F3"
+        ]
+      ],
+      "descansa": "F4"
+    },
+    {
+      "jornada": 4,
+      "partidos": [
+        [
+          "F1",
+          "F4"
+        ],
+        [
+          "F5",
+          "F3"
+        ]
+      ],
+      "descansa": "F2"
+    },
+    {
+      "jornada": 5,
+      "partidos": [
+        [
+          "F1",
+          "F3"
+        ],
+        [
+          "F4",
+          "F2"
+        ]
+      ],
+      "descansa": "F5"
+    }
+  ]
+}

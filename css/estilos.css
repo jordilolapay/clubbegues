@@ -161,6 +161,54 @@ tr.lider .nom-equip { font-weight: 800; }
 .equip-cel { display: flex; align-items: center; gap: 9px; }
 .punt-color { width: 12px; height: 12px; border-radius: 3px; flex: none; }
 
+/* ---------- Selector de competició ---------- */
+
+.selector {
+  display: inline-flex;
+  border: 2px solid var(--fosc);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 22px 0 4px;
+  background: var(--paper);
+}
+.selector__opcio {
+  padding: 9px 26px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--fosc);
+}
+.selector__opcio + .selector__opcio { border-left: 2px solid var(--fosc); }
+.selector__opcio:hover { background: #eee9e3; }
+.selector__opcio[aria-current="true"] { background: var(--fosc); color: #fff; }
+
+/* ---------- Jornades de lliga ---------- */
+
+.jornades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.jornada h3 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-suau);
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--linia);
+}
+.jornada .partit + .partit { margin-top: 10px; }
+.jornada .descansa {
+  margin: 10px 0 0;
+  font-size: 0.82rem;
+  color: var(--text-suau);
+  font-style: italic;
+}
+
 /* ---------- Filtres ---------- */
 
 .filtres { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }

@@ -38,34 +38,51 @@ export const TOTAL_PARTITS = ESQUEMA_PARTITS.length;
 export const TOTAL_POSICIONS = ORIGEN_POSICIONS.length;
 
 /**
- * Calcula l'estat d'un esport: participants derivats de cada partit, posicions finals i punts.
+ * Calcula l'estat d'un esport: participants de cada partit, posicions finals i punts.
  *
- * @param {object} esport   entrada de torneo.deportes
- * @param {object} torneig  torneo.json sencer
- * @param {object} quadre   entrada de cuadros.json (o undefined)
- * @param {object} resultat entrada de resultados.json (o undefined)
+ * @param {object} esport entrada de deportes (torneo.json)
+ * @param {object} config competició: { equipos, categorias, ... }. És torneo.json per a la
+ *                        masculina i femenino.json per a la femenina.
+ * @param {object} fonts  { format, quadre, resultat, jornades, puntsLliga }
  * @returns {object} estat de l'esport (mai llança: els problemes van a `errors`)
  */
-export function calcularEsport(esport, torneig, quadre, resultat) {
+export function calcularEsport(esport, config, fonts = {}) {
   const errors = [];
-  const equipsValids = new Set(torneig.equipos.map((e) => e.id));
-  const categoria = torneig.categorias[esport.categoria];
+  const equipsValids = new Set(config.equipos.map((e) => e.id));
+  const nPosicions = config.equipos.length;
+  const categoria = config.categorias[esport.categoria];
   if (!categoria) {
     errors.push(`L'esport "${esport.id}" té la categoria desconeguda "${esport.categoria}".`);
   }
   const taulaPunts = categoria ? categoria.puntos : [];
+  const format = fonts.format ?? esport.formato;
+  const { quadre, resultat } = fonts;
 
   const base =
-    esport.formato === 'clasificacion'
-      ? posicionsPerClassificacio(esport, resultat, equipsValids, errors)
-      : posicionsPerQuadre(esport, quadre, resultat, equipsValids, errors);
+    format === 'clasificacion'
+      ? posicionsPerClassificacio(esport, resultat, equipsValids, errors, nPosicions)
+      : format === 'liga'
+        ? posicionsPerLliga(esport, config, fonts, errors)
+        : posicionsPerQuadre(esport, quadre, resultat, equipsValids, errors);
 
-  const punts = {};
+  // Els punts surten de la posició final, menys si hi ha empats a la lliga: aleshores els
+  // equips empatats es reparteixen a parts iguals els punts dels llocs que ocupen.
+  const puntsProvisionals = {};
   base.posicions.forEach((idEquip, i) => {
-    if (idEquip) punts[idEquip] = taulaPunts[i] ?? 0;
+    if (idEquip) puntsProvisionals[idEquip] = taulaPunts[i] ?? 0;
   });
+  for (const bloc of base.empats ?? []) {
+    const suma = bloc.posicions.reduce((total, pos) => total + (taulaPunts[pos - 1] ?? 0), 0);
+    const repartit = Math.round(suma / bloc.equipos.length);
+    for (const idEquip of bloc.equipos) puntsProvisionals[idEquip] = repartit;
+  }
+
+  // En un quadre, un lloc decidit ja no canvia i puntua de seguida. En una lliga, en canvi,
+  // qualsevol posició pot moure's fins a l'últim partit: no es reparteix res fins que s'acaba.
+  const punts = base.provisional ? {} : puntsProvisionals;
 
   return {
+    puntsProvisionals,
     id: esport.id,
     esport,
     categoria: esport.categoria,
@@ -73,6 +90,7 @@ export function calcularEsport(esport, torneig, quadre, resultat) {
     errors,
     punts,
     ...base,
+    format,
   };
 }
 
@@ -149,22 +167,159 @@ function posicionsPerQuadre(esport, quadre, resultat, equipsValids, errors) {
   const posicions = ORIGEN_POSICIONS.map(([idPartit, quin]) => (partits[idPartit] ?? buit)[quin]);
   const jugats = ESQUEMA_PARTITS.filter(({ id }) => partits[id].estat === 'jugat').length;
 
-  return { format: 'cuadro', partits, posicions, progres: { jugats, total: TOTAL_PARTITS } };
+  return { partits, posicions, progres: { jugats, total: TOTAL_PARTITS } };
+}
+
+/**
+ * Lliga de tots contra tots a una volta (competició femenina).
+ * L'ordre és: victòries → enfrontament directe entre els empatats → ordre manual
+ * (`desempate` a resultados-femenino.json). Si encara hi ha empat, comparteixen lloc i es
+ * reparteixen a parts iguals els punts dels llocs que ocupen.
+ */
+function posicionsPerLliga(esport, config, fonts, errors) {
+  const { resultat, jornades = [] } = fonts;
+  const puntsLliga = fonts.puntsLliga ?? { victoria: 1, derrota: 0 };
+  const equipsValids = new Set(config.equipos.map((e) => e.id));
+
+  if (!resultat) errors.push(`Falta "${esport.id}" a datos/resultados-femenino.json.`);
+  if (!jornades.length) errors.push(`Falta el calendari de jornades a datos/femenino.json.`);
+
+  const partits = {};
+  const marcador = new Map(config.equipos.map((e) => [e.id, { id: e.id, jugats: 0, victories: 0, derrotes: 0 }]));
+
+  for (const jornada of jornades) {
+    for (const [local, visitant] of jornada.partidos ?? []) {
+      const clau = `${local}-${visitant}`;
+      for (const equip of [local, visitant]) {
+        if (!equipsValids.has(equip)) errors.push(`El partit "${clau}" de ${esport.id} fa servir l'equip desconegut "${equip}".`);
+      }
+
+      const dades = resultat?.[clau];
+      if (resultat && !dades) errors.push(`Falta el partit "${clau}" de ${esport.id} a datos/resultados-femenino.json.`);
+
+      let guanya = dades?.ganador ?? null;
+      if (guanya !== null) {
+        if (!equipsValids.has(guanya)) {
+          errors.push(`El guanyador "${guanya}" de ${esport.id} · ${clau} no és cap equip de datos/femenino.json.`);
+          guanya = null;
+        } else if (guanya !== local && guanya !== visitant) {
+          errors.push(`El guanyador "${guanya}" de ${esport.id} · ${clau} no és cap dels dos participants (${local} i ${visitant}).`);
+          guanya = null;
+        }
+      }
+
+      const perd = guanya ? (guanya === local ? visitant : local) : null;
+      partits[clau] = {
+        id: clau,
+        jornada: jornada.jornada,
+        participants: [local, visitant],
+        guanyador: guanya,
+        perdedor: perd,
+        marcador: typeof dades?.marcador === 'string' ? dades.marcador : '',
+        estat: guanya ? 'jugat' : 'pendent',
+      };
+
+      if (guanya) {
+        for (const equip of [guanya, perd]) {
+          const fila = marcador.get(equip);
+          if (fila) fila.jugats += 1;
+        }
+        marcador.get(guanya).victories += 1;
+        marcador.get(perd).derrotes += 1;
+      }
+    }
+  }
+
+  // Partits apuntats que no són al calendari.
+  for (const clau of Object.keys(resultat ?? {})) {
+    if (clau !== 'desempate' && !partits[clau]) {
+      errors.push(`El partit "${clau}" de ${esport.id} no és al calendari de datos/femenino.json.`);
+    }
+  }
+
+  for (const fila of marcador.values()) {
+    fila.puntsLliga = fila.victories * puntsLliga.victoria + fila.derrotes * puntsLliga.derrota;
+  }
+
+  const desempat = Array.isArray(resultat?.desempate) ? resultat.desempate : [];
+  const blocs = ordenarLliga([...marcador.keys()], marcador, partits, desempat);
+
+  const posicions = [];
+  const empats = [];
+  const taula = [];
+  for (const bloc of blocs) {
+    const primera = posicions.length + 1;
+    const llocs = bloc.map((_, i) => primera + i);
+    if (bloc.length > 1) empats.push({ equipos: bloc, posicions: llocs });
+    for (const idEquip of bloc) {
+      posicions.push(idEquip);
+      taula.push({ ...marcador.get(idEquip), posicio: primera, compartida: bloc.length > 1 });
+    }
+  }
+
+  const jugats = Object.values(partits).filter((p) => p.estat === 'jugat').length;
+  const total = Object.keys(partits).length;
+  return {
+    partits,
+    posicions,
+    empats,
+    taulaLliga: taula,
+    jornades,
+    puntsLliga,
+    provisional: jugats < total,
+    progres: { jugats, total },
+  };
+}
+
+/** Agrupa i ordena de més a menys segons una puntuació; els que empaten queden al mateix bloc. */
+function agruparPer(ids, valor) {
+  const grups = new Map();
+  for (const id of ids) {
+    const clau = valor(id);
+    if (!grups.has(clau)) grups.set(clau, []);
+    grups.get(clau).push(id);
+  }
+  return [...grups.entries()].sort((a, b) => b[0] - a[0]).map(([, grup]) => grup);
+}
+
+function ordenarLliga(ids, marcador, partits, desempat) {
+  const blocs = [];
+  for (const perVictories of agruparPer(ids, (id) => marcador.get(id).victories)) {
+    if (perVictories.length === 1) { blocs.push(perVictories); continue; }
+
+    // Enfrontament directe: només compten els partits entre els equips empatats.
+    const directes = (id) =>
+      Object.values(partits).filter(
+        (p) => p.guanyador === id && p.participants.some((rival) => rival !== id && perVictories.includes(rival))
+      ).length;
+
+    for (const perDirectes of agruparPer(perVictories, directes)) {
+      if (perDirectes.length === 1) { blocs.push(perDirectes); continue; }
+
+      // Últim recurs: l'ordre que hagi decidit l'organització.
+      const manual = (id) => {
+        const i = desempat.indexOf(id);
+        return i === -1 ? -Infinity : -i;
+      };
+      blocs.push(...agruparPer(perDirectes, manual));
+    }
+  }
+  return blocs;
 }
 
 /** Ciclisme, atletisme, natació: ordre d'arribada directe. */
-function posicionsPerClassificacio(esport, resultat, equipsValids, errors) {
-  const posicions = new Array(TOTAL_POSICIONS).fill(null);
+function posicionsPerClassificacio(esport, resultat, equipsValids, errors, nPosicions) {
+  const posicions = new Array(nPosicions).fill(null);
   const llista = resultat?.clasificacion;
 
   if (!Array.isArray(llista)) {
-    errors.push(`Falta l'array "clasificacion" de "${esport.id}" a datos/resultados.json.`);
+    errors.push(`Falta l'array "clasificacion" de "${esport.id}" al fitxer de resultats.`);
   } else {
-    if (llista.length !== TOTAL_POSICIONS) {
-      errors.push(`La classificació de ${esport.id} té ${llista.length} posicions i n'hi hauria d'haver ${TOTAL_POSICIONS}.`);
+    if (llista.length !== nPosicions) {
+      errors.push(`La classificació de ${esport.id} té ${llista.length} posicions i n'hi hauria d'haver ${nPosicions}.`);
     }
     const vistos = new Set();
-    llista.slice(0, TOTAL_POSICIONS).forEach((idEquip, i) => {
+    llista.slice(0, nPosicions).forEach((idEquip, i) => {
       if (idEquip === null || idEquip === undefined || idEquip === '') return;
       if (!equipsValids.has(idEquip)) {
         errors.push(`La classificació de ${esport.id} fa servir l'equip desconegut "${idEquip}".`);
@@ -180,24 +335,26 @@ function posicionsPerClassificacio(esport, resultat, equipsValids, errors) {
   }
 
   const jugats = posicions.filter(Boolean).length;
-  return { format: 'clasificacion', partits: {}, posicions, progres: { jugats, total: TOTAL_POSICIONS } };
+  return { partits: {}, posicions, progres: { jugats, total: nPosicions } };
 }
 
 /**
  * Classificació general: suma els punts de tots els esports.
  * Els esports a mig fer sumen el que ja se sap.
  */
-export function calcularGeneral(torneig, esports) {
-  const files = torneig.equipos.map((equip) => ({
+export function calcularGeneral(config, esports) {
+  const files = config.equipos.map((equip) => ({
     equip,
     punts: 0,
-    perCategoria: Object.fromEntries(Object.keys(torneig.categorias).map((c) => [c, 0])),
+    perCategoria: Object.fromEntries(Object.keys(config.categorias).map((c) => [c, 0])),
     // recompte[i] = quantes vegades ha quedat en posició i+1 (serveix per desempatar)
-    recompte: new Array(TOTAL_POSICIONS).fill(0),
+    recompte: new Array(config.equipos.length).fill(0),
   }));
   const perId = new Map(files.map((f) => [f.equip.id, f]));
 
   for (const estat of esports) {
+    // Una lliga sense acabar encara no reparteix res.
+    if (estat.provisional) continue;
     estat.posicions.forEach((idEquip, i) => {
       const fila = idEquip && perId.get(idEquip);
       if (!fila) return;
@@ -222,7 +379,7 @@ export function calcularGeneral(torneig, esports) {
 /** Més punts; si empaten, més primers llocs, després més segons, i així fins al desè. */
 function comparaEquips(a, b) {
   if (b.punts !== a.punts) return b.punts - a.punts;
-  for (let i = 0; i < TOTAL_POSICIONS; i++) {
+  for (let i = 0; i < a.recompte.length; i++) {
     if (b.recompte[i] !== a.recompte[i]) return b.recompte[i] - a.recompte[i];
   }
   return 0;

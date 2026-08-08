@@ -1,0 +1,743 @@
+{
+  "petanca": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "voleibol-playa": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "voleibol-pista": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "tenis": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "fronton": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "padel": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ping-pong": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbol-sala": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbol-siete": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "balonmano": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "baloncesto": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "waterpolo": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "domino": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ajedrez": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "dardos": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "futbolin": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "billar": {
+    "F1-F2": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F3-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F5": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F2-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F4": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F5-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F1-F3": {
+      "ganador": null,
+      "marcador": ""
+    },
+    "F4-F2": {
+      "ganador": null,
+      "marcador": ""
+    }
+  },
+  "ciclismo": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "atletismo": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "natacion": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+}

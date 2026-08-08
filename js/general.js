@@ -1,13 +1,20 @@
 // general.js — pinta index.html: classificació general + reixa d'esports.
 
-import { carregarTorneig, celaEquip, el, buida, mostrarErrors, mostrarErrorGreu } from './comu.js';
+import {
+  COMPETICIONS, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca, el,
+  mostrarErrorGreu, mostrarErrors, selectorCompeticio,
+} from './comu.js';
 import { calcularGeneral } from './motor.js';
 import { NOMS_CATEGORIES, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
 
+const zonaSelector = document.querySelector('#selector');
 const zonaErrors = document.querySelector('#errors');
 const zonaGeneral = document.querySelector('#general');
 const zonaFiltres = document.querySelector('#filtres');
 const zonaReixa = document.querySelector('#reixa');
+const zonaTitol = document.querySelector('#subtitol');
+
+const competicio = competicioDeLaAdreca();
 
 let dades = null;
 let filtre = 'tots';
@@ -15,8 +22,13 @@ let filtre = 'tots';
 init();
 
 async function init() {
+  zonaSelector.append(selectorCompeticio(competicio, 'index.html'));
+  const { adjectiu } = COMPETICIONS[competicio];
+  zonaTitol.textContent = `Competició ${adjectiu}`;
+  document.title = `Classificació ${adjectiu} · Olimpíades 2026 - Club de Begues`;
+
   try {
-    dades = await carregarTorneig();
+    dades = await carregarTorneig(competicio);
   } catch (e) {
     mostrarErrorGreu(zonaErrors, e);
     buida(zonaGeneral);
@@ -32,8 +44,8 @@ async function init() {
 /* ---------- Classificació general ---------- */
 
 function pintarGeneral() {
-  const { torneig, esports, equips } = dades;
-  const classificacio = calcularGeneral(torneig, esports);
+  const { config, esports, equips } = dades;
+  const classificacio = calcularGeneral(config, esports);
   const totalPunts = classificacio.reduce((suma, fila) => suma + fila.punts, 0);
 
   buida(zonaGeneral);
@@ -47,7 +59,7 @@ function pintarGeneral() {
     return;
   }
 
-  const categories = Object.keys(torneig.categorias);
+  const categories = Object.keys(config.categorias);
   const capcalera = el('tr', {}, [
     el('th', { text: '#' }),
     el('th', { text: 'Equip' }),
@@ -85,7 +97,7 @@ function pintarGeneral() {
 function pintarFiltres() {
   const opcions = [
     { id: 'tots', text: 'Tots' },
-    ...Object.keys(dades.torneig.categorias).map((cat) => ({ id: cat, text: NOMS_CATEGORIES[cat]?.llarg ?? cat })),
+    ...Object.keys(dades.config.categorias).map((cat) => ({ id: cat, text: NOMS_CATEGORIES[cat]?.llarg ?? cat })),
     { id: 'acabats', text: 'Ja tenen campió' },
   ];
 
@@ -107,7 +119,7 @@ function pintarReixa() {
   const { torneig, esports, equips } = dades;
   const visibles = esports.filter((estat) => {
     if (filtre === 'tots') return true;
-    if (filtre === 'acabats') return Boolean(estat.posicions[0]);
+    if (filtre === 'acabats') return Boolean(campioDe(estat));
     return estat.categoria === filtre;
   });
 
@@ -119,13 +131,13 @@ function pintarReixa() {
 
   for (const estat of visibles) {
     const grup = estat.esport.grupoAfin ? torneig.gruposAfines[estat.esport.grupoAfin] : null;
-    const campio = estat.posicions[0];
+    const campio = campioDe(estat);
     const { jugats, total } = estat.progres;
 
     zonaReixa.append(
       el('a', {
         class: 'targeta-esport',
-        href: `deporte.html?id=${encodeURIComponent(estat.id)}`,
+        href: adreca('deporte.html', dades.competicio, { id: estat.id }),
         style: { '--accent': grup?.color ?? 'var(--fosc)' },
       }, [
         el('h3', { text: nomEsport(estat.esport) }),

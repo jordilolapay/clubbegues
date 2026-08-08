@@ -1,4 +1,4 @@
-// datos.js — carrega i guarda en memòria els tres JSON de datos/.
+// datos.js — carrega i guarda en memòria els fitxers de datos/.
 
 const CARPETA = new URL('../datos/', import.meta.url);
 
@@ -7,7 +7,7 @@ let promesa = null;
 async function llegir(nom) {
   let resposta;
   try {
-    // no-cache: si un organitzador acaba d'editar resultados.json, volem veure'l ja.
+    // no-cache: si un organitzador acaba d'editar un resultat, volem veure'l ja.
     resposta = await fetch(new URL(nom, CARPETA), { cache: 'no-cache' });
   } catch (e) {
     throw new Error(
@@ -22,16 +22,18 @@ async function llegir(nom) {
   }
 }
 
-/** Carrega els tres fitxers un sol cop per pàgina. */
+/** Carrega tots els fitxers un sol cop per pàgina. */
 export function carregarDades() {
   if (!promesa) {
     promesa = (async () => {
-      const [torneig, quadres, resultats] = await Promise.all([
+      const [torneig, quadres, resultats, femeni, resultatsFemeni] = await Promise.all([
         llegir('torneo.json'),
         llegir('cuadros.json'),
         llegir('resultados.json'),
+        llegir('femenino.json'),
+        llegir('resultados-femenino.json'),
       ]);
-      return { torneig, quadres, resultats };
+      return { torneig, quadres, resultats, femeni, resultatsFemeni };
     })();
   }
   return promesa;
