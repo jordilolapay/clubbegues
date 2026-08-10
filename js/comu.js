@@ -72,7 +72,8 @@ export async function carregarTorneig(competicio = 'masculina') {
     config.equipos.map((equip, i) => [equip.id, { ...equip, color: colorEquip(equip, i), ordre: i }])
   );
 
-  const errors = [];
+  // Els problemes de lectura del full de càlcul es veuen al mateix bàner que els de les dades.
+  const errors = [...(dades.avisos ?? [])];
   const esports = torneig.deportes.map((esport) => {
     // En femení els 17 esports de quadre es juguen com a lliga; els tres de resistència, igual.
     const format = femeni && esport.formato === 'cuadro' ? 'liga' : esport.formato;
@@ -159,7 +160,7 @@ export function mostrarErrors(contenidor, errors) {
     el('div', { class: 'avis' }, [
       el('h3', { text: errors.length === 1 ? 'Hi ha un problema a les dades' : `Hi ha ${errors.length} problemes a les dades` }),
       llista,
-      el('p', { class: 'ajuda', text: "La resta de la web funciona igualment. Revisa el fitxer indicat a datos/ (mira l'apartat final del README)." }),
+      el('p', { class: 'ajuda', text: "La resta de la web funciona igualment. Revisa la fila del full de càlcul o el fitxer de datos/ que diu l'avís (mira l'apartat final del README)." }),
     ])
   );
 }

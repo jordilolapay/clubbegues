@@ -1,10 +1,13 @@
 # Olimpíades 2026 — Club de Begues
 
 Web dels quadres i la classificació de les Olimpíades. **No cal saber programar per mantenir-la.**
-Durant el torneig només s'editen **dos fitxers**, un per competició:
-`datos/resultados.json` (masculí) i `datos/resultados-femenino.json` (femení).
 
-La web es publica sola a GitHub Pages: quan guardes un canvi, al cap d'un minut ja es veu.
+Durant el torneig els resultats s'apunten en un **full de càlcul de Google**. La web el llegeix cada
+vegada que algú l'obre: apuntes un resultat, l'altra persona recarrega la pàgina i ja el veu. No cal
+tocar el repositori ni esperar res.
+
+Els fitxers de `datos/` continuen existint com a **xarxa de seguretat**: si un dia el full de càlcul
+no es pot llegir, la web tira d'ells i ho avisa a dalt (apartat 8).
 
 ---
 
@@ -19,145 +22,145 @@ d'una a l'altra amb els botons **MASCULÍ / FEMENÍ** de dalt.
 | Com es juguen els 17 esports | Quadre eliminatori amb prèvies i consolació | **Lliga**: totes contra totes a una sola volta |
 | Ciclisme, atletisme i natació | Ordre d'arribada (10 llocs) | Ordre d'arribada (5 llocs) |
 | Punts del 1r lloc (esports d'equip) | 70 | 70 |
-| Fitxer que s'edita | `datos/resultados.json` | `datos/resultados-femenino.json` |
+| On s'apunten els resultats | Pestanya **Masculí** del full de càlcul | Pestanya **Femení** del full de càlcul |
 
 Les dues classificacions **no es barregen**: són equips diferents i cadascuna té la seva taula.
 
 ---
 
-## 1. Què hi ha a cada fitxer
+## 1. Preparar el full de càlcul (una sola vegada)
 
-| Fitxer | Per a què serveix | El toques? |
+**1. Crea el full de càlcul.** Ves a [sheets.new](https://sheets.new) i posa-li un nom, per exemple
+*Olimpíades 2026 — resultats*.
+
+**2. Fes tres pestanyes** i anomena-les **exactament** així (amb accents i majúscules):
+
+```
+Equips     Masculí     Femení
+```
+
+**3. Omple-les amb les plantilles.** A la carpeta `datos/plantilla-full/` d'aquest repositori hi ha
+tres fitxers ja preparats, amb tots els esports i tots els partits en el seu ordre:
+
+| Fitxer | Pestanya | Files |
 |---|---|---|
-| `datos/resultados.json` | Resultats de la competició **masculina** | **Sí, cada dia** |
-| `datos/resultados-femenino.json` | Resultats de la competició **femenina** | **Sí, cada dia** |
-| `datos/torneo.json` | Equips masculins, punts de cada categoria, llista d'esports | Només al principi |
-| `datos/femenino.json` | Equips femenins, els seus punts i el calendari de la lliga | Només al principi |
-| `datos/cuadros.json` | Qui juga contra qui a les prèvies i als quarts (masculí) | **Mai** |
-| `js/textos.js` | Els noms en català que es veuen a la web | Rarament |
-| La resta (`index.html`, `deporte.html`, `css/`, `js/`) | La web en si | No |
+| `equips.csv` | Equips | 15 equips (10 masculins + 5 femenins) |
+| `masculi.csv` | Masculí | 285 (17 esports × 15 partits + 3 esports × 10 llocs) |
+| `femeni.csv` | Femení | 185 (17 esports × 10 partits + 3 esports × 5 llocs) |
 
-`datos/cuadros.json` és el resultat d'un repartiment estudiat perquè tots els equips juguin en
-condicions equivalents. Si el canvies, es trenca l'equilibri del torneig.
+Per a cada un: descarrega'l de GitHub (obre el fitxer i clica **Download raw file**) i, al full de
+càlcul, situa't a la pestanya que toqui i fes **Fitxer › Importa › Penja**. A la finestra que surt
+tria **Substitueix el full actual** i, com a separador, **Coma**.
 
-El calendari de la lliga femenina (`jornadas`, dins de `datos/femenino.json`) tampoc s'ha de tocar:
-ja està fet perquè totes juguin contra totes i cada jornada en descansi una.
+**4. Comparteix-lo.** Clica **Comparteix** i, a *Accés general*, posa **Qualsevol amb l'enllaç** amb
+el permís **Lector**. Sense això el navegador de la gent no el pot llegir.
+
+> Compartir-lo com a *lector* vol dir que qualsevol pot **veure'l**. Per **editar-lo** només podran
+> les persones que hi afegeixis una per una a *Comparteix*. Dona permís d'edició només a qui hagi
+> d'apuntar resultats.
+
+**5. Digues-li a la web quin full és.** Copia l'adreça del full de càlcul del navegador:
+
+```
+https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890/edit#gid=0
+                                       └──────────── això és l'identificador ────────────┘
+```
+
+Obre `js/config.js`, enganxa'l entre les cometes de `id:` i guarda (apartat 6 per publicar-ho):
+
+```js
+export const FULL = {
+  id: '1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890',
+```
+
+Pots enganxar-hi l'adreça sencera si vols; la web ja en treu l'identificador.
+
+Això és l'únic pas que es fa al repositori. A partir d'aquí, tot el dia a dia és al full de càlcul.
 
 ---
 
-## 2. Posar els noms reals dels equips
+## 2. Els noms dels equips — pestanya **Equips**
 
-Els equips masculins són a `datos/torneo.json` i els femenins a `datos/femenino.json`, però
-funcionen exactament igual. A dalt de tot de cada fitxer hi ha la llista:
+| Competició | Id | Nom | Color |
+|---|---|---|---|
+| Masculí | E1 | Els Senglars | |
+| Masculí | E2 | Equip 2 | `#C0392B` |
+| … | | | |
+| Femení | F1 | Les Àligues | |
 
-```json
-{ "id": "E1", "nombre": "Equip 1", "color": null },
-```
+Escriu el nom de veritat de cada equip a la columna **Nom**. Es veurà a tota la web de seguida.
 
-Canvia **només** el que hi ha entre cometes darrere de `"nombre"`:
-
-```json
-{ "id": "E1", "nombre": "Els Senglars", "color": null },
-```
-
-> ⚠️ **L'`id` no es toca mai** (`E1`…`E10` en masculí, `F1`…`F5` en femení). És el codi intern que
-> fan servir els altres fitxers. Si el canvies, la web deixa de trobar l'equip.
-
-Si vols un color concret per a un equip, posa'l en comptes de `null`: `"color": "#C0392B"`.
-Amb `null` la web ja n'hi assigna un.
+- **La columna `Id` no es toca mai** (`E1`…`E10` en masculí, `F1`…`F5` en femení). És el codi que
+  fan servir la resta de pestanyes; si el canvies, la web deixa de trobar l'equip.
+- La columna **Color** és opcional: posa-hi un color en format `#RRGGBB` si en vols un de concret.
+  Si la deixes buida, la web ja n'assigna un.
 
 ---
 
-## 3. Apuntar un resultat masculí
+## 3. Apuntar un resultat masculí — pestanya **Masculí**
 
-### Esports amb quadre (17 esports: petanca, tennis, futbol sala…)
+Quatre columnes: **Esport · Partit · Guanyador · Marcador**. Les dues primeres ja venen omplertes i
+no s'han de tocar. Tu només escrius a **Guanyador** (i a **Marcador**, si vols).
 
-Obre `datos/resultados.json`, busca l'esport i, dins seu, el partit. Posa el **codi de l'equip que
-guanya** i el marcador.
+| Esport | Partit | Guanyador | Marcador |
+|---|---|---|---|
+| Petanca | Prèvia 1 | `E5` | 13-8 |
+| Petanca | Prèvia 2 | | |
 
-**Abans:**
+**No cal escriure qui juga el partit següent**: la web ho calcula sola. En apuntar el guanyador de
+la Prèvia 1, aquest equip apareix automàticament als quarts, i el que perd apareix al partit pel 9è
+i 10è lloc.
 
-```json
-"petanca": {
-  "previa1": { "ganador": null, "marcador": "" },
-```
+A **Guanyador** hi pots posar el codi (`E5`) o el nom de l'equip tal com l'has escrit a la pestanya
+Equips (`Els Senglars`). Tant li fa majúscules, accents o espais de més.
 
-**Després** (ha guanyat l'equip E5 per 13 a 8):
+El **Marcador** és text lliure: `13-8`, `3-1`, `2-0 (pròrroga)` o buit. Només es mostra.
 
-```json
-"petanca": {
-  "previa1": { "ganador": "E5", "marcador": "13-8" },
-```
+> 💡 Per no equivocar-se escrivint noms: selecciona la columna Guanyador i fes
+> **Dades › Validació de dades › Llista d'un interval**, amb l'interval `Equips!C2:C11`. Així surt
+> un desplegable amb els equips.
 
-I ja està. **No cal escriure qui juga el partit següent**: la web ho calcula sola. En apuntar el
-guanyador de `previa1`, aquest equip apareix automàticament als quarts, i el que perd apareix al
-partit pel 9è i 10è lloc.
+**Els 15 partits de cada esport** (és el que ja diu la columna Partit):
 
-El `marcador` és text lliure: pots posar `"13-8"`, `"3-1"`, `"2-0 (pròrroga)"` o deixar-ho buit
-(`""`). Només es mostra, no es fa servir per a res més.
-
-**Els 15 partits de cada esport:**
-
-| Clau al fitxer | Què és |
+| Partit | Què és |
 |---|---|
-| `previa1`, `previa2` | Les dues eliminatòries prèvies |
-| `qf1`, `qf2`, `qf3`, `qf4` | Quarts de final |
-| `sf1`, `sf2` | Semifinals |
-| `final` | Decideix 1r i 2n |
-| `tercerPuesto` | Decideix 3r i 4t |
-| `consSf1`, `consSf2` | Semifinals de consolació (els que perden a quarts) |
-| `consFinal` | Decideix 5è i 6è |
-| `consTercero` | Decideix 7è i 8è |
-| `puesto9` | Decideix 9è i 10è (els que perden les prèvies) |
+| Prèvia 1, Prèvia 2 | Les dues eliminatòries prèvies |
+| Quarts 1 … Quarts 4 | Quarts de final |
+| Semifinal 1, Semifinal 2 | Semifinals |
+| Final | Decideix 1r i 2n |
+| 3r i 4t lloc | Decideix 3r i 4t |
+| Semifinal consolació 1 i 2 | Els que perden a quarts |
+| Final consolació · 5è i 6è lloc | Decideix 5è i 6è |
+| 7è i 8è lloc | Decideix 7è i 8è |
+| 9è i 10è lloc | Els que perden les prèvies |
 
 ### Ciclisme, atletisme i natació
 
-Aquests no tenen eliminatòries: s'apunta l'ordre d'arribada, del primer al desè.
+Aquests no tenen eliminatòries: la columna Partit diu **Lloc 1**, **Lloc 2**… fins a **Lloc 10**, i
+a Guanyador hi poses qui ha quedat en aquell lloc. Deixa buits els llocs que encara no se sàpiguen.
 
-**Abans:**
-
-```json
-"ciclismo": { "clasificacion": [null, null, null, null, null, null, null, null, null, null] }
-```
-
-**Després** (ha guanyat E3, segon E7, tercer E1, la resta encara no se sap):
-
-```json
-"ciclismo": { "clasificacion": ["E3", "E7", "E1", null, null, null, null, null, null, null] }
-```
-
-Deixa `null` a les posicions que encara no estiguin decidides.
-
-### Regles del format JSON (importants)
-
-- Els codis d'equip van **entre cometes**: `"E5"`. El `null` va **sense** cometes.
-- Cada línia acaba amb una coma, **menys l'última** de cada bloc.
-- Si t'equivoques amb una coma o una cometa, la web avisarà (mira l'apartat 7).
+| Esport | Partit | Guanyador |
+|---|---|---|
+| Natació | Lloc 1 | `E3` |
+| Natació | Lloc 2 | `E7` |
+| Natació | Lloc 3 | |
 
 ---
 
-## 4. Apuntar un resultat femení
+## 4. Apuntar un resultat femení — pestanya **Femení**
 
-S'edita `datos/resultados-femenino.json`. Funciona igual, però com que en femení els 17 esports es
-juguen com una **lliga de totes contra totes**, els partits no es diuen `previa1` o `sf2` sinó
-**pels dos equips que hi juguen**: `"F1-F2"`, `"F4-F5"`…
+Igual que la masculina, però com que en femení els 17 esports es juguen com una **lliga de totes
+contra totes**, els partits no es diuen *Semifinal 1* sinó **pels dos equips que hi juguen**:
 
-**Abans:**
+| Esport | Jornada | Partit | Qui juga | Guanyador | Marcador |
+|---|---|---|---|---|---|
+| Petanca | J1 | `F1-F2` | Les Àligues - Equip femení 2 | `F1` | 13-9 |
+| Petanca | J1 | `F4-F5` | … | | |
 
-```json
-"petanca": {
-  "F1-F2": { "ganador": null, "marcador": "" },
-```
+La columna **Qui juga** és només perquè es llegeixi bé: la web no la mira (i no s'actualitza sola si
+canvies un nom a la pestanya Equips). La que compta és **Partit**.
 
-**Després** (ha guanyat F1 per 13 a 9):
-
-```json
-"petanca": {
-  "F1-F2": { "ganador": "F1", "marcador": "13-9" },
-```
-
-Cada esport té **10 partits** (cada equip en juga 4) i estan escrits en l'ordre del calendari, o
-sigui que els trobaràs agrupats per jornada, igual que a la web:
+Cada esport té **10 partits** (cada equip en juga 4), en l'ordre del calendari:
 
 | Jornada | Partits | Descansa |
 |---|---|---|
@@ -167,26 +170,24 @@ sigui que els trobaràs agrupats per jornada, igual que a la web:
 | 4 | `F1-F4`, `F5-F3` | F2 |
 | 5 | `F1-F3`, `F4-F2` | F5 |
 
-⚠️ La clau del partit s'ha d'escriure **tal com ja surt al fitxer**. Si el partit és `"F1-F2"`, no
-val escriure `"F2-F1"`: la web avisarà que aquest partit no és al calendari.
+Ciclisme, atletisme i natació femenins van per llocs, igual que en masculí però amb **5 llocs**
+(de *Lloc 1* a *Lloc 5*).
 
 ### Com s'ordena la taula
 
 No hi ha empats als partits: o guanya una o guanya l'altra. La taula s'ordena així:
 
 1. Per **victòries**.
-2. Si dues equips empaten a victòries, mana el **partit que han jugat entre elles**.
+2. Si dos equips empaten a victòries, mana el **partit que han jugat entre elles**.
 3. Si encara estan empatades, comparteixen lloc (a la web surt `3r=`) i **es reparteixen a parts
    iguals** els punts dels llocs que ocupen.
 
-Si voleu desfer un empat a mà (per sorteig, per exemple), afegiu una línia `desempate` a l'esport
-amb els equips en l'ordre que decidiu:
+Si voleu desfer un empat a mà (per sorteig, per exemple), afegiu una fila més a aquell esport amb la
+paraula **Desempat** a la columna Partit i els equips en l'ordre que decidiu, separats per comes:
 
-```json
-"petanca": {
-  "desempate": ["F3", "F1"],
-  "F1-F2": { "ganador": "F1", "marcador": "13-9" },
-```
+| Esport | Partit | Guanyador |
+|---|---|---|
+| Petanca | Desempat | `F3, F1` |
 
 ### Els punts de la general només compten al final
 
@@ -196,19 +197,12 @@ punts que es repartirien si la lliga acabés ara.
 
 (En masculí és diferent: un lloc decidit ja no es mou, o sigui que puntua de seguida.)
 
-### Ciclisme, atletisme i natació femenins
-
-Igual que en masculí però amb **5 llocs** en comptes de 10:
-
-```json
-"ciclismo": { "clasificacion": ["F3", "F2", null, null, null] }
-```
-
 ---
 
 ## 5. Canviar el nom d'un esport a la web
 
-Els noms que es veuen són a `js/textos.js`, a la llista `NOMS_ESPORTS`:
+Els noms dels esports **no** surten del full de càlcul: són a `js/textos.js`, a la llista
+`NOMS_ESPORTS`.
 
 ```js
 'futbol-siete': 'Futbol 7',
@@ -216,55 +210,91 @@ Els noms que es veuen són a `js/textos.js`, a la llista `NOMS_ESPORTS`:
 
 Canvia només el text de la dreta. El de l'esquerra és el codi intern i no es toca.
 
+Si canvies un nom aquí, canvia'l també a la columna **Esport** del full de càlcul (o deixa-la com
+estava: la web reconeix tant el nom nou com el codi intern).
+
 ---
 
-## 6. Publicar els canvis
+## 6. Quan es veuen els canvis
 
-**Des de github.com (el més fàcil):**
+**El que escrius al full de càlcul** es veu de seguida: guarda (Google guarda sol) i recarrega la
+pàgina. Si sembla que no ha canviat, recarrega forçant: **Ctrl+F5** (o **Cmd+Shift+R** al Mac).
 
-1. Entra al repositori i obre el fitxer de resultats que toqui (`datos/resultados.json` per al
-   masculí, `datos/resultados-femenino.json` per al femení).
-2. Clica la icona del llapis (✏️) per editar.
-3. Fes el canvi.
-4. Baixa fins al final, escriu una descripció curta (per exemple `Resultats petanca dissabte`) i
-   clica **Commit changes**.
-5. Espera un minut i recarrega la web.
+**El que canvies al repositori** (`js/config.js`, `js/textos.js`, els fitxers de `datos/`) triga un
+minut, perquè GitHub Pages ha de tornar a publicar la web. Des de github.com:
 
-**Des de l'ordinador**, si tens el repositori baixat:
+1. Obre el fitxer al repositori i clica la icona del llapis (✏️).
+2. Fes el canvi.
+3. Baixa fins al final, escriu una descripció curta i clica **Commit changes**.
+
+Des de l'ordinador, si tens el repositori baixat:
 
 ```bash
-git add datos/resultados.json
-git commit -m "Resultats petanca dissabte"
+git add js/config.js
+git commit -m "Connectar el full de càlcul"
 git push
 ```
-
-Si has recarregat i no veus el canvi, prova de recarregar forçant (Ctrl+F5, o Cmd+Shift+R al Mac).
 
 ---
 
 ## 7. Si surt un avís vermell a la web
 
 La web comprova les dades cada vegada que es carrega i, si troba res estrany, ho diu en un requadre
-vermell a dalt. **La resta de la web continua funcionant.** Els avisos més habituals:
+vermell a dalt. **La resta de la web continua funcionant.** Els avisos diuen la pestanya i el número
+de fila del full de càlcul, o sigui que es troba de seguida.
 
 | Què diu | Què vol dir | Com s'arregla |
 |---|---|---|
-| *El guanyador "E5" … no és cap dels dos participants* | Has apuntat com a guanyador un equip que no juga aquell partit | Mira el quadre a la web i posa el codi correcte |
-| *… fa servir l'equip desconegut "E11"* | Codi d'equip mal escrit | En masculí només existeixen `E1`…`E10`; en femení, `F1`…`F5` |
-| *Hi ha guanyador però encara no se sap qui hi juga* | Has apuntat un partit del quadre abans que l'anterior | Apunta primer el partit que hi porta |
-| *El partit "F2-F1" … no és al calendari* | Has canviat l'ordre dels equips a la clau del partit | Escriu la clau tal com ja surt al fitxer (`"F1-F2"`) |
-| *L'equip … surt més d'un cop a la classificació* | Un equip repetit a ciclisme/atletisme/natació | Treu-lo de la posició sobrant |
-| *La classificació … té 10 posicions i n'hi hauria d'haver 5* | Has copiat una llista del fitxer masculí al femení | El femení té 5 llocs, no 10 |
-| *No s'han pogut carregar les dades* | El JSON té un error de format (una coma o una cometa) | Desfés l'últim canvi i torna-hi amb calma |
+| *No s'ha pogut llegir la pestanya "Masculí" del full de càlcul* | O el full no està compartit, o la pestanya no es diu així | Repassa els passos 2 i 4 de l'apartat 1 |
+| *Full de càlcul · Masculí, fila 12: "Vuitens 3" no és cap partit de petanca* | S'ha tocat la columna Partit | Torna a posar-hi el text que hi havia |
+| *… el guanyador "Els Tigres" no és cap equip d'aquesta competició* | Nom mal escrit, o un equip masculí a la pestanya femenina | Mira els noms a la pestanya Equips |
+| *El guanyador "E5" … no és cap dels dos participants* | S'ha apuntat com a guanyador un equip que no juga aquell partit | Mira el quadre a la web i posa l'equip correcte |
+| *Hi ha guanyador però encara no se sap qui hi juga* | S'ha apuntat un partit del quadre abans que l'anterior | Apunta primer el partit que hi porta |
+| *L'equip … surt més d'un cop a la classificació* | Un equip repetit a ciclisme/atletisme/natació | Treu-lo del lloc sobrant |
+| *No s'han pogut carregar les dades* | Un fitxer de `datos/` té un error de format | Desfés l'últim canvi al repositori i torna-hi amb calma |
 
-Si t'has equivocat i no en surts, a GitHub pots recuperar la versió anterior del fitxer des de
-l'historial (pestanya **History** del fitxer).
+Tot el que la web no entén, **ho ignora i ho diu**: mai es queda en blanc ni es penja per una fila
+mal escrita.
+
+El full de càlcul també té historial: **Fitxer › Historial de versions** per veure qui ha canviat
+què i tornar enrere.
 
 ---
 
-## 8. Provar-ho a l'ordinador abans de publicar (opcional)
+## 8. Els fitxers de `datos/` (la xarxa de seguretat)
 
-La web llegeix els JSON amb `fetch`, i això no funciona obrint el fitxer amb doble clic. Cal servir
+| Fitxer | Per a què serveix | El toques? |
+|---|---|---|
+| `datos/torneo.json` | Equips masculins, punts de cada categoria, llista dels 20 esports | Rarament |
+| `datos/femenino.json` | Equips femenins, els seus punts i el calendari de la lliga | Rarament |
+| `datos/cuadros.json` | Qui juga contra qui a les prèvies i als quarts (masculí) | **Mai** |
+| `datos/resultados.json` | Resultats masculins de reserva | Només si no hi ha full de càlcul |
+| `datos/resultados-femenino.json` | Resultats femenins de reserva | Només si no hi ha full de càlcul |
+| `datos/plantilla-full/*.csv` | Les plantilles per crear el full de càlcul | Un cop, al principi |
+| `eines/generar-plantilla.mjs` | Torna a generar aquestes plantilles si canvia la llista d'esports | Gairebé mai |
+| `js/config.js` | Quin full de càlcul es llegeix | Un cop, al principi |
+| `js/textos.js` | Els noms en català que es veuen a la web | Rarament |
+| La resta (`index.html`, `deporte.html`, `css/`, `js/`) | La web en si | No |
+
+Mentre `js/config.js` tingui un identificador de full de càlcul, **els dos fitxers de resultats no
+es fan servir**. Serveixen per a dues coses:
+
+- Si el full de càlcul es cau (o s'ha deixat de compartir), la web segueix funcionant amb el que hi
+  hagi escrit i avisa del problema.
+- Si algun dia voleu deixar de fer servir Google, buideu `id: ''` a `js/config.js` i la web torna a
+  llegir aquests fitxers. El format és el mateix que el del full: una entrada per partit amb
+  `"ganador"` (el codi de l'equip, entre cometes, o `null`) i `"marcador"`.
+
+`datos/cuadros.json` és el resultat d'un repartiment estudiat perquè tots els equips juguin en
+condicions equivalents. Si el canvies, es trenca l'equilibri del torneig. El calendari de la lliga
+femenina (`jornadas`, dins de `datos/femenino.json`) tampoc s'ha de tocar: ja està fet perquè totes
+juguin contra totes i cada jornada en descansi una.
+
+---
+
+## 9. Provar-ho a l'ordinador abans de publicar (opcional)
+
+La web llegeix les dades amb `fetch`, i això no funciona obrint el fitxer amb doble clic. Cal servir
 la carpeta per HTTP. Amb Python:
 
 ```bash
