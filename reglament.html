@@ -6,15 +6,18 @@
     <title>Reglament · Olimpíades 2026 - Club de Begues</title>
     <meta name="description" content="Reglament de les Olimpíades 2026 del Club de Begues: equips, puntuació, horaris, sancions i normes de cada esport.">
     <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/menu.js" defer></script>
 </head>
 <body>
 
     <header class="barra">
         <div class="contenidor">
             <a href="index.html"><img src="img/logo_club.png" alt="Club de Begues"></a>
-            <nav>
+            <button class="menu-boto" id="menu-boto" type="button" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu-principal">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="menu-principal">
                 <a href="index.html">Classificació</a>
-                <a href="portada.html">Les Olimpíades</a>
                 <a href="reglament.html" aria-current="page">Reglament</a>
             </nav>
         </div>

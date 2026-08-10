@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscripcions - Olimpíades 2026</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/menu.js" defer></script>
 </head>
 <body>
 
     <header class="barra">
         <div class="contenidor">
             <a href="index.html"><img src="img/logo_club.png" alt="Club de Begues"></a>
-            <nav>
+            <button class="menu-boto" id="menu-boto" type="button" aria-label="Obrir el menú" aria-expanded="false" aria-controls="menu-principal">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="menu-principal">
                 <a href="index.html">Classificació</a>
-                <a href="portada.html">Les Olimpíades</a>
                 <a href="reglament.html">Reglament</a>
             </nav>
         </div>
