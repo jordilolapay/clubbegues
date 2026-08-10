@@ -12,7 +12,7 @@
 // Si no, el navegador de la gent no el pot llegir.
 
 export const FULL = {
-  id: '',
+  id: '1gB3BzDDBQATh5wTy8JRPxCHLMUqPpnQwFcp3pIsIvLo',
 
   // Els noms de les tres pestanyes del full de càlcul. Si les reanomenes, canvia-ho aquí.
   pestanyes: {
