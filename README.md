@@ -45,8 +45,8 @@ tres fitxers ja preparats, amb tots els esports i tots els partits en el seu ord
 | Fitxer | Pestanya | Files |
 |---|---|---|
 | `equips.csv` | Equips | 15 equips (10 masculins + 5 femenins) |
-| `masculi.csv` | Masculí | 285 (17 esports × 15 partits + 3 esports × 10 llocs) |
-| `femeni.csv` | Femení | 185 (17 esports × 10 partits + 3 esports × 5 llocs) |
+| `masculi.csv` | Masculí | 295 (17 esports × 15 partits + 4 esports × 10 llocs) |
+| `femeni.csv` | Femení | 190 (17 esports × 10 partits + 4 esports × 5 llocs) |
 
 Per a cada un: descarrega'l de GitHub (obre el fitxer i clica **Download raw file**) i, al full de
 càlcul, situa't a la pestanya que toqui i fes **Fitxer › Importa › Penja**. A la finestra que surt
@@ -134,16 +134,28 @@ El **Marcador** és text lliure: `13-8`, `3-1`, `2-0 (pròrroga)` o buit. Només
 | 7è i 8è lloc | Decideix 7è i 8è |
 | 9è i 10è lloc | Els que perden les prèvies |
 
-### Ciclisme, atletisme i natació
+### Ciclisme, atletisme, natació i minigolf
 
 Aquests no tenen eliminatòries: la columna Partit diu **Lloc 1**, **Lloc 2**… fins a **Lloc 10**, i
 a Guanyador hi poses qui ha quedat en aquell lloc. Deixa buits els llocs que encara no se sàpiguen.
 
-| Esport | Partit | Guanyador |
-|---|---|---|
-| Natació | Lloc 1 | `E3` |
-| Natació | Lloc 2 | `E7` |
-| Natació | Lloc 3 | |
+| Esport | Partit | Guanyador | Marcador |
+|---|---|---|---|
+| Natació | Lloc 1 | `E3` | 2:41 |
+| Natació | Lloc 2 | `E7` | 2:48 |
+| Natació | Lloc 3 | | |
+
+Aquí el **Marcador** també és opcional, i serveix per apuntar la marca de cada equip (el temps, els
+cops…). Si n'hi ha alguna d'escrita, a la web surt una columna més al costat de cada equip.
+
+El **minigolf** funciona igual: guanya qui fa **menys cops** en tot el circuit i la resta s'ordenen
+de menys a més cops. La web no ordena res tota sola: apunta els equips ja ordenats de *Lloc 1* cap
+avall, i posa els cops a Marcador si vols que es vegin.
+
+| Esport | Partit | Guanyador | Marcador |
+|---|---|---|---|
+| Minigolf | Lloc 1 | `E4` | 38 |
+| Minigolf | Lloc 2 | `E1` | 41 |
 
 ---
 
@@ -170,8 +182,8 @@ Cada esport té **10 partits** (cada equip en juga 4), en l'ordre del calendari:
 | 4 | `F1-F4`, `F5-F3` | F2 |
 | 5 | `F1-F3`, `F4-F2` | F5 |
 
-Ciclisme, atletisme i natació femenins van per llocs, igual que en masculí però amb **5 llocs**
-(de *Lloc 1* a *Lloc 5*).
+Ciclisme, atletisme, natació i minigolf femenins van per llocs, igual que en masculí però amb
+**5 llocs** (de *Lloc 1* a *Lloc 5*).
 
 ### Com s'ordena la taula
 
@@ -265,7 +277,7 @@ què i tornar enrere.
 
 | Fitxer | Per a què serveix | El toques? |
 |---|---|---|
-| `datos/torneo.json` | Equips masculins, punts de cada categoria, llista dels 20 esports | Rarament |
+| `datos/torneo.json` | Equips masculins, punts de cada categoria, llista dels 21 esports | Rarament |
 | `datos/femenino.json` | Equips femenins, els seus punts i el calendari de la lliga | Rarament |
 | `datos/cuadros.json` | Qui juga contra qui a les prèvies i als quarts (masculí) | **Mai** |
 | `datos/resultados.json` | Resultats masculins de reserva | Només si no hi ha full de càlcul |
@@ -324,4 +336,4 @@ equip en descansa una. Guanyar val 1 punt de lliga i perdre 0; no hi ha empats.
 
 En tots dos casos els punts de les Olimpíades depenen de la categoria de l'esport (esports d'equip,
 individuals o de resistència) i es poden consultar a la capçalera de cada esport. Cada competició
-té la seva classificació general, i cadascuna suma els punts dels seus 20 esports.
+té la seva classificació general, i cadascuna suma els punts dels seus 21 esports.

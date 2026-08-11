@@ -246,6 +246,13 @@
       "grupoAfin": "precision"
     },
     {
+      "id": "minigolf",
+      "nombre": "Minigolf",
+      "categoria": "individual",
+      "formato": "clasificacion",
+      "grupoAfin": "precision"
+    },
+    {
       "id": "ciclismo",
       "nombre": "Ciclismo",
       "categoria": "resistencia",

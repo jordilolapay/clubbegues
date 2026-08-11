@@ -123,7 +123,10 @@ function esquelet(torneig, nPosicions, partitsLliga) {
 
   for (const esport of torneig.deportes) {
     if (esport.formato === 'clasificacion') {
-      resultats[esport.id] = { clasificacion: new Array(nPosicions).fill(null) };
+      resultats[esport.id] = {
+        clasificacion: new Array(nPosicions).fill(null),
+        marcadores: new Array(nPosicions).fill(''),
+      };
     } else if (partitsLliga) {
       resultats[esport.id] = Object.fromEntries(partitsLliga.map((id) => [id, buit()]));
     } else {
@@ -214,12 +217,14 @@ export function resultatsDelFull(files, opcions, avisos) {
       return;
     }
 
-    // Natació, atletisme i ciclisme: una fila per lloc, del 1r a l'últim.
+    // Natació, atletisme, ciclisme i minigolf: una fila per lloc, del 1r a l'últim.
+    // El marcador (temps, cops…) és opcional i només es mostra.
     if (esport.formato === 'clasificacion') {
       const lloc = llocDeTexte(textPartit);
       if (!lloc || lloc > nPosicions) {
         return avis(`"${textPartit}" no és cap lloc de ${esport.id} (hauria de dir de "Lloc 1" a "Lloc ${nPosicions}").`);
       }
+      desti.marcadores[lloc - 1] = llegir(fila, 'marcador');
       if (!textGuanyador) return;
       const equip = perEquip.get(clau(textGuanyador));
       if (!equip) return avis(`"${textGuanyador}" no és cap equip d'aquesta competició.`);

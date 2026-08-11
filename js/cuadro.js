@@ -4,7 +4,9 @@ import {
   COMPETICIONS, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca, el,
   mostrarErrorGreu, mostrarErrors, selectorCompeticio,
 } from './comu.js';
-import { NOMS_PARTITS, NOMS_RONDES, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
+import {
+  NOMS_PARTITS, NOMS_RONDES, nomCategoria, nomEsport, nomGrup, ordinal, textosClassificacio,
+} from './textos.js';
 
 const zonaSelector = document.querySelector('#selector');
 const zonaErrors = document.querySelector('#errors');
@@ -100,10 +102,11 @@ function pintarContingut(estat, dades) {
   buida(zonaCos);
 
   if (estat.format === 'clasificacion') {
+    const textos = textosClassificacio(estat.id);
     zonaCos.append(
       el('section', { class: 'seccio' }, [
-        el('h2', { text: "Ordre d'arribada" }),
-        el('p', { class: 'nota', text: "En aquest esport no hi ha eliminatòries: s'apunta directament l'ordre d'arribada." }),
+        el('h2', { text: textos.titol }),
+        el('p', { class: 'nota', text: textos.nota }),
         taulaPosicions(estat, dades),
       ])
     );
@@ -323,6 +326,11 @@ function textIncognita(idPartit, index) {
 
 /** Taula de les 10 posicions finals amb els punts que s'emporta cadascú. */
 function taulaPosicions(estat, dades) {
+  // La columna de marques (temps, cops…) només surt si hi ha res apuntat.
+  const marcadors = estat.marcadors ?? [];
+  const ambMarca = marcadors.some((marca) => marca);
+  const textos = textosClassificacio(estat.id);
+
   const cos = el('tbody');
   estat.posicions.forEach((idEquip, i) => {
     const posicio = i + 1;
@@ -338,6 +346,7 @@ function taulaPosicions(estat, dades) {
               ]),
             ])
           : el('td', { class: 'apagat', text: 'Per decidir' }),
+        ambMarca && el('td', { class: marcadors[i] ? 'num' : 'num apagat', text: marcadors[i] || '—' }),
         el('td', { class: idEquip ? 'num punts' : 'num apagat', text: String(estat.taulaPunts[i] ?? 0) }),
       ])
     );
@@ -349,6 +358,7 @@ function taulaPosicions(estat, dades) {
         el('tr', {}, [
           el('th', { text: 'Lloc' }),
           el('th', { text: 'Equip' }),
+          ambMarca && el('th', { class: 'num', text: textos.marca }),
           el('th', { class: 'num', text: 'Punts' }),
         ]),
       ]),

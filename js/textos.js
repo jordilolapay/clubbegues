@@ -23,6 +23,7 @@ export const NOMS_ESPORTS = {
   dardos: 'Dards',
   futbolin: 'Futbolí',
   billar: 'Billar',
+  minigolf: 'Minigolf',
   ciclismo: 'Ciclisme',
   atletismo: 'Atletisme',
   natacion: 'Natació',
@@ -73,6 +74,26 @@ export const NOMS_RONDES = {
   consSemis: 'Semifinals',
   consFinal: 'Final consolació',
 };
+
+/**
+ * Esports que van per ordre i no per eliminatòries: com se'n diu la taula i què hi ha
+ * a la columna del marcador. Si un esport no surt aquí, es fa servir DEFECTE.
+ */
+export const TEXTOS_CLASSIFICACIO = {
+  DEFECTE: {
+    titol: "Ordre d'arribada",
+    nota: "En aquest esport no hi ha eliminatòries: s'apunta directament l'ordre d'arribada.",
+    marca: 'Marca',
+  },
+  minigolf: {
+    titol: 'Classificació',
+    nota: 'En aquest esport no hi ha eliminatòries: guanya qui fa menys cops en tot el circuit, ' +
+      'i la resta d\'equips s\'ordenen de menys a més cops.',
+    marca: 'Cops',
+  },
+};
+
+export const textosClassificacio = (id) => TEXTOS_CLASSIFICACIO[id] ?? TEXTOS_CLASSIFICACIO.DEFECTE;
 
 /** Nom de cada competició. */
 export const NOMS_COMPETICIONS = {

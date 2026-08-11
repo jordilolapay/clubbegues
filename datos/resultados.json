@@ -1053,6 +1053,32 @@
       "marcador": ""
     }
   },
+  "minigolf": {
+    "clasificacion": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "marcadores": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
   "ciclismo": {
     "clasificacion": [
       null,
@@ -1065,6 +1091,18 @@
       null,
       null,
       null
+    ],
+    "marcadores": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
   },
   "atletismo": {
@@ -1079,6 +1117,18 @@
       null,
       null,
       null
+    ],
+    "marcadores": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
   },
   "natacion": {
@@ -1093,6 +1143,18 @@
       null,
       null,
       null
+    ],
+    "marcadores": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
   }
 }

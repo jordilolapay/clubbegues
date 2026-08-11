@@ -75,7 +75,8 @@ export async function carregarTorneig(competicio = 'masculina') {
   // Els problemes de lectura del full de càlcul es veuen al mateix bàner que els de les dades.
   const errors = [...(dades.avisos ?? [])];
   const esports = torneig.deportes.map((esport) => {
-    // En femení els 17 esports de quadre es juguen com a lliga; els tres de resistència, igual.
+    // En femení els 17 esports de quadre es juguen com a lliga; els quatre que van per
+    // ordre (resistència i minigolf) es queden igual.
     const format = femeni && esport.formato === 'cuadro' ? 'liga' : esport.formato;
     try {
       const estat = calcularEsport(esport, config, {

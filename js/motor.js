@@ -307,10 +307,24 @@ function ordenarLliga(ids, marcador, partits, desempat) {
   return blocs;
 }
 
-/** Ciclisme, atletisme, natació: ordre d'arribada directe. */
+/**
+ * Ciclisme, atletisme, natació i minigolf: ordre directe, sense eliminatòries.
+ * `marcadores` és opcional (temps, cops…) i només es mostra al costat de cada equip.
+ */
 function posicionsPerClassificacio(esport, resultat, equipsValids, errors, nPosicions) {
   const posicions = new Array(nPosicions).fill(null);
+  const marcadors = new Array(nPosicions).fill('');
   const llista = resultat?.clasificacion;
+
+  const marques = resultat?.marcadores;
+  if (marques !== undefined && !Array.isArray(marques)) {
+    errors.push(`El camp "marcadores" de ${esport.id} hauria de ser una llista.`);
+  } else if (Array.isArray(marques)) {
+    marques.slice(0, nPosicions).forEach((marca, i) => {
+      if (typeof marca === 'string') marcadors[i] = marca.trim();
+      else if (typeof marca === 'number') marcadors[i] = String(marca);
+    });
+  }
 
   if (!Array.isArray(llista)) {
     errors.push(`Falta l'array "clasificacion" de "${esport.id}" al fitxer de resultats.`);
@@ -335,7 +349,7 @@ function posicionsPerClassificacio(esport, resultat, equipsValids, errors, nPosi
   }
 
   const jugats = posicions.filter(Boolean).length;
-  return { partits: {}, posicions, progres: { jugats, total: nPosicions } };
+  return { partits: {}, posicions, marcadors, progres: { jugats, total: nPosicions } };
 }
 
 /**
