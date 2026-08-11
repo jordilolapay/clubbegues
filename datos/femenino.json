@@ -63,6 +63,13 @@
     "victoria": 1,
     "derrota": 0
   },
+  "rotacion": {
+    "baloncesto": 2,
+    "balonmano": 3,
+    "voleibol-pista": 2,
+    "futbol-sala": 2,
+    "futbolin": 1
+  },
   "jornadas": [
     {
       "jornada": 1,

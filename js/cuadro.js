@@ -2,7 +2,7 @@
 
 import {
   COMPETICIONS, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca, el,
-  diaCurt, franja, mostrarErrorGreu, mostrarErrors, nomDia, selectorCompeticio, textIncognita,
+  diaCurt, franja, inicia, mostrarErrorGreu, mostrarErrors, nomDia, selectorCompeticio, textIncognita,
 } from './comu.js';
 import {
   NOMS_PARTITS, NOMS_RONDES, nomCategoria, nomEsport, nomGrup, ordinal, textosClassificacio,
@@ -237,7 +237,7 @@ function pintarLliga(estat, dades) {
 
     el('section', { class: 'seccio' }, [
       el('h2', { text: 'Partits' }),
-      el('div', { class: 'jornades' }, estat.jornades.map((jornada) => blocJornada(jornada, estat, dades))),
+      el('div', { class: 'jornades' }, jornadesEnOrdre(estat, dades).map((jornada) => blocJornada(jornada, estat, dades))),
     ])
   );
 }
@@ -289,6 +289,26 @@ function taulaLliga(estat, dades) {
           : "L'ordre es decideix per victòries i, si dos equips n'empaten, pel partit que han jugat entre elles.",
     }),
   ]);
+}
+
+/**
+ * Les jornades en l'ordre que es juguen. Cada esport comença per una jornada diferent, perquè
+ * un mateix dia no surtin els mateixos partits a tot arreu, o sigui que la primera que es juga
+ * no té per què ser la número 1. Les que no tenen horari es queden al final, per número.
+ */
+function jornadesEnOrdre(estat, dades) {
+  const quan = (jornada) => {
+    const moments = (jornada.partidos ?? [])
+      .map(([local, visitant]) => dades.horaris.partit(estat.id, `${local}-${visitant}`))
+      .filter((slot) => slot)
+      .map((slot) => inicia(slot).getTime());
+    return moments.length ? Math.min(...moments) : Infinity;
+  };
+
+  return (estat.jornades ?? [])
+    .map((jornada) => ({ jornada, quan: quan(jornada) }))
+    .sort((a, b) => a.quan - b.quan || a.jornada.jornada - b.jornada.jornada)
+    .map((ordenada) => ordenada.jornada);
 }
 
 function blocJornada(jornada, estat, dades) {

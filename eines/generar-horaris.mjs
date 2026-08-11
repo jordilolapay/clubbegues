@@ -1,8 +1,17 @@
 // Transcriu la graella visual de la pestanya "Horaris" a la pestanya "Calendari",
 // que és la que llegeix la web.
 //
-//     node eines/generar-horaris.mjs           → datos/plantilla-full/calendari.csv
-//     node eines/generar-horaris.mjs --json    → datos/horarios.json (des de la pestanya Calendari)
+//     node eines/generar-horaris.mjs             → datos/plantilla-full/calendari.csv
+//     node eines/generar-horaris.mjs --json      → datos/horarios.json (des de la pestanya Calendari)
+//
+// I tres coses que es fan sobre la pestanya Calendari tal com està ara, sense tornar a mirar
+// la graella (o sigui, sense carregar-se els retocs que s'hi hagin fet a mà):
+//
+//     … --qui-juga        → hi refà la columna "Qui juga"
+//     … --lliga-femenina  → hi reparteix la lliga femenina segons `rotacion` (§ LLIGA_FEMENINA)
+//     … --buscar-rotacio  → no toca res: diu quina `rotacion` aniria millor amb aquest calendari
+//
+// Els tres accepten un fitxer CSV per la línia d'ordres, per provar-los sense internet.
 //
 // La graella d'"Horaris" està feta per mirar-la, no per llegir-la amb un programa: les hores
 // són files, les instal·lacions són columnes, una casella pot ocupar cinc files (això vol dir
@@ -16,7 +25,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { inflateRawSync } from 'node:zlib';
 import { FULL } from '../js/config.js';
-import { adrecaPestanya, horarisDelFull, llegirCSV } from '../js/full.js';
+import { adrecaPestanya, dataDelFull, equipsDelFull, horarisDelFull, horesDelFull, llegirCSV } from '../js/full.js';
 import { NOMS_ESPORTS, NOMS_PARTITS } from '../js/textos.js';
 
 const ARREL = new URL('..', import.meta.url).pathname;
@@ -289,9 +298,6 @@ function hores(text) {
 /* -------------------------------------------------------- Recórrer la graella */
 
 function transcriure(caselles, ultima, avisos) {
-  const femeni = json('femenino.json');
-  const partitsLliga = femeni.jornadas.flatMap((j) => j.partidos.map(([a, b]) => `${a}-${b}`));
-
   const inici = new Date(`${PRIMER_DIA}T00:00:00Z`);
   const cela = (col, fila) => caselles.get(`${String.fromCharCode(64 + col)}${fila}`);
 
@@ -367,12 +373,42 @@ function transcriure(caselles, ultima, avisos) {
     }
   }
 
-  return { slots, partitsLliga };
+  return slots;
 }
+
+/* ------------------------------------------- La rotació de la lliga femenina */
+
+/**
+ * Els cinc equips femenins juguen tots contra tots, o sigui que a cada jornada n'hi ha un que
+ * descansa i els enfrontaments són sempre els mateixos deu. Si tots els esports juguessin les
+ * jornades en el mateix ordre, un mateix dia sortirien els mateixos partits a tot arreu i qui
+ * descansa no jugaria a res: per això cada esport comença per una jornada diferent.
+ *
+ * Quantes en desplaça cadascun ho diu `rotacion` a datos/femenino.json. El número de la graella
+ * («1-2») vol dir el primer i el segon partit D'AQUELL ESPORT, i el desplaçament el converteix
+ * en el partit de la lliga que li toca.
+ */
+const LLIGA_FEMENINA = (() => {
+  const femeni = json('femenino.json');
+  const partits = femeni.jornadas.flatMap((j) => j.partidos.map(([a, b]) => `${a}-${b}`));
+  const perJornada = femeni.jornadas[0]?.partidos.length ?? 2;
+  const rotacio = femeni.rotacion ?? {};
+
+  return {
+    partits,
+    perJornada,
+    rotacio,
+    /** El partit que fa `numero` d'un esport: el 1r del bàsquet no és el 1r de la lliga. */
+    partit(numero, esport, rotacio = this.rotacio) {
+      const gir = (rotacio[esport] ?? 0) * perJornada;
+      return partits[(numero - 1 + gir) % partits.length];
+    },
+  };
+})();
 
 /* --------------------------------- Repartir els partits entre els slots de cada ronda */
 
-function assignarPartits(slots, partitsLliga, avisos) {
+function assignarPartits(slots, avisos) {
   // Les dates límit no reparteixen res: afecten tots els partits de la ronda alhora.
   for (const slot of slots) {
     if (slot.tipus !== 'limit') continue;
@@ -407,19 +443,85 @@ function assignarPartits(slots, partitsLliga, avisos) {
     }
   }
 
-  // Femení: els números de la graella són els partits de la lliga en ordre de calendari.
+  // Femení: els números de la graella són els partits que aquell esport porta jugats, i cada
+  // esport comença per una jornada diferent (§ LLIGA_FEMENINA).
   for (const slot of slots) {
     for (const numero of slot.lliga ?? []) {
-      const partit = partitsLliga[numero - 1];
-      if (!partit) {
-        avisos.push(`"${slot.etiqueta}": el partit número ${numero} no existeix (la lliga en té ${partitsLliga.length}).`);
+      if (numero < 1 || numero > LLIGA_FEMENINA.partits.length) {
+        avisos.push(`"${slot.etiqueta}": el partit número ${numero} no existeix (la lliga en té ${LLIGA_FEMENINA.partits.length}).`);
         continue;
       }
       for (const esport of slot.tipus === 'limit' ? [null] : slot.esports) {
-        slot.partits = [...(slot.partits ?? []), { esport, id: partit }];
+        slot.partits = [...(slot.partits ?? []), { esport, id: LLIGA_FEMENINA.partit(numero, esport) }];
       }
     }
   }
+}
+
+/* --------------------------------------------------------- Qui juga cada partit */
+
+/** Compara noms sense distingir majúscules, accents ni signes: "Quarts 1" = "quarts1". */
+const clau = (valor) =>
+  String(valor ?? '').normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+/** Els noms dels equips: els del full de càlcul si es poden llegir, si no els de datos/. */
+async function nomsEquips() {
+  const noms = new Map();
+  for (const equip of [...json('torneo.json').equipos, ...json('femenino.json').equipos]) {
+    noms.set(equip.id, equip.nombre);
+  }
+  try {
+    const resposta = await fetch(adrecaPestanya(FULL.id, FULL.pestanyes.equips), { cache: 'no-cache' });
+    if (!resposta.ok) throw new Error(String(resposta.status));
+    for (const [id, dades] of equipsDelFull(llegirCSV(await resposta.text()), [], FULL.pestanyes.equips)) {
+      if (dades.nombre) noms.set(id, dades.nombre);
+    }
+  } catch {
+    console.log("  ⚠ No s'ha pogut llegir la pestanya d'equips: la columna \"Qui juga\" fa servir els noms de datos/.");
+  }
+  return noms;
+}
+
+/**
+ * Qui juga un partit, si es pot saber abans que comenci el torneig.
+ *
+ * Femení: sempre, perquè la lliga ja està sortejada i l'identificador del partit ja diu els dos
+ * equips. Masculí: només les prèvies i els quarts, i als quarts 1 i 3 un dels dos encara és el
+ * guanyador d'una prèvia. De semifinals en amunt tot depèn de resultats i no s'hi posa res.
+ */
+function quiJuga(idPartit, idEsport, noms, quadres) {
+  const nom = (id) => noms.get(id) ?? id;
+  const sigla = (id) => NOMS_PARTITS[id]?.sigla ?? id;
+
+  const lliga = /^(F\d+)-(F\d+)$/.exec(idPartit);
+  if (lliga) return `${nom(lliga[1])} - ${nom(lliga[2])}`;
+
+  const quadre = quadres[idEsport];
+  if (!quadre) return '';
+  const parella = (dos) => (Array.isArray(dos) && dos.length === 2 ? `${nom(dos[0])} - ${nom(dos[1])}` : '');
+  const surtDeLaPrevia = (previa, rival) => (rival ? `Guanyador ${sigla(previa)} - ${nom(rival)}` : '');
+
+  switch (idPartit) {
+    case 'previa1': return parella(quadre.previa1);
+    case 'previa2': return parella(quadre.previa2);
+    case 'qf1': return surtDeLaPrevia('previa1', quadre.qf1Rival);
+    case 'qf2': return parella(quadre.qf2);
+    case 'qf3': return surtDeLaPrevia('previa2', quadre.qf3Rival);
+    case 'qf4': return parella(quadre.qf4);
+    default: return '';
+  }
+}
+
+/**
+ * La cel·la "Qui juga" d'una fila. Si la franja té més d'un partit va un per línia, amb la
+ * sigla al davant perquè es vegi quin és quin; els que encara no se saben no hi surten.
+ */
+function columnaQuiJuga(idsPartits, idEsport, noms, quadres) {
+  const linies = idsPartits
+    .map((id) => [id, quiJuga(id, idEsport, noms, quadres)])
+    .filter(([, text]) => text);
+  if (linies.length <= 1) return linies[0]?.[1] ?? '';
+  return linies.map(([id, text]) => `${NOMS_PARTITS[id]?.sigla ?? id}: ${text}`).join('\n');
 }
 
 /* ------------------------------------------------------------------ Sortida */
@@ -427,14 +529,15 @@ function assignarPartits(slots, partitsLliga, avisos) {
 const celaCSV = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
 const csv = (files) => `${files.map((f) => f.map(celaCSV).join(',')).join('\n')}\n`;
 
-const CAPCALERA = ['Data', 'Hora', 'Tipus', 'Lloc', 'Competició', 'Esport', 'Partit', 'Nota'];
+const CAPCALERA = ['Data', 'Hora', 'Tipus', 'Lloc', 'Competició', 'Esport', 'Partit', 'Qui juga', 'Nota'];
+const COLUMNA_NOTA = CAPCALERA.indexOf('Nota');
 
 const dataCurta = (d) => `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}/${d.getUTCFullYear()}`;
 const nomEsport = (id) => NOMS_ESPORTS[id] ?? id;
 const nomPartit = (id) => NOMS_PARTITS[id]?.llarg ?? id;
 const nomCompeticio = (c) => ({ masculina: 'Masculí', femenina: 'Femení' }[c] ?? '');
 
-function aFiles(slots, avisos) {
+function aFiles(slots, noms, quadres, avisos) {
   const torneig = json('torneo.json');
   const format = new Map(torneig.deportes.map((d) => [d.id, d.formato]));
 
@@ -456,10 +559,15 @@ function aFiles(slots, avisos) {
 
     if (slot.tipus === 'limit') {
       if (!slot.esports.length) avisos.push(`"${slot.etiqueta}": no s'ha entès a quins esports afecta.`);
+      // Una data límit afecta sis esports alhora: cada un té un quadre diferent, o sigui que
+      // dels partits masculins no se'n pot dir qui hi juga. Dels femenins sí: la lliga és igual
+      // a tots els esports.
+      const idsLimit = (slot.partits ?? []).map((p) => p.id);
       files.push([
         data, '', 'Límit', '', competicio,
         slot.esports.map(nomEsport).join(', '),
-        (slot.partits ?? []).map((p) => nomPartit(p.id)).join(', '),
+        idsLimit.map(nomPartit).join(', '),
+        columnaQuiJuga(idsLimit, null, noms, quadres),
         [slot.etiqueta, ...(slot.sobrant?.length ? slot.sobrant : [])].join(' · '),
       ]);
       continue;
@@ -469,7 +577,7 @@ function aFiles(slots, avisos) {
 
     // Actes: el que no és cap esport (reunió, tardeo, sopar…).
     if (!slot.esports.length) {
-      files.push([data, hora, 'Acte', slot.lloc, competicio, '', '', slot.etiqueta]);
+      files.push([data, hora, 'Acte', slot.lloc, competicio, '', '', '', slot.etiqueta]);
       continue;
     }
 
@@ -483,12 +591,267 @@ function aFiles(slots, avisos) {
       files.push([
         data, hora, '', slot.lloc, competicio, nomEsport(esport),
         seus.length ? seus.map((p) => nomPartit(p.id)).join(', ') : 'Tot',
+        columnaQuiJuga(seus.map((p) => p.id), esport, noms, quadres),
         [(slot.repassar || implicit || barrejat) && '⚠ REPASSAR', ...notes].filter(Boolean).join(' · '),
       ]);
     }
   }
 
   return files;
+}
+
+/* ------------------------------------- Refer només la columna "Qui juga" */
+
+/** Un fitxer passat per la línia d'ordres, si n'hi ha: serveix per provar-ho sense internet. */
+const fitxerLocal = process.argv.slice(2).find((argument) => !argument.startsWith('--'));
+
+/** La pestanya Calendari tal com està ara. */
+async function baixarCalendari() {
+  if (fitxerLocal) return llegirCSV(readFileSync(fitxerLocal, 'utf8'));
+  const resposta = await fetch(adrecaPestanya(FULL.id, FULL.pestanyes.calendari), { cache: 'no-cache' });
+  if (!resposta.ok) throw new Error(`No s'ha pogut llegir la pestanya "${FULL.pestanyes.calendari}" (error ${resposta.status}).`);
+  return llegirCSV(await resposta.text());
+}
+
+/** Com es pot escriure cada esport i cada partit a les cel·les del calendari. */
+function diccionaris() {
+  const perEsport = new Map();
+  for (const esport of json('torneo.json').deportes) {
+    for (const alias of [esport.id, esport.nombre, NOMS_ESPORTS[esport.id]]) {
+      if (alias) perEsport.set(clau(alias), esport.id);
+    }
+  }
+
+  const perPartit = new Map();
+  for (const [id, noms] of Object.entries(NOMS_PARTITS)) {
+    for (const alias of [id, noms.llarg, noms.sigla]) perPartit.set(clau(alias), id);
+  }
+  for (const jornada of json('femenino.json').jornadas ?? []) {
+    for (const [local, visitant] of jornada.partidos ?? []) {
+      perPartit.set(clau(`${local}-${visitant}`), `${local}-${visitant}`);
+      perPartit.set(clau(`${visitant}-${local}`), `${local}-${visitant}`); // per si algú l'apunta al revés
+    }
+  }
+
+  return { perEsport, perPartit };
+}
+
+/**
+ * Refà la columna "Qui juga" del que hi ha ARA a la pestanya Calendari, sense tocar la resta.
+ * És el que cal quan el calendari ja s'ha repassat a mà i no es vol tornar a generar des de
+ * la graella (que es carregaria els retocs).
+ */
+function ambQuiJuga(files, noms, quadres, avisos) {
+  const [capcalera = [], ...cos] = files;
+  const columna = (nom) => capcalera.findIndex((cela) => clau(cela) === clau(nom));
+  for (const nom of ['Esport', 'Partit']) {
+    if (columna(nom) < 0) throw new Error(`La pestanya "${FULL.pestanyes.calendari}" no té cap columna "${nom}".`);
+  }
+
+  // Si la columna ja hi és es refà al seu lloc; si no, se n'obre una just després de Partit.
+  const existent = columna('Qui juga');
+  const on = existent >= 0 ? existent : columna('Partit') + 1;
+  const posar = (fila, valor) => {
+    const nova = [...fila];
+    while (nova.length < on) nova.push('');
+    if (existent >= 0) nova[on] = valor;
+    else nova.splice(on, 0, valor);
+    return nova;
+  };
+
+  const { perEsport, perPartit } = diccionaris();
+  const cela = (fila, nom) => (fila[columna(nom)] ?? '').trim();
+  const trossos = (text) => text.split(/[,;]/).map((t) => t.trim()).filter(Boolean);
+
+  const cosNou = cos.map((fila, i) => {
+    const esports = trossos(cela(fila, 'Esport')).map((t) => perEsport.get(clau(t))).filter(Boolean);
+    const partits = [];
+    for (const tros of trossos(cela(fila, 'Partit'))) {
+      const id = perPartit.get(clau(tros));
+      if (id) partits.push(id);
+      else if (!['tot', 'tots', 'tota', 'totes'].includes(clau(tros))) {
+        avisos.push(`Calendari, fila ${i + 2}: "${tros}" no és cap partit, o sigui que no surt a "Qui juga".`);
+      }
+    }
+    // Amb un sol esport se sap de quin quadre parlem; amb més d'un (les dates límit), no.
+    return posar(fila, columnaQuiJuga(partits, esports.length === 1 ? esports[0] : null, noms, quadres));
+  });
+
+  return [posar(capcalera, 'Qui juga'), ...cosNou];
+}
+
+/* ------------------------------------- Repartir de nou la lliga femenina */
+
+/**
+ * Les franges del calendari on es juguen partits de la lliga femenina, en ordre. Cada una diu
+ * de quin esport és i en quines posicions de la cel·la Partit hi ha partits de lliga (una
+ * mateixa cel·la pot barrejar quadre masculí i lliga femenina: futbolí i dards ho fan).
+ */
+function franjesFemenines(files) {
+  const [cap = [], ...cos] = files;
+  const columna = (nom) => cap.findIndex((cela) => clau(cela) === clau(nom));
+  const cela = (fila, nom) => (fila[columna(nom)] ?? '').trim();
+  const { perEsport, perPartit } = diccionaris();
+  const deLliga = new Set(LLIGA_FEMENINA.partits);
+
+  // Les hores de matinada són de la nit del dia abans, com a tot arreu.
+  const minuts = (text) => {
+    if (!text) return null;
+    const [h, m] = text.split(':').map(Number);
+    return ((h < 6 ? h + 24 : h) * 60) + m;
+  };
+
+  const franges = [];
+  cos.forEach((fila, i) => {
+    if (!['', 'partit', 'partido'].includes(clau(cela(fila, 'Tipus')))) return; // límits i actes, no
+    const esports = cela(fila, 'Esport').split(/[,;]/).map((t) => perEsport.get(clau(t.trim()))).filter(Boolean);
+    if (esports.length !== 1) return; // amb dos esports a la mateixa cel·la no se sap de quin és cada partit
+
+    const parts = cela(fila, 'Partit').split(',').map((t) => t.trim());
+    const posicions = parts.map((t, n) => [n, perPartit.get(clau(t))]).filter(([, id]) => deLliga.has(id));
+    if (!posicions.length) return;
+
+    const { inici, fi } = horesDelFull(cela(fila, 'Hora'));
+    franges.push({
+      fila: i, esport: esports[0], data: dataDelFull(cela(fila, 'Data'), FULL.any) ?? '',
+      ini: minuts(inici) ?? 0, fi: minuts(fi) ?? minuts(inici) ?? 0,
+      parts, posicions: posicions.map(([n]) => n), partits: posicions.map(([, id]) => id),
+    });
+  });
+
+  return { capcalera: cap, cos, columna, franges };
+}
+
+/**
+ * Diu quins partits toquen a cada franja: cada esport juga els seus en el mateix ordre de
+ * sempre, però començant per la jornada que li toca. Es pot passar tantes vegades com calgui,
+ * que el resultat sempre és el mateix (el que mana és l'ordre, no el que hi ha escrit ara).
+ */
+function repartirLliga(franges, rotacio) {
+  const perEsport = new Map();
+  for (const franja of [...franges].sort((a, b) => a.data.localeCompare(b.data) || a.ini - b.ini)) {
+    if (!perEsport.has(franja.esport)) perEsport.set(franja.esport, []);
+    perEsport.get(franja.esport).push(franja);
+  }
+
+  const toca = new Map();
+  for (const [esport, seves] of perEsport) {
+    let numero = 0;
+    for (const franja of seves) {
+      toca.set(franja, franja.posicions.map(() => LLIGA_FEMENINA.partit(++numero, esport, rotacio)));
+    }
+  }
+  return toca;
+}
+
+/** Escriu al calendari els partits que ha repartit repartirLliga(). */
+function repartirLligaFemenina(files) {
+  const { capcalera, cos, columna, franges } = franjesFemenines(files);
+  const toca = repartirLliga(franges, LLIGA_FEMENINA.rotacio);
+
+  let canviats = 0;
+  const nou = cos.map((fila) => [...fila]);
+  for (const franja of franges) {
+    const parts = [...franja.parts];
+    franja.posicions.forEach((posicio, n) => {
+      const id = toca.get(franja)[n];
+      if (parts[posicio] !== id) canviats++;
+      parts[posicio] = id;
+    });
+    nou[franja.fila][columna('Partit')] = parts.join(', ');
+  }
+
+  return { files: [capcalera, ...nou], canviats };
+}
+
+/**
+ * Repassa com queda la lliga femenina: partits repetits el mateix dia a dos esports, equips
+ * que han de ser a dos llocs a la mateixa hora i equips que un dia no juguen res.
+ */
+function repassarLligaFemenina(franges, toca, noms) {
+  const partitsDe = (franja) => toca.get(franja) ?? franja.partits;
+  /** Una sessió d'una hora o dues, amb tothom a la pista alhora (no la nit de futbolí i dards). */
+  const tancada = (franja) => franja.fi - franja.ini <= 150;
+  const equips = [...new Set(LLIGA_FEMENINA.partits.flatMap((id) => id.split('-')))];
+  const nom = (id) => noms?.get(id) ?? id;
+
+  const perDia = new Map();
+  for (const franja of franges) {
+    if (!perDia.has(franja.data)) perDia.set(franja.data, []);
+    perDia.get(franja.data).push(franja);
+  }
+
+  const problemes = [];
+  for (const [data, sessions] of [...perDia].sort()) {
+    const dia = data.slice(8, 10) + '/' + data.slice(5, 7);
+
+    // El mateix partit a dos esports el mateix dia. Pesa més si tots dos són esports amb hora
+    // fixa: que futbolí i dards (que duren tota la nit) coincideixin no molesta ningú.
+    const on = new Map();
+    for (const sessio of sessions) for (const id of partitsDe(sessio)) {
+      if (!on.has(id)) on.set(id, []);
+      on.get(id).push(sessio);
+    }
+    for (const [id, seves] of on) {
+      const quins = [...new Set(seves.map((s) => nomEsport(s.esport)))];
+      if (quins.length < 2) continue;
+      const ambHora = seves.filter((s) => tancada(s)).length;
+      problemes.push({ pes: ambHora > 1 ? 3 : 1, text: `${dia}: ${id} es juga a ${quins.join(' i ')}` });
+    }
+
+    for (let a = 0; a < sessions.length; a++) {
+      for (let b = a + 1; b < sessions.length; b++) {
+        const [x, y] = [sessions[a], sessions[b]];
+        // Les sessions llargues (futbolí i dards, de 20:00 a 01:00) no compten: els partits es
+        // van jugant al llarg de la nit i no tots a la mateixa hora.
+        if (x.esport === y.esport || x.ini >= y.fi || y.ini >= x.fi) continue;
+        if (!tancada(x) || !tancada(y)) continue;
+        const seus = new Set(partitsDe(x).flatMap((id) => id.split('-')));
+        const xoc = [...new Set(partitsDe(y).flatMap((id) => id.split('-')))].filter((e) => seus.has(e));
+        if (xoc.length) {
+          problemes.push({
+            pes: 5,
+            text: `${dia}: ${xoc.map(nom).join(', ')} juga ${nomEsport(x.esport)} i ${nomEsport(y.esport)} a la mateixa hora`,
+          });
+        }
+      }
+    }
+
+    const juguen = new Set(sessions.flatMap((s) => partitsDe(s).flatMap((id) => id.split('-'))));
+    const fora = equips.filter((e) => !juguen.has(e));
+    // Amb un sol esport aquell dia sempre n'hi ha un que descansa: això no és cap problema.
+    if (fora.length && new Set(sessions.map((s) => s.esport)).size > 1) {
+      problemes.push({ pes: 2, text: `${dia}: ${fora.map(nom).join(', ')} no juga res` });
+    }
+  }
+
+  return problemes.sort((a, b) => b.pes - a.pes);
+}
+
+/** Prova totes les rotacions possibles i diu quina va millor. */
+function buscarRotacions(files) {
+  const { franges } = franjesFemenines(files);
+  const esports = [...new Set(franges.map((f) => f.esport))];
+  const jornades = LLIGA_FEMENINA.partits.length / LLIGA_FEMENINA.perJornada;
+  const total = jornades ** esports.length;
+  if (total > 5e6) return null;
+
+  let millor = null;
+  for (let n = 0; n < total; n++) {
+    const rotacio = {};
+    let x = n;
+    for (const esport of esports) { rotacio[esport] = x % jornades; x = Math.floor(x / jornades); }
+    const problemes = repassarLligaFemenina(franges, repartirLliga(franges, rotacio), null);
+    const punts = [
+      problemes.reduce((total, p) => total + p.pes, 0),
+      problemes.length,
+      Object.values(rotacio).reduce((a, b) => a + b, 0),
+    ];
+    if (!millor || punts.some((p, i) => p !== millor.punts[i] && p < millor.punts[i] && punts.slice(0, i).every((q, j) => q === millor.punts[j]))) {
+      millor = { rotacio, punts, problemes };
+    }
+  }
+  return millor;
 }
 
 /* -------------------------------------------------------------------- Marxa */
@@ -501,30 +864,63 @@ function guardarJSON(files, avisos) {
   return horaris ?? [];
 }
 
+function guardarCSV(files) {
+  const carpeta = `${ARREL}datos/plantilla-full`;
+  mkdirSync(carpeta, { recursive: true });
+  writeFileSync(`${carpeta}/calendari.csv`, csv(files));
+}
+
 const avisos = [];
 
 if (process.argv.includes('--json')) {
   // Torna a fer datos/horarios.json amb el que hi hagi ara mateix a la pestanya Calendari.
-  const resposta = await fetch(adrecaPestanya(FULL.id, FULL.pestanyes.calendari), { cache: 'no-cache' });
-  if (!resposta.ok) throw new Error(`No s'ha pogut llegir la pestanya "${FULL.pestanyes.calendari}" (error ${resposta.status}).`);
-  const horaris = guardarJSON(llegirCSV(await resposta.text()), avisos);
+  const horaris = guardarJSON(await baixarCalendari(), avisos);
   console.log(`Fet: datos/horarios.json · ${horaris.length} franges`);
-} else {
-  const buf = process.argv[2] && !process.argv[2].startsWith('--')
-    ? readFileSync(process.argv[2])
-    : await baixarGraella();
-
-  const { caselles, ultima } = llegirGraella(buf, 'Horaris');
-  const { slots, partitsLliga } = transcriure(caselles, ultima, avisos);
-  assignarPartits(slots, partitsLliga, avisos);
-
-  const files = aFiles(slots, avisos);
-  const carpeta = `${ARREL}datos/plantilla-full`;
-  mkdirSync(carpeta, { recursive: true });
-  writeFileSync(`${carpeta}/calendari.csv`, csv(files));
+} else if (process.argv.includes('--qui-juga')) {
+  // Agafa la pestanya Calendari tal com està i només hi refà la columna "Qui juga".
+  const quadres = json('cuadros.json');
+  const files = ambQuiJuga(await baixarCalendari(), await nomsEquips(), quadres, avisos);
+  guardarCSV(files);
+  guardarJSON(files, []); // els problemes d'aquestes files ja surten més amunt
+  const on = files[0].indexOf('Qui juga');
+  const omplertes = files.slice(1).filter((f) => f[on]).length;
+  console.log(`Fet: datos/plantilla-full/calendari.csv i datos/horarios.json · ${files.length - 1} files · ${omplertes} amb "Qui juga"`);
+} else if (process.argv.includes('--buscar-rotacio')) {
+  // No toca res: només diu quina rotació de la lliga femenina aniria millor amb aquest calendari.
+  const millor = buscarRotacions(await baixarCalendari());
+  if (!millor) throw new Error('Hi ha massa esports per provar-ho tot.');
+  console.log('La millor rotació per a datos/femenino.json:');
+  const posar = Object.entries(millor.rotacio).filter(([, gir]) => gir);
+  console.log(`  "rotacion": { ${posar.map(([id, gir]) => `"${id}": ${gir}`).join(', ')} }`);
+  console.log(`Amb aquesta hi queden ${millor.problemes.length} coses per mirar:`);
+  for (const problema of millor.problemes) console.log('  ·', problema.text);
+} else if (process.argv.includes('--lliga-femenina')) {
+  // Reparteix la lliga femenina del calendari que ja hi ha i refà la columna "Qui juga".
+  const noms = await nomsEquips();
+  const { files: repartides, canviats } = repartirLligaFemenina(await baixarCalendari());
+  const files = ambQuiJuga(repartides, noms, json('cuadros.json'), avisos);
+  guardarCSV(files);
   guardarJSON(files, []); // els problemes d'aquestes files ja surten més amunt
 
-  const repassar = files.filter((f) => String(f[7]).includes('REPASSAR')).length;
+  const gir = Object.entries(LLIGA_FEMENINA.rotacio).filter(([, quantes]) => quantes);
+  console.log(`Fet: datos/plantilla-full/calendari.csv i datos/horarios.json · ${canviats} partits canviats de lloc`);
+  console.log(`Desplaçats: ${gir.length ? gir.map(([id, quantes]) => `${nomEsport(id)} ${quantes} ${quantes > 1 ? 'jornades' : 'jornada'}`).join(', ') : 'cap esport'}`);
+  const { franges } = franjesFemenines(files);
+  const problemes = repassarLligaFemenina(franges, new Map(), noms);
+  console.log(problemes.length ? `Queden ${problemes.length} coses per mirar:` : 'No queda cap partit repetit ni cap equip a dos llocs alhora.');
+  for (const problema of problemes) console.log('  ·', problema.text);
+} else {
+  const buf = fitxerLocal ? readFileSync(fitxerLocal) : await baixarGraella();
+
+  const { caselles, ultima } = llegirGraella(buf, 'Horaris');
+  const slots = transcriure(caselles, ultima, avisos);
+  assignarPartits(slots, avisos);
+
+  const files = aFiles(slots, await nomsEquips(), json('cuadros.json'), avisos);
+  guardarCSV(files);
+  guardarJSON(files, []); // els problemes d'aquestes files ja surten més amunt
+
+  const repassar = files.filter((f) => String(f[COLUMNA_NOTA]).includes('REPASSAR')).length;
   console.log(`Fet: datos/plantilla-full/calendari.csv i datos/horarios.json · ${files.length - 1} files · ${repassar} per repassar`);
 }
 

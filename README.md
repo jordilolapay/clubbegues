@@ -47,7 +47,7 @@ quatre fitxers ja preparats, amb tots els esports i tots els partits en el seu o
 | `equips.csv` | Equips | 15 equips (10 masculins + 5 femenins) |
 | `masculi.csv` | Masculí | 295 (17 esports × 15 partits + 4 esports × 10 llocs) |
 | `femeni.csv` | Femení | 190 (17 esports × 10 partits + 4 esports × 5 llocs) |
-| `calendari.csv` | Calendari | 128 franges (dia, hora, lloc i què s'hi juga) |
+| `calendari.csv` | Calendari | 129 franges (dia, hora, lloc, què s'hi juga i qui hi juga) |
 
 Per a cada un: descarrega'l de GitHub (obre el fitxer i clica **Download raw file**) i, al full de
 càlcul, situa't a la pestanya que toqui i fes **Fitxer › Importa › Penja**. A la finestra que surt
@@ -173,7 +173,7 @@ contra totes**, els partits no es diuen *Semifinal 1* sinó **pels dos equips qu
 La columna **Qui juga** és només perquè es llegeixi bé: la web no la mira (i no s'actualitza sola si
 canvies un nom a la pestanya Equips). La que compta és **Partit**.
 
-Cada esport té **10 partits** (cada equip en juga 4), en l'ordre del calendari:
+Cada esport té **10 partits** (cada equip en juga 4), repartits en cinc jornades:
 
 | Jornada | Partits | Descansa |
 |---|---|---|
@@ -182,6 +182,32 @@ Cada esport té **10 partits** (cada equip en juga 4), en l'ordre del calendari:
 | 3 | `F1-F5`, `F2-F3` | F4 |
 | 4 | `F1-F4`, `F5-F3` | F2 |
 | 5 | `F1-F3`, `F4-F2` | F5 |
+
+### Cada esport comença per una jornada diferent
+
+Com que són cinc equips, a cada jornada n'hi ha un que descansa i els enfrontaments són sempre
+aquests deu. Si tots els esports juguessin les jornades en el mateix ordre, **un mateix dia
+sortirien els mateixos partits a tot arreu** i qui descansa no jugaria a res: el 16 d'agost, futbol
+7 i bàsquet serien els dos `F1-F2` i `F4-F5`, i l'equip 3 se n'aniria a casa.
+
+Per això cada esport **comença per una jornada diferent**. Ho diu `rotacion` a
+`datos/femenino.json`, en nombre de jornades de desplaçament:
+
+```json
+"rotacion": { "baloncesto": 2, "balonmano": 3, "voleibol-pista": 2, "futbol-sala": 2, "futbolin": 1 }
+```
+
+Amb això, el dia 16 el futbol 7 juga la jornada 1 (`F1-F2`, `F4-F5`) i el bàsquet la 3
+(`F1-F5`, `F2-F3`): partits diferents i **totes cinc juguen**. Els esports que no hi surten
+comencen per la jornada 1. Les jornades segueixen sent les mateixes per a tothom — l'única cosa
+que canvia és **per quina comença cada esport**.
+
+A la fitxa d'un esport, els blocs de jornada surten **en l'ordre que es juguen**, o sigui que el
+primer pot ser la *Jornada 3*: el número és el de la lliga, igual per a tothom, i el que mana és
+la data. Les jornades que encara no tinguin horari es queden al final.
+
+Qui ho reparteix és `eines/generar-horaris.mjs` (§ apartat 5): si canvieu `rotacion`, o els dies
+i hores del calendari, torneu-lo a passar.
 
 Ciclisme, atletisme, natació i minigolf femenins van per llocs, igual que en masculí però amb
 **5 llocs** (de *Lloc 1* a *Lloc 5*).
@@ -220,13 +246,13 @@ portada surt què s'està jugant ara mateix.
 
 Una fila és **una franja**: una estona, en un lloc, amb una cosa que s'hi juga.
 
-| Data | Hora | Tipus | Lloc | Competició | Esport | Partit | Nota |
-|---|---|---|---|---|---|---|---|
-| 17/08/2026 | 21-22h | | Poliesportiu | Masculí | Handbol | Quarts 1 | |
-| 22/08/2026 | 15:00-16:00 | | Poliesportiu | Femení | Voleibol pista | F1-F2, F4-F5 | |
-| 15/08/2026 | 9-14h | | Club de Begues | | Natació | Tot | Inauguració |
-| 21/08/2026 | | Límit | | Masculí | Petanca, Dòmino | Quarts 1, Quarts 2 | |
-| 29/08/2026 | 21-23h | Acte | Club de Begues | | | | Sopar de cloenda |
+| Data | Hora | Tipus | Lloc | Competició | Esport | Partit | Qui juga | Nota |
+|---|---|---|---|---|---|---|---|---|
+| 17/08/2026 | 21-22h | | Poliesportiu | Masculí | Handbol | Quarts 1 | Guanyador P1 - Equip 6 | |
+| 22/08/2026 | 15:00-16:00 | | Poliesportiu | Femení | Voleibol pista | F1-F2, F4-F5 | F1-F2: Les Potres - Tocapilotes<br>F4-F5: Birra Sana - Dynamos | |
+| 15/08/2026 | 9-14h | | Club de Begues | | Natació | Tot | | Inauguració |
+| 21/08/2026 | | Límit | | Masculí | Petanca, Dòmino | Quarts 1, Quarts 2 | | |
+| 29/08/2026 | 21-23h | Acte | Club de Begues | | | | | Sopar de cloenda |
 
 - **Data**: `22/08/2026`, `22/08` o `2026-08-22`; tant li fa.
 - **Hora**: `21-22h`, `21:00-22:00` o només `21h`. Les hores de matinada (de 0 a 6) s'apunten al
@@ -241,6 +267,9 @@ Una fila és **una franja**: una estona, en un lloc, amb una cosa que s'hi juga.
   `Final`, `9è i 10è lloc` en masculí; `F1-F2` en femení. Si en aquella estona se'n juga més d'un,
   posa'ls separats per comes. Si es juga **tot l'esport de cop** (natació, escacs, minigolf),
   escriu-hi **`Tot`**.
+- **Qui juga**: els noms dels equips, per poder mirar el calendari sense haver d'anar al quadre.
+  **La web no la llegeix**: és només per a qui mira el full de càlcul, i per tant es pot escriure
+  el que es vulgui (§ més avall com omplir-la sola).
 - **Nota**: text lliure que surt a la web sota el partit. És on va «Inauguració», «Cross», etc.
 
 **No cal omplir-ho tot.** Un esport sense cap franja simplement no ensenya horaris; la resta de
@@ -252,6 +281,52 @@ Petanca, dòmino, tennis, frontó, pàdel i billar no tenen hora: cada partit es
 parts es posen d'acord, però abans d'una **data límit** per ronda. Això s'apunta amb `Límit` a la
 columna Tipus, l'hora en blanc, i a Partit els partits que han d'estar jugats aquell dia. A la
 fitxa d'aquests esports, en lloc de les hores hi surt un bloc de dates límit.
+
+### La columna **Qui juga**, sense escriure-la a mà
+
+```bash
+node eines/generar-horaris.mjs --qui-juga
+```
+
+Llegeix la pestanya Calendari **tal com està ara** (amb els retocs que hi hagueu fet a mà), hi
+posa la columna *Qui juga* al costat de Partit i escriu el resultat a
+`datos/plantilla-full/calendari.csv`. Després importeu-lo a la pestanya com el primer dia
+(*Fitxer › Importa › Substitueix el full actual*), o copieu-ne només la columna.
+
+Què hi surt i què no:
+
+- **Femení**: sempre, perquè la lliga ja està sortejada. `F1-F2` → els noms dels dos equips.
+- **Masculí**: les **prèvies** i els **quarts**. Als quarts 1 i 3 un dels dos encara no se sap i
+  hi surt «Guanyador P1» / «Guanyador P2», que és el que diu el quadre de `datos/cuadros.json`.
+- De **semifinals en amunt** tot depèn de resultats: la cel·la es queda buida (a la web, en canvi,
+  els partits sí que van dient «Guanyador QF1» a mesura que se sap).
+- Les files de **data límit masculines** també es queden buides: afecten sis esports alhora i cada
+  un té un quadre diferent. Les femenines sí que s'omplen, perquè la lliga és igual a tots.
+
+Si la franja té més d'un partit, en va un per línia amb la sigla al davant (`QF1: …`). Els noms
+dels equips surten de la pestanya **Equips**, o sigui que **si canvieu els noms dels equips cal
+tornar a passar l'ordre** perquè la columna es posi al dia.
+
+### La lliga femenina, repartida entre els dies
+
+```bash
+node eines/generar-horaris.mjs --lliga-femenina
+```
+
+Reparteix els partits de la lliga femenina del calendari que hi ha ara: cada esport juga els seus
+deu partits en el mateix ordre de sempre, però començant per la jornada que li toca (§ apartat 4).
+No mou cap dia ni cap hora — només canvia **quins equips** juguen a cada franja — i es pot passar
+tantes vegades com calgui, que sempre dona el mateix.
+
+En acabar diu què queda per mirar: partits que es juguen a dos esports el mateix dia, equips que
+haurien de ser a dos llocs a la mateixa hora i dies en què algú no juga res.
+
+```bash
+node eines/generar-horaris.mjs --buscar-rotacio
+```
+
+No toca res: prova totes les rotacions possibles amb el calendari que hi ha i escriu la millor,
+llesta per copiar a `datos/femenino.json`. Val la pena passar-lo si canvieu dies o hores.
 
 ### Si canvieu la graella dels horaris
 
@@ -268,6 +343,13 @@ de les caselles (blau = masculí, taronja = femení, verd = totes dues) i les ca
 que és el que diu quanta estona dura cada cosa. El que no pugui endevinar ho deixa marcat amb
 **⚠ REPASSAR** a la columna Nota — repassa aquestes files abans d'importar-lo. (Aquesta marca no
 surt mai a la web: és només per a qui manté el full.)
+
+Els números femenins de la graella (`1-2`, `3-6`…) volen dir **el primer, el segon… partit
+d'aquell esport**, no de la lliga: la rotació de l'apartat 4 ja els converteix en els partits que
+toquen. O sigui que si canvieu `rotacion` **no cal tocar la graella**.
+
+Ull: això refà el Calendari sencer i **es carrega els retocs fets a mà**. Si només voleu una cosa
+concreta, feu servir `--lliga-femenina` o `--qui-juga`, que treballen sobre el Calendari que hi ha.
 
 Per refer la còpia de seguretat `datos/horarios.json` amb el que hi hagi ara a la pestanya
 Calendari:
@@ -347,14 +429,14 @@ què i tornar enrere.
 | Fitxer | Per a què serveix | El toques? |
 |---|---|---|
 | `datos/torneo.json` | Equips masculins, punts de cada categoria, llista dels 21 esports | Rarament |
-| `datos/femenino.json` | Equips femenins, els seus punts i el calendari de la lliga | Rarament |
+| `datos/femenino.json` | Equips femenins, els seus punts, el calendari de la lliga i la rotació (apartat 4) | Rarament |
 | `datos/cuadros.json` | Qui juga contra qui a les prèvies i als quarts (masculí) | **Mai** |
 | `datos/resultados.json` | Resultats masculins de reserva | Només si no hi ha full de càlcul |
 | `datos/resultados-femenino.json` | Resultats femenins de reserva | Només si no hi ha full de càlcul |
 | `datos/horarios.json` | Els horaris de reserva | Només si no hi ha full de càlcul |
 | `datos/plantilla-full/*.csv` | Les plantilles per crear el full de càlcul | Un cop, al principi |
 | `eines/generar-plantilla.mjs` | Torna a generar aquestes plantilles si canvia la llista d'esports | Gairebé mai |
-| `eines/generar-horaris.mjs` | Passa la graella d'horaris a la pestanya Calendari (apartat 5) | Si canvia la graella |
+| `eines/generar-horaris.mjs` | Passa la graella d'horaris a la pestanya Calendari, reparteix la lliga femenina i omple la columna *Qui juga* (apartat 5) | Si canvia la graella o el calendari |
 | `js/config.js` | Quin full de càlcul es llegeix i com es diuen les pestanyes | Un cop, al principi |
 | `js/textos.js` | Els noms en català que es veuen a la web | Rarament |
 | La resta (`index.html`, `deporte.html`, `horaris.html`, `css/`, `js/`) | La web en si | No |
@@ -371,7 +453,8 @@ d'horaris no es fan servir**. Serveixen per a dues coses:
 `datos/cuadros.json` és el resultat d'un repartiment estudiat perquè tots els equips juguin en
 condicions equivalents. Si el canvies, es trenca l'equilibri del torneig. El calendari de la lliga
 femenina (`jornadas`, dins de `datos/femenino.json`) tampoc s'ha de tocar: ja està fet perquè totes
-juguin contra totes i cada jornada en descansi una.
+juguin contra totes i cada jornada en descansi una. El que sí que es pot canviar d'aquest fitxer és
+`rotacion`, que només diu per quina jornada comença cada esport (apartat 4).
 
 ---
 

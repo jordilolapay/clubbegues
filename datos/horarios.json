@@ -55,7 +55,7 @@
   },
   {
     "data": "2026-08-15",
-    "inici": "18:00",
+    "inici": "20:00",
     "fi": "01:00",
     "tipus": "acte",
     "competicio": null,
@@ -145,23 +145,6 @@
     "tipus": "partit",
     "competicio": "masculina",
     "esports": [
-      "baloncesto"
-    ],
-    "partits": [
-      "previa1",
-      "previa2"
-    ],
-    "tot": false,
-    "lloc": "Poliesportiu",
-    "nota": ""
-  },
-  {
-    "data": "2026-08-16",
-    "inici": "20:00",
-    "fi": "21:00",
-    "tipus": "partit",
-    "competicio": "masculina",
-    "esports": [
       "futbol-siete"
     ],
     "partits": [
@@ -184,6 +167,23 @@
     "partits": [
       "F1-F2",
       "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -768,6 +768,23 @@
     "nota": ""
   },
   {
+    "data": "2026-08-20",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
     "data": "2026-08-21",
     "inici": "18:00",
     "fi": "19:00",
@@ -817,8 +834,8 @@
   },
   {
     "data": "2026-08-21",
-    "inici": "19:00",
-    "fi": "20:00",
+    "inici": "22:00",
+    "fi": "23:00",
     "tipus": "partit",
     "competicio": "masculina",
     "esports": [
@@ -827,6 +844,23 @@
     "partits": [
       "consSf1",
       "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F1-F2",
+      "F4-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -850,8 +884,8 @@
   },
   {
     "data": "2026-08-21",
-    "inici": "20:00",
-    "fi": "21:00",
+    "inici": "21:00",
+    "fi": "22:00",
     "tipus": "partit",
     "competicio": "femenina",
     "esports": [
@@ -921,8 +955,8 @@
   },
   {
     "data": "2026-08-21",
-    "inici": "21:00",
-    "fi": "22:00",
+    "inici": "23:00",
+    "fi": "00:00",
     "tipus": "partit",
     "competicio": "masculina",
     "esports": [
@@ -938,16 +972,16 @@
   },
   {
     "data": "2026-08-21",
-    "inici": "22:00",
-    "fi": "23:00",
+    "inici": "18:00",
+    "fi": "19:00",
     "tipus": "partit",
     "competicio": "masculina",
     "esports": [
       "voleibol-pista"
     ],
     "partits": [
-      "previa1",
-      "previa2"
+      "qf2",
+      "qf4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -955,8 +989,8 @@
   },
   {
     "data": "2026-08-21",
-    "inici": "23:00",
-    "fi": "00:00",
+    "inici": "20:00",
+    "fi": "21:00",
     "tipus": "partit",
     "competicio": "masculina",
     "esports": [
@@ -964,24 +998,7 @@
     ],
     "partits": [
       "qf1",
-      "qf2"
-    ],
-    "tot": false,
-    "lloc": "Poliesportiu",
-    "nota": ""
-  },
-  {
-    "data": "2026-08-21",
-    "inici": "00:00",
-    "fi": "01:00",
-    "tipus": "partit",
-    "competicio": "masculina",
-    "esports": [
-      "voleibol-pista"
-    ],
-    "partits": [
-      "qf3",
-      "qf4"
+      "qf3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1097,23 +1114,6 @@
   },
   {
     "data": "2026-08-22",
-    "inici": "15:00",
-    "fi": "16:00",
-    "tipus": "partit",
-    "competicio": "femenina",
-    "esports": [
-      "voleibol-pista"
-    ],
-    "partits": [
-      "F1-F2",
-      "F4-F5"
-    ],
-    "tot": false,
-    "lloc": "Poliesportiu",
-    "nota": ""
-  },
-  {
-    "data": "2026-08-22",
     "inici": "16:00",
     "fi": "17:00",
     "tipus": "partit",
@@ -1201,6 +1201,20 @@
     "competicio": null,
     "esports": [
       "futbolin"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "22:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "dardos"
     ],
     "partits": [],
     "tot": true,
