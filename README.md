@@ -2,12 +2,12 @@
 
 Web dels quadres i la classificació de les Olimpíades. **No cal saber programar per mantenir-la.**
 
-Durant el torneig els resultats s'apunten en un **full de càlcul de Google**. La web el llegeix cada
-vegada que algú l'obre: apuntes un resultat, l'altra persona recarrega la pàgina i ja el veu. No cal
-tocar el repositori ni esperar res.
+Durant el torneig els resultats i els horaris s'apunten en un **full de càlcul de Google**. La web
+el llegeix cada vegada que algú l'obre: apuntes un resultat, l'altra persona recarrega la pàgina i
+ja el veu. No cal tocar el repositori ni esperar res.
 
 Els fitxers de `datos/` continuen existint com a **xarxa de seguretat**: si un dia el full de càlcul
-no es pot llegir, la web tira d'ells i ho avisa a dalt (apartat 8).
+no es pot llegir, la web tira d'ells i ho avisa a dalt (apartat 9).
 
 ---
 
@@ -33,20 +33,21 @@ Les dues classificacions **no es barregen**: són equips diferents i cadascuna t
 **1. Crea el full de càlcul.** Ves a [sheets.new](https://sheets.new) i posa-li un nom, per exemple
 *Olimpíades 2026 — resultats*.
 
-**2. Fes tres pestanyes** i anomena-les **exactament** així (amb accents i majúscules):
+**2. Fes quatre pestanyes** i anomena-les **exactament** així (amb accents i majúscules):
 
 ```
-Equips     Masculí     Femení
+Equips     Masculí     Femení     Calendari
 ```
 
 **3. Omple-les amb les plantilles.** A la carpeta `datos/plantilla-full/` d'aquest repositori hi ha
-tres fitxers ja preparats, amb tots els esports i tots els partits en el seu ordre:
+quatre fitxers ja preparats, amb tots els esports i tots els partits en el seu ordre:
 
 | Fitxer | Pestanya | Files |
 |---|---|---|
 | `equips.csv` | Equips | 15 equips (10 masculins + 5 femenins) |
 | `masculi.csv` | Masculí | 295 (17 esports × 15 partits + 4 esports × 10 llocs) |
 | `femeni.csv` | Femení | 190 (17 esports × 10 partits + 4 esports × 5 llocs) |
+| `calendari.csv` | Calendari | 128 franges (dia, hora, lloc i què s'hi juga) |
 
 Per a cada un: descarrega'l de GitHub (obre el fitxer i clica **Download raw file**) i, al full de
 càlcul, situa't a la pestanya que toqui i fes **Fitxer › Importa › Penja**. A la finestra que surt
@@ -66,7 +67,7 @@ https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890/edi
                                        └──────────── això és l'identificador ────────────┘
 ```
 
-Obre `js/config.js`, enganxa'l entre les cometes de `id:` i guarda (apartat 6 per publicar-ho):
+Obre `js/config.js`, enganxa'l entre les cometes de `id:` i guarda (apartat 7 per publicar-ho):
 
 ```js
 export const FULL = {
@@ -211,7 +212,73 @@ punts que es repartirien si la lliga acabés ara.
 
 ---
 
-## 5. Canviar el nom d'un esport a la web
+## 5. Els horaris — pestanya **Calendari**
+
+És la pestanya que fa que la web sàpiga **quan i on** es juga cada cosa. Amb ella, cada partit
+surt amb el dia i l'hora a sota, hi ha una pàgina d'**Horaris** amb el calendari sencer i a la
+portada surt què s'està jugant ara mateix.
+
+Una fila és **una franja**: una estona, en un lloc, amb una cosa que s'hi juga.
+
+| Data | Hora | Tipus | Lloc | Competició | Esport | Partit | Nota |
+|---|---|---|---|---|---|---|---|
+| 17/08/2026 | 21-22h | | Poliesportiu | Masculí | Handbol | Quarts 1 | |
+| 22/08/2026 | 15:00-16:00 | | Poliesportiu | Femení | Voleibol pista | F1-F2, F4-F5 | |
+| 15/08/2026 | 9-14h | | Club de Begues | | Natació | Tot | Inauguració |
+| 21/08/2026 | | Límit | | Masculí | Petanca, Dòmino | Quarts 1, Quarts 2 | |
+| 29/08/2026 | 21-23h | Acte | Club de Begues | | | | Sopar de cloenda |
+
+- **Data**: `22/08/2026`, `22/08` o `2026-08-22`; tant li fa.
+- **Hora**: `21-22h`, `21:00-22:00` o només `21h`. Les hores de matinada (de 0 a 6) s'apunten al
+  **dia d'abans**, com a la graella: el partit de les `0-1h` de la nit de dissabte va a dissabte.
+- **Tipus**: buit vol dir que és un partit. `Límit` és una data màxima sense hora (§ més avall) i
+  `Acte` és una cosa que no és cap esport (la reunió, el sopar).
+- **Lloc**: text lliure, el que vulguis que es llegeixi: `Poliesportiu`, `Camp de futbol`…
+- **Competició**: `Masculí` o `Femení`. **Deixa-la buida si és de totes dues** (natació, minigolf,
+  escacs…): llavors surt a les dues bandes de la web.
+- **Esport**: com a les altres pestanyes. Se'n pot posar més d'un separats per comes.
+- **Partit**: aquí va **el mateix nom que a la pestanya de resultats** — `Prèvia 1`, `Quarts 1`,
+  `Final`, `9è i 10è lloc` en masculí; `F1-F2` en femení. Si en aquella estona se'n juga més d'un,
+  posa'ls separats per comes. Si es juga **tot l'esport de cop** (natació, escacs, minigolf),
+  escriu-hi **`Tot`**.
+- **Nota**: text lliure que surt a la web sota el partit. És on va «Inauguració», «Cross», etc.
+
+**No cal omplir-ho tot.** Un esport sense cap franja simplement no ensenya horaris; la resta de
+la web funciona igual.
+
+### Els esports que es juguen quan es vol
+
+Petanca, dòmino, tennis, frontó, pàdel i billar no tenen hora: cada partit es juga quan les dues
+parts es posen d'acord, però abans d'una **data límit** per ronda. Això s'apunta amb `Límit` a la
+columna Tipus, l'hora en blanc, i a Partit els partits que han d'estar jugats aquell dia. A la
+fitxa d'aquests esports, en lloc de les hores hi surt un bloc de dates límit.
+
+### Si canvieu la graella dels horaris
+
+La pestanya **Horaris** (la graella de colors, hores × instal·lacions) **la web no la mira**: és
+per mirar-la la gent. Qui mana és **Calendari**. Si canvieu la graella i voleu tornar a generar el
+Calendari a partir d'ella:
+
+```bash
+node eines/generar-horaris.mjs
+```
+
+Això escriu `datos/plantilla-full/calendari.csv` llegint la graella del full de càlcul: els colors
+de les caselles (blau = masculí, taronja = femení, verd = totes dues) i les caselles combinades,
+que és el que diu quanta estona dura cada cosa. El que no pugui endevinar ho deixa marcat amb
+**⚠ REPASSAR** a la columna Nota — repassa aquestes files abans d'importar-lo. (Aquesta marca no
+surt mai a la web: és només per a qui manté el full.)
+
+Per refer la còpia de seguretat `datos/horarios.json` amb el que hi hagi ara a la pestanya
+Calendari:
+
+```bash
+node eines/generar-horaris.mjs --json
+```
+
+---
+
+## 6. Canviar el nom d'un esport a la web
 
 Els noms dels esports **no** surten del full de càlcul: són a `js/textos.js`, a la llista
 `NOMS_ESPORTS`.
@@ -227,7 +294,7 @@ estava: la web reconeix tant el nom nou com el codi intern).
 
 ---
 
-## 6. Quan es veuen els canvis
+## 7. Quan es veuen els canvis
 
 **El que escrius al full de càlcul** es veu de seguida: guarda (Google guarda sol) i recarrega la
 pàgina. Si sembla que no ha canviat, recarrega forçant: **Ctrl+F5** (o **Cmd+Shift+R** al Mac).
@@ -249,7 +316,7 @@ git push
 
 ---
 
-## 7. Si surt un avís vermell a la web
+## 8. Si surt un avís vermell a la web
 
 La web comprova les dades cada vegada que es carrega i, si troba res estrany, ho diu en un requadre
 vermell a dalt. **La resta de la web continua funcionant.** Els avisos diuen la pestanya i el número
@@ -258,6 +325,8 @@ de fila del full de càlcul, o sigui que es troba de seguida.
 | Què diu | Què vol dir | Com s'arregla |
 |---|---|---|
 | *No s'ha pogut llegir la pestanya "Masculí" del full de càlcul* | O el full no està compartit, o la pestanya no es diu així | Repassa els passos 2 i 4 de l'apartat 1 |
+| *A la pestanya "Calendari" hi falta la columna "data"* | Aquella pestanya no existeix, o es diu d'una altra manera | Comprova el nom exacte (apartat 5). Mentrestant els horaris surten de `datos/horarios.json` |
+| *Full de càlcul · Calendari, fila 30: "Vuitens 1" no és cap partit* | A la columna Partit hi ha un nom que no existeix | Fes servir el mateix nom que a la pestanya de resultats |
 | *Full de càlcul · Masculí, fila 12: "Vuitens 3" no és cap partit de petanca* | S'ha tocat la columna Partit | Torna a posar-hi el text que hi havia |
 | *… el guanyador "Els Tigres" no és cap equip d'aquesta competició* | Nom mal escrit, o un equip masculí a la pestanya femenina | Mira els noms a la pestanya Equips |
 | *El guanyador "E5" … no és cap dels dos participants* | S'ha apuntat com a guanyador un equip que no juga aquell partit | Mira el quadre a la web i posa l'equip correcte |
@@ -273,7 +342,7 @@ què i tornar enrere.
 
 ---
 
-## 8. Els fitxers de `datos/` (la xarxa de seguretat)
+## 9. Els fitxers de `datos/` (la xarxa de seguretat)
 
 | Fitxer | Per a què serveix | El toques? |
 |---|---|---|
@@ -282,14 +351,16 @@ què i tornar enrere.
 | `datos/cuadros.json` | Qui juga contra qui a les prèvies i als quarts (masculí) | **Mai** |
 | `datos/resultados.json` | Resultats masculins de reserva | Només si no hi ha full de càlcul |
 | `datos/resultados-femenino.json` | Resultats femenins de reserva | Només si no hi ha full de càlcul |
+| `datos/horarios.json` | Els horaris de reserva | Només si no hi ha full de càlcul |
 | `datos/plantilla-full/*.csv` | Les plantilles per crear el full de càlcul | Un cop, al principi |
 | `eines/generar-plantilla.mjs` | Torna a generar aquestes plantilles si canvia la llista d'esports | Gairebé mai |
-| `js/config.js` | Quin full de càlcul es llegeix | Un cop, al principi |
+| `eines/generar-horaris.mjs` | Passa la graella d'horaris a la pestanya Calendari (apartat 5) | Si canvia la graella |
+| `js/config.js` | Quin full de càlcul es llegeix i com es diuen les pestanyes | Un cop, al principi |
 | `js/textos.js` | Els noms en català que es veuen a la web | Rarament |
-| La resta (`index.html`, `deporte.html`, `css/`, `js/`) | La web en si | No |
+| La resta (`index.html`, `deporte.html`, `horaris.html`, `css/`, `js/`) | La web en si | No |
 
-Mentre `js/config.js` tingui un identificador de full de càlcul, **els dos fitxers de resultats no
-es fan servir**. Serveixen per a dues coses:
+Mentre `js/config.js` tingui un identificador de full de càlcul, **els fitxers de resultats i
+d'horaris no es fan servir**. Serveixen per a dues coses:
 
 - Si el full de càlcul es cau (o s'ha deixat de compartir), la web segueix funcionant amb el que hi
   hagi escrit i avisa del problema.
@@ -304,7 +375,7 @@ juguin contra totes i cada jornada en descansi una.
 
 ---
 
-## 9. Provar-ho a l'ordinador abans de publicar (opcional)
+## 10. Provar-ho a l'ordinador abans de publicar (opcional)
 
 La web llegeix les dades amb `fetch`, i això no funciona obrint el fitxer amb doble clic. Cal servir
 la carpeta per HTTP. Amb Python:

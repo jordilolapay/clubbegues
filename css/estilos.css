@@ -409,6 +409,133 @@ tr.lider .nom-equip { font-weight: 800; }
 
 .nota { font-size: 0.88rem; color: var(--text-suau); margin: 0 0 14px; }
 
+/* ---------- Horaris ---------- */
+
+.filtres-horaris { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 22px; }
+.filtre-camp { display: flex; flex-direction: column; gap: 4px; flex: 1 1 200px; max-width: 280px; }
+.filtre-camp > span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-suau);
+}
+.filtre-camp select {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 8px 10px;
+  border: 2px solid var(--fosc);
+  border-radius: var(--radi);
+  background: var(--paper);
+  color: var(--text);
+}
+
+.dia { margin-bottom: 34px; }
+.dia h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 1.15rem;
+  border-bottom: 3px solid var(--fosc);
+  padding-bottom: 6px;
+  margin-bottom: 0;
+}
+.etiqueta--avui { border-color: var(--verd); color: var(--verd); font-size: 0.68rem; padding: 2px 8px; }
+.dia--passat h2 { border-bottom-color: var(--linia); color: var(--text-suau); }
+
+.franges { display: flex; flex-direction: column; }
+.franja {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linia);
+}
+.franja--passat { opacity: 0.55; }
+.franja--ara {
+  background: #eaf6ef;
+  border-bottom-color: var(--verd);
+  box-shadow: inset 3px 0 0 var(--verd);
+  padding-left: 12px;
+  opacity: 1;
+}
+
+.franja-quan { display: flex; flex-direction: column; gap: 2px; }
+.franja-quan .hora { font-weight: 800; font-variant-numeric: tabular-nums; }
+.franja-quan .lloc { font-size: 0.82rem; color: var(--text-suau); }
+.franja-quan .ara {
+  align-self: flex-start;
+  margin-top: 3px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  background: var(--verd);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.franja-que { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.franja-que .nota { margin: 2px 0 0; }
+.franja-esport {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--linia);
+}
+.franja-esport:hover { border-bottom-color: var(--fosc); }
+
+.franja-partit { display: flex; align-items: baseline; gap: 10px; margin-top: 5px; font-size: 0.95rem; }
+.franja-partit .sigla {
+  flex: none;
+  min-width: 52px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-suau);
+}
+.franja-partit .contra { min-width: 0; }
+.franja-partit .vs { color: var(--text-suau); }
+.franja-partit .equip--guanya { font-weight: 800; }
+.franja-partit .equip--guanya::after { content: " ✓"; color: var(--verd); }
+.franja-partit .equip--perd { color: var(--text-suau); }
+.franja-partit .equip--incognita { font-style: italic; color: var(--text-suau); font-size: 0.9rem; }
+
+.franja--limit .hora { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--vermell); }
+.franja--limit { border-left: 3px solid var(--vermell); padding-left: 12px; }
+.franja--acte .acte { margin: 0; font-weight: 700; }
+
+/* Els horaris que surten dins la fitxa d'un esport i a la portada. */
+.quan-partit {
+  display: block;
+  padding: 5px 10px;
+  border-top: 1px solid var(--linia);
+  background: #faf8f6;
+  font-size: 0.76rem;
+  color: var(--text-suau);
+  font-variant-numeric: tabular-nums;
+}
+.limits { display: flex; flex-wrap: wrap; gap: 12px; }
+.limits > div {
+  flex: 1 1 220px;
+  max-width: 320px;
+  background: var(--paper);
+  border: 2px solid var(--fosc);
+  border-radius: var(--radi);
+  padding: 10px 12px;
+  box-shadow: var(--ombra);
+}
+.limits .quan { font-weight: 800; }
+.limits p { margin: 2px 0 0; font-size: 0.86rem; color: var(--text-suau); }
+
+.ara-despres { display: flex; flex-direction: column; gap: 0; }
+.ara-despres .franja { grid-template-columns: 120px 1fr; }
+.ara-despres .franja:last-child { border-bottom: none; }
+
 /* ---------- Portada ---------- */
 
 .portada { background: var(--paper); text-align: center; padding: 56px 0 64px; }
@@ -569,6 +696,10 @@ tr.lider .nom-equip { font-weight: 800; }
   body { font-size: 16px; }
   :root { --gap-quadre: 26px; --amplada-ronda: 158px; }
   .contenidor { width: calc(100% - 24px); }
+  .franja, .ara-despres .franja { grid-template-columns: 1fr; gap: 6px; }
+  .franja-quan { flex-direction: row; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .franja-partit { flex-direction: column; gap: 0; }
+  .franja-partit .sigla { min-width: 0; }
   h1 { font-size: 1.65rem; }
   .barra .contenidor { min-height: 60px; }
   .barra img { height: 38px; }

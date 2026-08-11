@@ -1,11 +1,11 @@
 // general.js — pinta index.html: classificació general + reixa d'esports.
 
 import {
-  COMPETICIONS, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca, el,
-  mostrarErrorGreu, mostrarErrors, selectorCompeticio,
+  COMPETICIONS, acaba, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca,
+  diaCurt, el, franja, inicia, mostrarErrorGreu, mostrarErrors, selectorCompeticio, textIncognita,
 } from './comu.js';
 import { calcularGeneral } from './motor.js';
-import { NOMS_CATEGORIES, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
+import { NOMS_CATEGORIES, NOMS_PARTITS, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
 
 const zonaSelector = document.querySelector('#selector');
 const zonaErrors = document.querySelector('#errors');
@@ -13,6 +13,13 @@ const zonaGeneral = document.querySelector('#general');
 const zonaFiltres = document.querySelector('#filtres');
 const zonaReixa = document.querySelector('#reixa');
 const zonaTitol = document.querySelector('#subtitol');
+const seccioAra = document.querySelector('#seccio-ara');
+const zonaAra = document.querySelector('#ara');
+const titolAra = document.querySelector('#titol-ara');
+const enllacHoraris = document.querySelector('#enllac-horaris');
+
+/** Quantes franges es mostren a la portada abans de remetre a la pàgina d'horaris. */
+const QUANTES_ARA = 5;
 
 const competicio = competicioDeLaAdreca();
 
@@ -36,9 +43,82 @@ async function init() {
     return;
   }
   mostrarErrors(zonaErrors, dades.errors);
+  pintarAra();
   pintarGeneral();
   pintarFiltres();
   pintarReixa();
+}
+
+/* ---------- Ara i després ---------- */
+
+/**
+ * Què s'està jugant i què ve tot seguit. Mentre el torneig no ha començat serveix de compte
+ * enrere, i quan s'ha acabat la secció desapareix tota sola.
+ */
+function pintarAra() {
+  const ara = new Date();
+  enllacHoraris.href = adreca('horaris.html', competicio);
+
+  const enJoc = dades.horaris.llista.filter((slot) => inicia(slot) <= ara && ara < acaba(slot));
+  const venen = dades.horaris.llista.filter((slot) => inicia(slot) > ara);
+  if (!enJoc.length && !venen.length) return; // torneig acabat (o encara sense horaris)
+
+  titolAra.textContent = enJoc.length ? 'Ara i després' : 'Què ve ara';
+  seccioAra.hidden = false;
+
+  const mostrar = [...enJoc, ...venen.slice(0, Math.max(QUANTES_ARA - enJoc.length, 2))];
+  buida(zonaAra).append(
+    el('div', { class: 'ara-despres' }, mostrar.map((slot) => franjaCurta(slot, ara)))
+  );
+}
+
+function franjaCurta(slot, ara) {
+  const enJoc = inicia(slot) <= ara && ara < acaba(slot);
+  const avui = inicia(slot).toDateString() === ara.toDateString();
+
+  return el('article', {
+    class: ['franja', enJoc && 'franja--ara', slot.tipus === 'limit' && 'franja--limit'].filter(Boolean).join(' '),
+  }, [
+    el('div', { class: 'franja-quan' }, [
+      el('span', { class: 'hora', text: slot.tipus === 'limit' ? 'Data límit' : `${avui ? '' : `${diaCurt(slot.data)} · `}${franja(slot)}` }),
+      slot.lloc && el('span', { class: 'lloc', text: slot.lloc }),
+      enJoc && el('span', { class: 'ara', text: 'Ara' }),
+    ]),
+    el('div', { class: 'franja-que' }, queEsJuga(slot)),
+  ]);
+}
+
+function queEsJuga(slot) {
+  if (slot.tipus === 'acte') return [el('p', { class: 'acte', text: slot.nota || 'Acte de les Olimpíades' })];
+
+  return slot.esports.map((id) => {
+    const estat = dades.perId.get(id);
+    const titol = el('a', {
+      class: 'franja-esport',
+      href: adreca('deporte.html', competicio, { id }),
+      text: estat ? nomEsport(estat.esport) : id,
+    });
+
+    if (slot.tipus === 'limit') {
+      return el('div', {}, [titol, el('p', { class: 'nota', text: `Últim dia per jugar ${slot.partits.map((p) => NOMS_PARTITS[p]?.llarg ?? p).join(', ')}.` })]);
+    }
+    if (slot.tot || !slot.partits.length) {
+      return el('div', {}, [titol, el('p', { class: 'nota', text: slot.nota || "Es juga tot l'esport." })]);
+    }
+
+    // Una franja compartida per les dues competicions porta els partits de totes dues.
+    const meus = slot.partits.filter((idPartit) => estat?.partits?.[idPartit]);
+    if (!meus.length) return null;
+
+    return el('div', {}, [titol, ...meus.map((idPartit) => {
+      const noms = estat.partits[idPartit].participants.map((equip, i) =>
+        equip ? dades.equips.get(equip)?.nombre ?? equip : textIncognita(idPartit, i));
+      return el('div', { class: 'franja-partit' }, [
+        el('span', { class: 'sigla', text: NOMS_PARTITS[idPartit]?.sigla ?? '' }),
+        el('span', { class: 'contra', text: noms.join(' – ') }),
+      ]);
+    })]);
+  }).filter(Boolean);
 }
 
 /* ---------- Classificació general ---------- */

@@ -2,7 +2,7 @@
 
 import {
   COMPETICIONS, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca, el,
-  mostrarErrorGreu, mostrarErrors, selectorCompeticio,
+  diaCurt, franja, mostrarErrorGreu, mostrarErrors, nomDia, selectorCompeticio, textIncognita,
 } from './comu.js';
 import {
   NOMS_PARTITS, NOMS_RONDES, nomCategoria, nomEsport, nomGrup, ordinal, textosClassificacio,
@@ -13,21 +13,6 @@ const zonaErrors = document.querySelector('#errors');
 const zonaCap = document.querySelector('#capcalera');
 const zonaCos = document.querySelector('#contingut');
 const enllacTornar = document.querySelector('#tornar');
-
-/** Quan un participant encara no se sap, d'on sortirà: [guanyador|perdedor, partit]. */
-const PROCEDENCIA = {
-  qf1: [['guanyador', 'previa1'], null],
-  qf3: [['guanyador', 'previa2'], null],
-  sf1: [['guanyador', 'qf1'], ['guanyador', 'qf2']],
-  sf2: [['guanyador', 'qf3'], ['guanyador', 'qf4']],
-  final: [['guanyador', 'sf1'], ['guanyador', 'sf2']],
-  tercerPuesto: [['perdedor', 'sf1'], ['perdedor', 'sf2']],
-  consSf1: [['perdedor', 'qf1'], ['perdedor', 'qf2']],
-  consSf2: [['perdedor', 'qf3'], ['perdedor', 'qf4']],
-  consFinal: [['guanyador', 'consSf1'], ['guanyador', 'consSf2']],
-  consTercero: [['perdedor', 'consSf1'], ['perdedor', 'consSf2']],
-  puesto9: [['perdedor', 'previa1'], ['perdedor', 'previa2']],
-};
 
 init();
 
@@ -96,21 +81,71 @@ function pintarCapcalera(estat, dades) {
   );
 }
 
+/* ---------- Horaris ---------- */
+
+/** Dia, hora i lloc d'un partit, tal com surt a peu de targeta: "ds. 22 · 18:00 – 19:00 · Poliesportiu". */
+function quanEsJuga(estat, dades, idPartit) {
+  const slot = dades.horaris.partit(estat.id, idPartit);
+  if (!slot || slot.tipus !== 'partit') return null;
+  return el('span', {
+    class: 'quan-partit',
+    text: [diaCurt(slot.data), franja(slot), slot.lloc].filter(Boolean).join(' · '),
+  });
+}
+
+/**
+ * Els esports que no tenen hora fixada (petanca, dòmino, tennis…) es juguen quan les
+ * dues parts vulguin, mentre sigui abans de la data límit de cada ronda: és l'única
+ * informació d'horari que tenen, i és la que es mostra en lloc de les hores.
+ */
+function blocHoraris(estat, dades) {
+  const limits = dades.horaris.limits(estat.id);
+  if (limits.length) {
+    return el('section', { class: 'seccio' }, [
+      el('h2', { text: 'Dates límit' }),
+      el('p', { class: 'nota', text: "Aquest esport no té hora fixada: cada partit es juga quan les dues parts es posin d'acord, sempre abans de la data límit de la ronda." }),
+      el('div', { class: 'limits' }, limits.map((slot) =>
+        el('div', {}, [
+          el('p', { class: 'quan', text: nomDia(slot.data) }),
+          el('p', { text: `S'ha d'haver jugat: ${slot.partits.map((id) => NOMS_PARTITS[id]?.llarg ?? id).join(', ')}.` }),
+        ])
+      )),
+    ]);
+  }
+
+  // Els que es despatxen en una o poques sessions: natació, ciclisme, escacs…
+  const sessions = dades.horaris.esport(estat.id).filter((slot) => slot.tipus === 'partit' && slot.tot);
+  if (!sessions.length) return null;
+
+  return el('section', { class: 'seccio' }, [
+    el('h2', { text: 'Quan es juga' }),
+    el('div', { class: 'limits' }, sessions.map((slot) =>
+      el('div', {}, [
+        el('p', { class: 'quan', text: nomDia(slot.data) }),
+        el('p', { text: [franja(slot), slot.lloc].filter(Boolean).join(' · ') }),
+        slot.nota && el('p', { text: slot.nota }),
+      ])
+    )),
+  ]);
+}
+
 /* ---------- Contingut ---------- */
 
 function pintarContingut(estat, dades) {
   buida(zonaCos);
 
+  const horaris = blocHoraris(estat, dades);
+  if (horaris) zonaCos.append(horaris);
+
   if (estat.format === 'clasificacion') {
     const textos = textosClassificacio(estat.id);
-    zonaCos.append(
+    return zonaCos.append(
       el('section', { class: 'seccio' }, [
         el('h2', { text: textos.titol }),
         el('p', { class: 'nota', text: textos.nota }),
         taulaPosicions(estat, dades),
       ])
     );
-    return;
   }
 
   if (estat.format === 'liga') {
@@ -312,16 +347,10 @@ function targetaPartit(partit, estat, dades) {
     );
   });
 
-  return targeta;
-}
+  const quan = quanEsJuga(estat, dades, partit.id);
+  if (quan) targeta.append(quan);
 
-/** «Guanyador QF1», «Perdedor SF2»… per als partits que encara no tenen participants. */
-function textIncognita(idPartit, index) {
-  const origen = PROCEDENCIA[idPartit]?.[index];
-  if (!origen) return '—';
-  const [quin, partit] = origen;
-  const sigla = NOMS_PARTITS[partit]?.sigla ?? partit;
-  return `${quin === 'guanyador' ? 'Guanyador' : 'Perdedor'} ${sigla}`;
+  return targeta;
 }
 
 /** Taula de les 10 posicions finals amb els punts que s'emporta cadascú. */

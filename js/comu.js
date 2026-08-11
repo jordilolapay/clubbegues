@@ -2,7 +2,7 @@
 
 import { carregarDades } from './datos.js';
 import { calcularEsport } from './motor.js';
-import { colorEquip } from './textos.js';
+import { colorEquip, NOMS_PARTITS } from './textos.js';
 
 /** Les dues competicions. `masculina` és la que hi ha per defecte a les adreces. */
 export const COMPETICIONS = {
@@ -108,11 +108,117 @@ export async function carregarTorneig(competicio = 'masculina') {
 
   return {
     competicio, config, torneig, esports, equips, errors,
+    horaris: indexarHoraris(dades.horaris, competicio),
     perId: new Map(esports.map((e) => [e.id, e])),
   };
 }
 
 export const nomEquip = (equips, id) => equips.get(id)?.nombre ?? id ?? '';
+
+/* ---------- Qui juga un partit ---------- */
+
+/** Quan un participant encara no se sap, d'on sortirà: [guanyador|perdedor, partit]. */
+export const PROCEDENCIA = {
+  qf1: [['guanyador', 'previa1'], null],
+  qf3: [['guanyador', 'previa2'], null],
+  sf1: [['guanyador', 'qf1'], ['guanyador', 'qf2']],
+  sf2: [['guanyador', 'qf3'], ['guanyador', 'qf4']],
+  final: [['guanyador', 'sf1'], ['guanyador', 'sf2']],
+  tercerPuesto: [['perdedor', 'sf1'], ['perdedor', 'sf2']],
+  consSf1: [['perdedor', 'qf1'], ['perdedor', 'qf2']],
+  consSf2: [['perdedor', 'qf3'], ['perdedor', 'qf4']],
+  consFinal: [['guanyador', 'consSf1'], ['guanyador', 'consSf2']],
+  consTercero: [['perdedor', 'consSf1'], ['perdedor', 'consSf2']],
+  puesto9: [['perdedor', 'previa1'], ['perdedor', 'previa2']],
+};
+
+/** «Guanyador QF1», «Perdedor SF2»… per als partits que encara no tenen participants. */
+export function textIncognita(idPartit, index) {
+  const origen = PROCEDENCIA[idPartit]?.[index];
+  if (!origen) return '—';
+  const [quin, partit] = origen;
+  return `${quin === 'guanyador' ? 'Guanyador' : 'Perdedor'} ${NOMS_PARTITS[partit]?.sigla ?? partit}`;
+}
+
+/* ---------- Horaris ---------- */
+
+const DIES_SETMANA = ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'];
+// Tots els dies comencen per "di", o sigui que les abreviatures no es poden retallar soles.
+const DIES_CURTS = ['dg.', 'dl.', 'dt.', 'dc.', 'dj.', 'dv.', 'ds.'];
+const MESOS = ['gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost',
+  'setembre', 'octubre', 'novembre', 'desembre'];
+
+/**
+ * Quan comença de veritat una franja. Les hores de matinada (de 0 a 6) s'apunten al dia
+ * abans, perquè per a qui hi juga són la mateixa nit: "dissabte a les 0-1h".
+ */
+export function inicia(slot) {
+  if (!slot.inici) return new Date(`${slot.data}T23:59:00`); // les dates límit, al final del dia
+  const quan = new Date(`${slot.data}T${slot.inici}:00`);
+  if (Number(slot.inici.slice(0, 2)) < 6) quan.setDate(quan.getDate() + 1);
+  return quan;
+}
+
+export function acaba(slot) {
+  const inici = inicia(slot);
+  if (!slot.fi) return inici;
+  const quan = new Date(`${slot.data}T${slot.fi}:00`);
+  if (quan <= inici) quan.setDate(quan.getDate() + 1);
+  return quan;
+}
+
+/** "Dissabte 22 d'agost" */
+export function nomDia(data) {
+  const quan = new Date(`${data}T12:00:00`);
+  const mes = MESOS[quan.getMonth()];
+  return `${DIES_SETMANA[quan.getDay()]} ${quan.getDate()} ${/^[aeiou]/.test(mes) ? "d'" : 'de '}${mes}`;
+}
+
+/** "18:00 – 20:00", o només l'hora d'inici si no se sap quan s'acaba. */
+export const franja = (slot) => (slot.fi && slot.fi !== slot.inici ? `${slot.inici} – ${slot.fi}` : slot.inici ?? '');
+
+/** "ds. 22": per a les targetes de partit i la portada, on l'espai és just. */
+export const diaCurt = (data) => {
+  const quan = new Date(`${data}T12:00:00`);
+  return `${DIES_CURTS[quan.getDay()]} ${quan.getDate()}`;
+};
+
+/**
+ * Les franges que afecten una competició, ordenades, amb un índex per trobar de seguida
+ * la d'un partit concret. Un horari sense competició (natació, minigolf…) val per a totes dues.
+ */
+export function indexarHoraris(horaris, competicio) {
+  const meus = (horaris ?? [])
+    .filter((slot) => !slot.competicio || slot.competicio === competicio)
+    .sort((a, b) => inicia(a) - inicia(b));
+
+  const perEsport = new Map();
+  const perPartit = new Map();
+  for (const slot of meus) {
+    for (const esport of slot.esports) {
+      if (!perEsport.has(esport)) perEsport.set(esport, []);
+      perEsport.get(esport).push(slot);
+      for (const partit of slot.partits) {
+        const clau = `${esport}|${partit}`;
+        if (!perPartit.has(clau)) perPartit.set(clau, []);
+        perPartit.get(clau).push(slot);
+      }
+    }
+  }
+
+  return {
+    llista: meus,
+    perEsport,
+    /** Les franges d'un esport que no són cap partit concret: les dates límit a part. */
+    esport: (id) => perEsport.get(id) ?? [],
+    limits: (id) => (perEsport.get(id) ?? []).filter((slot) => slot.tipus === 'limit'),
+    /**
+     * Quan es juga un partit concret. Els esports que es despatxen d'una tirada (natació,
+     * escacs…) no en tenen: la seva franja es mostra un sol cop, a dalt de la fitxa.
+     */
+    partit: (esport, id) => perPartit.get(`${esport}|${id}`)?.[0] ?? null,
+  };
+}
 
 /**
  * Qui és el campió, si ja se sap. En un quadre n'hi ha prou amb haver jugat la final;

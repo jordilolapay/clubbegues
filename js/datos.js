@@ -42,14 +42,15 @@ function aplicarNoms(config, noms) {
 export function carregarDades() {
   if (!promesa) {
     promesa = (async () => {
-      const [torneig, quadres, resultats, femeni, resultatsFemeni] = await Promise.all([
+      const [torneig, quadres, resultats, femeni, resultatsFemeni, horaris] = await Promise.all([
         llegir('torneo.json'),
         llegir('cuadros.json'),
         llegir('resultados.json'),
         llegir('femenino.json'),
         llegir('resultados-femenino.json'),
+        llegir('horarios.json'),
       ]);
-      const dades = { torneig, quadres, resultats, femeni, resultatsFemeni, avisos: [], full: false };
+      const dades = { torneig, quadres, resultats, femeni, resultatsFemeni, horaris, avisos: [], full: false };
 
       // Si hi ha full de càlcul configurat, mana ell. El que no se'n pugui llegir es queda
       // amb el que digui datos/ i el motiu surt al bàner d'avisos.
@@ -61,6 +62,7 @@ export function carregarDades() {
       }
       if (delFull.resultats) { dades.resultats = delFull.resultats; dades.full = true; }
       if (delFull.resultatsFemeni) { dades.resultatsFemeni = delFull.resultatsFemeni; dades.full = true; }
+      if (delFull.horaris) dades.horaris = delFull.horaris;
 
       return dades;
     })();

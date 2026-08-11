@@ -248,6 +248,143 @@ export function resultatsDelFull(files, opcions, avisos) {
   return resultats;
 }
 
+/* ---------- Pestanya del calendari ---------- */
+
+/** Els tres tipus de fila del calendari, i com es poden escriure a la cel·la. */
+const TIPUS = new Map([
+  ['', 'partit'], ['partit', 'partit'], ['partido', 'partit'],
+  ['limit', 'limit'], ['datalimit', 'limit'], ['limite', 'limit'],
+  ['acte', 'acte'], ['acto', 'acte'], ['esdeveniment', 'acte'],
+]);
+
+const COMPETICIONS_FULL = new Map([
+  ['', null], ['tots', null], ['totes', null], ['mixt', null],
+  ['masculi', 'masculina'], ['masculina', 'masculina'], ['masculino', 'masculina'],
+  ['femeni', 'femenina'], ['femenina', 'femenina'], ['femenino', 'femenina'],
+]);
+
+/**
+ * Una data escrita com sigui: "22/08/2026", "22/08", "2026-08-22" o el que en surti si algú
+ * la deixa com a data de Google. Torna 'AAAA-MM-DD'.
+ */
+export function dataDelFull(text, anyPerDefecte) {
+  const brut = String(text ?? '').trim();
+  if (!brut) return null;
+
+  const iso = /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/.exec(brut);
+  if (iso) return `${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}`;
+
+  const trossos = /^(\d{1,2})[-/.](\d{1,2})(?:[-/.](\d{2,4}))?$/.exec(brut);
+  if (!trossos) return null;
+
+  // Primer el dia (com s'escriu aquí); si no pot ser dia, és que va al revés.
+  let [, dia, mes, any] = trossos;
+  if (Number(mes) > 12) [dia, mes] = [mes, dia];
+  if (Number(mes) > 12 || Number(dia) > 31) return null;
+  const anyComplet = any ? (any.length <= 2 ? `20${any.padStart(2, '0')}` : any) : String(anyPerDefecte);
+  return `${anyComplet}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+}
+
+/** "20:00-21:00" · "20-21h" · "20h" → { inici, fi } */
+export function horesDelFull(text) {
+  const brut = String(text ?? '').trim();
+  if (!brut) return { inici: null, fi: null };
+
+  const hora = (h, m) => `${String(Number(h) % 24).padStart(2, '0')}:${(m ?? '00').padStart(2, '0')}`;
+  const parts = brut.split(/\s*[-–]\s*/).map((tros) => /^(\d{1,2})(?::(\d{2}))?\s*h?$/i.exec(tros.trim()));
+  if (!parts[0]) return { inici: null, fi: null };
+  return {
+    inici: hora(parts[0][1], parts[0][2]),
+    fi: parts[1] ? hora(parts[1][1], parts[1][2]) : null,
+  };
+}
+
+/**
+ * Llegeix la pestanya del calendari. Una fila és una franja: dia, hora, lloc i què s'hi juga.
+ * La columna Partit fa servir el mateix vocabulari que les pestanyes de resultats
+ * ("Quarts 1", "F1-F2"), o la paraula "Tot" si en aquella estona es juga l'esport sencer.
+ */
+export function horarisDelFull(files, opcions, avisos) {
+  const { dades, pestanya = 'Calendari', any = new Date().getFullYear() } = opcions;
+
+  const perEsport = indexEsports(dades.torneig);
+  const perQuadre = indexPartitsQuadre();
+  const perLliga = indexPartitsLliga(dades.femeni?.jornadas ?? []);
+
+  const { columnes, cos, llegir } = ambCapcalera(files);
+  for (const columna of ['data', 'esport']) {
+    if (!columnes.has(columna)) {
+      // Si Google no troba la pestanya que se li demana, en torna una altra sense dir res:
+      // per això el més calent és que no existeixi o que es digui d'una altra manera.
+      avisos.push(
+        `A la pestanya "${pestanya}" del full de càlcul hi falta la columna "${columna}". ` +
+        `Comprova que la pestanya existeix i que es diu exactament així. Mentrestant els ` +
+        `horaris surten de datos/horarios.json.`
+      );
+      return null;
+    }
+  }
+
+  const horaris = [];
+  cos.forEach((fila, i) => {
+    const numero = i + 2;
+    const avis = (text) => avisos.push(`Full de càlcul · ${pestanya}, fila ${numero}: ${text}`);
+
+    const textData = llegir(fila, 'data');
+    const textEsport = llegir(fila, 'esport');
+    // "⚠ REPASSAR" és un recordatori per a qui manté el full, no per a qui mira la web.
+    const nota = llegir(fila, 'nota').replace(/⚠?\s*REPASSAR\s*·?\s*/i, '').trim();
+    if (!textData && !textEsport && !nota) return;
+
+    const data = dataDelFull(textData, any);
+    if (!data) return avis(`"${textData}" no és cap data (escriu-la com "22/08/2026").`);
+
+    const tipus = TIPUS.get(clau(llegir(fila, 'tipus')));
+    if (!tipus) return avis(`"${llegir(fila, 'tipus')}" no és cap tipus de fila (deixa-ho buit, o posa-hi "Límit" o "Acte").`);
+
+    if (!COMPETICIONS_FULL.has(clau(llegir(fila, 'competicio')))) {
+      return avis(`"${llegir(fila, 'competicio')}" no és cap competició (ha de dir "Masculí", "Femení", o res si són totes dues).`);
+    }
+    const competicio = COMPETICIONS_FULL.get(clau(llegir(fila, 'competicio')));
+
+    // Una fila pot valer per a diversos esports: les dates límit n'afecten sis de cop.
+    const esports = [];
+    for (const tros of textEsport.split(/[,;]/).map((t) => t.trim()).filter(Boolean)) {
+      const esport = perEsport.get(clau(tros));
+      if (!esport) avis(`l'esport "${tros}" no surt a datos/torneo.json.`);
+      else esports.push(esport.id);
+    }
+    if (tipus !== 'acte' && !esports.length) return;
+
+    // "Tot" vol dir que en aquella estona es juga l'esport sencer: és el cas dels que van per
+    // ordre d'arribada i dels que es despatxen en una sola sessió.
+    const textPartit = llegir(fila, 'partit');
+    const tot = !textPartit || ['tot', 'tots', 'tota', 'totes'].includes(clau(textPartit));
+
+    const partits = [];
+    if (!tot) {
+      for (const tros of textPartit.split(/[,;]/).map((t) => t.trim()).filter(Boolean)) {
+        const partit = competicio === 'femenina' ? perLliga.get(clau(tros))
+          : competicio === 'masculina' ? perQuadre.get(clau(tros))
+          : perQuadre.get(clau(tros)) ?? perLliga.get(clau(tros));
+        if (!partit) avis(`"${tros}" no és cap partit d'aquesta competició.`);
+        else partits.push(partit);
+      }
+    }
+
+    const { inici, fi } = horesDelFull(llegir(fila, 'hora'));
+    if (tipus !== 'limit' && !inici) avis(`no s'ha entès l'hora "${llegir(fila, 'hora')}".`);
+
+    horaris.push({
+      data, inici, fi, tipus, competicio, esports, partits, tot,
+      lloc: llegir(fila, 'lloc'),
+      nota,
+    });
+  });
+
+  return horaris;
+}
+
 /* ---------- Descàrrega ---------- */
 
 async function descarregar(pestanya, avisos) {
@@ -285,11 +422,12 @@ export async function llegirFull(dades) {
   const avisos = [];
   if (!FULL.id) return { avisos };
 
-  const { equips, masculi, femeni } = FULL.pestanyes;
-  const [filesEquips, filesMasculi, filesFemeni] = await Promise.all([
+  const { equips, masculi, femeni, calendari } = FULL.pestanyes;
+  const [filesEquips, filesMasculi, filesFemeni, filesCalendari] = await Promise.all([
     descarregar(equips, avisos),
     descarregar(masculi, avisos),
     descarregar(femeni, avisos),
+    descarregar(calendari, avisos),
   ]);
 
   const sortida = { avisos };
@@ -317,6 +455,11 @@ export async function llegirFull(dades) {
       nPosicions: dades.femeni.equipos.length,
     }, avisos);
     if (resultats) sortida.resultatsFemeni = resultats;
+  }
+
+  if (filesCalendari) {
+    const horaris = horarisDelFull(filesCalendari, { dades, pestanya: calendari, any: FULL.any }, avisos);
+    if (horaris) sortida.horaris = horaris;
   }
 
   return sortida;

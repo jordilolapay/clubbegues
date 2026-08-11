@@ -14,10 +14,15 @@
 export const FULL = {
   id: '1gB3BzDDBQATh5wTy8JRPxCHLMUqPpnQwFcp3pIsIvLo',
 
-  // Els noms de les tres pestanyes del full de càlcul. Si les reanomenes, canvia-ho aquí.
+  // Els noms de les pestanyes del full de càlcul. Si les reanomenes, canvia-ho aquí.
   pestanyes: {
     equips: 'Equips',
     masculi: 'Masculí',
     femeni: 'Femení',
+    calendari: 'Calendari',
   },
+
+  // L'any del torneig. Només serveix per a les dates del calendari que s'escriguin
+  // sense any ("22/08" en lloc de "22/08/2026").
+  any: 2026,
 };

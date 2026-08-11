@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olimpíades 2026 - Club de Begues</title>
+    <title>Horaris · Olimpíades 2026 - Club de Begues</title>
+    <meta name="description" content="Calendari dia a dia de les Olimpíades 2026 del Club de Begues: on i quan es juga cada partit.">
     <link rel="stylesheet" href="css/estilos.css">
     <script src="js/menu.js" defer></script>
 </head>
@@ -17,39 +18,36 @@
             </button>
             <nav id="menu-principal">
                 <a href="index.html">Classificació</a>
-                <a href="horaris.html">Horaris</a>
+                <a href="horaris.html" aria-current="page">Horaris</a>
                 <a href="reglament.html">Reglament</a>
             </nav>
         </div>
     </header>
 
-    <section class="portada">
-        <div class="contenidor">
-            <img src="img/aros_olimpicos.png" alt="Aros olímpics" class="aros">
-
-            <h1>OLIMPÍADES</h1>
-            <p class="any">2026</p>
-
-            <div class="dates">
-                <p>Infantils: del 13 al 19 de juliol</p>
-                <p>Adults: del 15 al 29 d'agost</p>
-            </div>
-
-            <div class="botons">
-                <a href="index.html" class="boto">Veure els quadres</a>
-                <a href="reglament.html" class="boto boto--clar">Llegir el reglament</a>
-            </div>
-        </div>
-    </section>
-
     <main class="contenidor">
-        <div class="caixa-info">
-            <h2>Les inscripcions ja estan tancades</h2>
-            <p>El termini per inscriure equips s'ha acabat. A partir d'ara anirem publicant aquí els
-               quadres de cada esport i la classificació general, que s'aniran actualitzant a mesura
-               que es vagin jugant els partits.</p>
-            <p style="margin-top:14px"><a href="inscripcions.html">Consulta la informació de les inscripcions</a></p>
+
+        <div class="titol-pagina">
+            <p class="sobretitol">Olimpíades 2026 · Club de Begues</p>
+            <h1>Horaris</h1>
+            <div id="selector"></div>
+            <p id="subtitol" class="nota" style="margin-top:10px"></p>
         </div>
+
+        <div id="errors" hidden></div>
+
+        <noscript>
+            <div class="avis">
+                <h3>Cal activar el JavaScript</h3>
+                <p>Aquesta pàgina munta el calendari al mateix navegador. Sense JavaScript no es pot mostrar.</p>
+            </div>
+        </noscript>
+
+        <div id="filtres-horaris" class="filtres-horaris"></div>
+
+        <div id="calendari"><p class="carregant">Carregant els horaris…</p></div>
+
+        <a class="tornar" id="tornar" href="index.html">← Classificació</a>
+
     </main>
 
     <footer class="peu">
@@ -63,5 +61,6 @@
         </div>
     </footer>
 
+    <script type="module" src="js/horaris.js"></script>
 </body>
 </html>

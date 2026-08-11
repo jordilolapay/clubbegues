@@ -1,0 +1,2145 @@
+[
+  {
+    "data": "2026-08-14",
+    "inici": "18:00",
+    "fi": "20:00",
+    "tipus": "acte",
+    "competicio": null,
+    "esports": [],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": "REUNIÓ INFORMATIVA"
+  },
+  {
+    "data": "2026-08-15",
+    "inici": "09:00",
+    "fi": "14:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "natacion"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": "INAUGURACIÓ + NATACIÓ"
+  },
+  {
+    "data": "2026-08-15",
+    "inici": "15:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "voleibol-playa"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-15",
+    "inici": "15:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "ping-pong"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-15",
+    "inici": "18:00",
+    "fi": "01:00",
+    "tipus": "acte",
+    "competicio": null,
+    "esports": [],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": "TARDEO"
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "10:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "ping-pong"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "10:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "voleibol-playa"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "10:00",
+    "fi": "16:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "minigolf"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "16:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "ajedrez"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "F1-F2",
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Camp de futbol",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Camp de futbol",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-16",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "F1-F2",
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "previa1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "F2-F5",
+      "F3-F4"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "qf1",
+      "qf2"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F1-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "qf3",
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-17",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "masculina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT PREVIA"
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "qf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "qf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "qf3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F2-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "consSf1",
+      "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F3-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-18",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "sf1",
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "consSf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "F1-F4",
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F1-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "consTercero",
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "consFinal",
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "sf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-19",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "femenina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "F1-F2",
+      "F4-F5",
+      "F2-F5",
+      "F3-F4",
+      "F1-F5"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT MEITAT LLIGA"
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "qf1",
+      "qf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-siete"
+    ],
+    "partits": [
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "qf3",
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "20:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "futbolin"
+    ],
+    "partits": [
+      "previa1",
+      "previa2",
+      "F1-F2",
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "20:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "previa1",
+      "previa2",
+      "F1-F2",
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-20",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "F2-F5",
+      "F3-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "F1-F2"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "previa1"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "consSf1",
+      "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "20:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "futbolin"
+    ],
+    "partits": [
+      "qf1",
+      "qf2",
+      "qf3",
+      "qf4",
+      "consSf1",
+      "consSf2",
+      "sf1",
+      "sf2",
+      "F2-F5",
+      "F3-F4",
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "20:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "qf1",
+      "qf2",
+      "qf3",
+      "qf4",
+      "consSf1",
+      "consSf2",
+      "sf1",
+      "sf2",
+      "F2-F5",
+      "F3-F4",
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "sf1",
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "previa1",
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "qf1",
+      "qf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": "00:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "qf3",
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-21",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "masculina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "qf1",
+      "qf2",
+      "qf3",
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT 1ª RONDA"
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "09:00",
+    "fi": "11:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "ciclismo"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "11:00",
+    "fi": "14:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "F2-F5",
+      "F3-F4",
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "11:00",
+    "fi": "12:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "previa1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "12:00",
+    "fi": "13:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "previa2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "14:00",
+    "fi": "17:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "qf1",
+      "qf2",
+      "qf3",
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "15:00",
+    "fi": "16:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F1-F2",
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "16:00",
+    "fi": "17:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F2-F5",
+      "F3-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "17:00",
+    "fi": "18:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "consSf1",
+      "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "19:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "atletismo"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": "ATLETISME / PES / SALT LONGITUD"
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F1-F5",
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "22:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "futbolin"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-22",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "sf1",
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "10:00",
+    "fi": "13:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "atletismo"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": "ATLETISME / 100m / RELLEUS"
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "13:00",
+    "fi": "16:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "consSf1",
+      "consSf2",
+      "sf1",
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "13:00",
+    "fi": "14:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "F1-F4",
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "14:00",
+    "fi": "15:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F1-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "15:00",
+    "fi": "16:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "16:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "F1-F4",
+      "F5-F3",
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "16:00",
+    "fi": "17:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "consTercero"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "17:00",
+    "fi": "18:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "19:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": null,
+    "esports": [
+      "atletismo"
+    ],
+    "partits": [],
+    "tot": true,
+    "lloc": "Altres",
+    "nota": "CROSS"
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "consTercero",
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "consFinal"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-23",
+    "inici": "00:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "18:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "waterpolo"
+    ],
+    "partits": [
+      "consFinal",
+      "final",
+      "consTercero",
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Club de Begues",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F1-F4",
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "consTercero",
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "voleibol-pista"
+    ],
+    "partits": [
+      "consFinal",
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F1-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-24",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F4-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-25",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F2-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-25",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F3-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-25",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "masculina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "consSf1",
+      "consSf2",
+      "sf1",
+      "sf2",
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT SEMIS I 9ª - 10ª LLOC"
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "qf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "qf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F1-F5"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F2-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "qf3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-26",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "qf4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-27",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F1-F4"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-27",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-27",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "F1-F4",
+      "F5-F3"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-27",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "consTercero",
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-27",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "femenina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "F2-F3",
+      "F1-F4",
+      "F5-F3",
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT FINALITZACIÓ LLIGA"
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "consSf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "consSf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F1-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "21:00",
+    "fi": "22:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "dardos"
+    ],
+    "partits": [
+      "consFinal",
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Altres",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "22:00",
+    "fi": "23:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "23:00",
+    "fi": "00:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "sf1"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": "00:00",
+    "fi": "01:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "sf2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-28",
+    "inici": null,
+    "fi": null,
+    "tipus": "limit",
+    "competicio": "masculina",
+    "esports": [
+      "petanca",
+      "domino",
+      "tenis",
+      "fronton",
+      "padel",
+      "billar"
+    ],
+    "partits": [
+      "consTercero",
+      "tercerPuesto",
+      "consFinal",
+      "final"
+    ],
+    "tot": false,
+    "lloc": "",
+    "nota": "LIMIT 3ª-4ª I FINALS"
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "11:00",
+    "fi": "12:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "consTercero"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "12:00",
+    "fi": "13:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "tercerPuesto"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "13:00",
+    "fi": "14:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "baloncesto"
+    ],
+    "partits": [
+      "F1-F3",
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "14:00",
+    "fi": "15:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "puesto9"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "15:00",
+    "fi": "16:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "consFinal"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "16:00",
+    "fi": "17:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "17:00",
+    "fi": "18:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F1-F3"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "18:00",
+    "fi": "19:00",
+    "tipus": "partit",
+    "competicio": "femenina",
+    "esports": [
+      "balonmano"
+    ],
+    "partits": [
+      "F4-F2"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "19:00",
+    "fi": "20:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "consFinal"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "20:00",
+    "fi": "21:00",
+    "tipus": "partit",
+    "competicio": "masculina",
+    "esports": [
+      "futbol-sala"
+    ],
+    "partits": [
+      "final"
+    ],
+    "tot": false,
+    "lloc": "Poliesportiu",
+    "nota": ""
+  },
+  {
+    "data": "2026-08-29",
+    "inici": "21:00",
+    "fi": "06:00",
+    "tipus": "acte",
+    "competicio": null,
+    "esports": [],
+    "partits": [],
+    "tot": true,
+    "lloc": "Club de Begues",
+    "nota": "SOPAR CLOENDA"
+  }
+]
