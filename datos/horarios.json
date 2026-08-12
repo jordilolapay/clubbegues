@@ -165,8 +165,8 @@
       "baloncesto"
     ],
     "partits": [
-      "F1-F2",
-      "F4-F5"
+      "F1-F5",
+      "F2-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -265,7 +265,7 @@
       "balonmano"
     ],
     "partits": [
-      "F1-F2"
+      "F1-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -298,7 +298,7 @@
       "balonmano"
     ],
     "partits": [
-      "F4-F5"
+      "F5-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -433,7 +433,7 @@
       "balonmano"
     ],
     "partits": [
-      "F2-F5"
+      "F1-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -466,7 +466,7 @@
       "balonmano"
     ],
     "partits": [
-      "F3-F4"
+      "F4-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -548,7 +548,7 @@
       "balonmano"
     ],
     "partits": [
-      "F1-F5"
+      "F1-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -581,7 +581,7 @@
       "balonmano"
     ],
     "partits": [
-      "F2-F3"
+      "F4-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -724,8 +724,8 @@
     "partits": [
       "previa1",
       "previa2",
-      "F1-F2",
-      "F4-F5"
+      "F2-F5",
+      "F3-F4"
     ],
     "tot": false,
     "lloc": "Altres",
@@ -760,8 +760,8 @@
       "baloncesto"
     ],
     "partits": [
-      "F2-F5",
-      "F3-F4"
+      "F1-F4",
+      "F5-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -859,8 +859,8 @@
       "voleibol-pista"
     ],
     "partits": [
-      "F1-F2",
-      "F4-F5"
+      "F1-F5",
+      "F2-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -892,8 +892,8 @@
       "baloncesto"
     ],
     "partits": [
-      "F1-F5",
-      "F2-F3"
+      "F1-F3",
+      "F4-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -917,10 +917,10 @@
       "consSf2",
       "sf1",
       "sf2",
-      "F2-F5",
-      "F3-F4",
       "F1-F5",
-      "F2-F3"
+      "F2-F3",
+      "F1-F4",
+      "F5-F3"
     ],
     "tot": false,
     "lloc": "Altres",
@@ -1122,8 +1122,8 @@
       "voleibol-pista"
     ],
     "partits": [
-      "F2-F5",
-      "F3-F4"
+      "F1-F4",
+      "F5-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1186,8 +1186,8 @@
       "voleibol-pista"
     ],
     "partits": [
-      "F1-F5",
-      "F2-F3"
+      "F1-F3",
+      "F4-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1281,8 +1281,8 @@
       "baloncesto"
     ],
     "partits": [
-      "F1-F4",
-      "F5-F3"
+      "F1-F2",
+      "F4-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1298,7 +1298,7 @@
       "balonmano"
     ],
     "partits": [
-      "F1-F4"
+      "F2-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1314,7 +1314,7 @@
       "balonmano"
     ],
     "partits": [
-      "F5-F3"
+      "F3-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1479,8 +1479,8 @@
       "voleibol-pista"
     ],
     "partits": [
-      "F1-F4",
-      "F5-F3"
+      "F1-F2",
+      "F4-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1496,8 +1496,8 @@
       "voleibol-pista"
     ],
     "partits": [
-      "F1-F3",
-      "F4-F2"
+      "F2-F5",
+      "F3-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1547,7 +1547,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F1-F2"
+      "F1-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1563,7 +1563,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F4-F5"
+      "F2-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1579,7 +1579,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F2-F5"
+      "F1-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1595,7 +1595,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F3-F4"
+      "F5-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1668,7 +1668,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F1-F5"
+      "F1-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1684,7 +1684,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F2-F3"
+      "F4-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1732,7 +1732,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F1-F4"
+      "F1-F2"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1748,7 +1748,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F5-F3"
+      "F4-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1888,7 +1888,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F1-F3"
+      "F2-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -1921,7 +1921,7 @@
       "futbol-sala"
     ],
     "partits": [
-      "F4-F2"
+      "F3-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -2025,8 +2025,8 @@
       "baloncesto"
     ],
     "partits": [
-      "F1-F3",
-      "F4-F2"
+      "F2-F5",
+      "F3-F4"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -2090,7 +2090,7 @@
       "balonmano"
     ],
     "partits": [
-      "F1-F3"
+      "F1-F5"
     ],
     "tot": false,
     "lloc": "Poliesportiu",
@@ -2106,7 +2106,7 @@
       "balonmano"
     ],
     "partits": [
-      "F4-F2"
+      "F2-F3"
     ],
     "tot": false,
     "lloc": "Poliesportiu",

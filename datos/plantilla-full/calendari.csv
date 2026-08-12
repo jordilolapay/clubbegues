@@ -12,8 +12,8 @@ Data,Hora,Tipus,Lloc,Competició,Esport,Partit,Qui juga,Nota
 F4-F5: Birra sana - Dynamos",
 16/08/2026,20:00-21:00,,Camp de futbol,Masculí,Futbol 7,"Prèvia 1, Prèvia 2","P1: Equip 5 - Equip 4
 P2: Equip 7 - Equip 9",
-16/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F1-F2, F4-F5","F1-F2: Las potras salvajes - Tocapelotas
-F4-F5: Birra sana - Dynamos",
+16/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F1-F5, F2-F3","F1-F5: Las potras salvajes - Dynamos
+F2-F3: Tocapelotas - Motomamis",
 16/08/2026,22:00-23:00,,Poliesportiu,Masculí,Bàsquet,"Prèvia 1, Prèvia 2","P1: Equip 6 - Equip 5
 P2: Equip 4 - Equip 10",
 17/08/2026,18:00-19:00,,Poliesportiu,Masculí,Handbol,Prèvia 1,Equip 8 - Equip 5,
@@ -22,10 +22,10 @@ P2: Equip 4 - Equip 10",
 F3-F4: Motomamis - Birra sana",
 17/08/2026,20:00-21:00,,Altres,Masculí,Futbol 7,"Quarts 1, Quarts 2","QF1: Guanyador P1 - Equip 10
 QF2: Equip 6 - Equip 1",
-17/08/2026,21:00-22:00,,Poliesportiu,Femení,Handbol,F1-F2,Las potras salvajes - Tocapelotas,
+17/08/2026,21:00-22:00,,Poliesportiu,Femení,Handbol,F1-F4,Las potras salvajes - Birra sana,
 17/08/2026,21:00-22:00,,Altres,Masculí,Futbol 7,"Quarts 3, Quarts 4","QF3: Guanyador P2 - Equip 2
 QF4: Equip 8 - Equip 3",
-17/08/2026,22:00-23:00,,Poliesportiu,Femení,Handbol,F4-F5,Birra sana - Dynamos,
+17/08/2026,22:00-23:00,,Poliesportiu,Femení,Handbol,F5-F3,Dynamos - Motomamis,
 17/08/2026,22:00-23:00,,Altres,Masculí,Futbol 7,9è i 10è lloc,,
 17/08/2026,,Límit,,Masculí,"Petanca, Dòmino, Tennis, Frontó, Pàdel, Billar","Prèvia 1, Prèvia 2",,LIMIT PREVIA
 18/08/2026,18:00-19:00,,Poliesportiu,Masculí,Handbol,Quarts 1,Guanyador P1 - Equip 6,
@@ -34,17 +34,17 @@ QF4: Equip 8 - Equip 3",
 F2-F3: Tocapelotas - Motomamis",
 18/08/2026,20:00-21:00,,Poliesportiu,Masculí,Handbol,Quarts 3,Guanyador P2 - Equip 7,
 18/08/2026,21:00-22:00,,Poliesportiu,Masculí,Handbol,Quarts 4,Equip 10 - Equip 9,
-18/08/2026,22:00-23:00,,Poliesportiu,Femení,Handbol,F2-F5,Tocapelotas - Dynamos,
+18/08/2026,22:00-23:00,,Poliesportiu,Femení,Handbol,F1-F3,Las potras salvajes - Motomamis,
 18/08/2026,22:00-23:00,,Altres,Masculí,Futbol 7,"Semifinal consolació 1, Semifinal consolació 2",,
-18/08/2026,23:00-00:00,,Poliesportiu,Femení,Handbol,F3-F4,Motomamis - Birra sana,
+18/08/2026,23:00-00:00,,Poliesportiu,Femení,Handbol,F4-F2,Birra sana - Tocapelotas,
 18/08/2026,23:00-00:00,,Altres,Masculí,Futbol 7,"Semifinal 1, Semifinal 2",,
 19/08/2026,18:00-19:00,,Poliesportiu,Masculí,Handbol,Semifinal consolació 1,,
 19/08/2026,19:00-20:00,,Poliesportiu,Masculí,Handbol,Semifinal consolació 2,,
 19/08/2026,19:00-20:00,,Altres,Femení,Futbol 7,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
 F5-F3: Dynamos - Motomamis",
-19/08/2026,20:00-21:00,,Poliesportiu,Femení,Handbol,F1-F5,Las potras salvajes - Dynamos,
+19/08/2026,20:00-21:00,,Poliesportiu,Femení,Handbol,F1-F2,Las potras salvajes - Tocapelotas,
 19/08/2026,20:00-21:00,,Altres,Masculí,Futbol 7,"7è i 8è lloc, 3r i 4t lloc",,
-19/08/2026,21:00-22:00,,Poliesportiu,Femení,Handbol,F2-F3,Tocapelotas - Motomamis,
+19/08/2026,21:00-22:00,,Poliesportiu,Femení,Handbol,F4-F5,Birra sana - Dynamos,
 19/08/2026,21:00-22:00,,Altres,Masculí,Futbol 7,"Final consolació · 5è i 6è lloc, Final",,
 19/08/2026,22:00-23:00,,Poliesportiu,Masculí,Handbol,Semifinal 1,,
 19/08/2026,23:00-00:00,,Poliesportiu,Masculí,Handbol,Semifinal 2,,
@@ -59,35 +59,35 @@ QF2: Equip 2 - Equip 1",
 F4-F2: Birra sana - Tocapelotas",
 20/08/2026,20:00-21:00,,Poliesportiu,Masculí,Bàsquet,"Quarts 3, Quarts 4","QF3: Guanyador P2 - Equip 8
 QF4: Equip 3 - Equip 9",
-20/08/2026,20:00-01:00,,Altres,,Futbolí,"Prèvia 1, Prèvia 2, F1-F2, F4-F5","P1: Equip 7 - Equip 4
+20/08/2026,20:00-01:00,,Altres,,Futbolí,"Prèvia 1, Prèvia 2, F2-F5, F3-F4","P1: Equip 7 - Equip 4
 P2: Equip 9 - Equip 6
-F1-F2: Las potras salvajes - Tocapelotas
-F4-F5: Birra sana - Dynamos",
+F2-F5: Tocapelotas - Dynamos
+F3-F4: Motomamis - Birra sana",
 20/08/2026,20:00-01:00,,Altres,,Dards,"Prèvia 1, Prèvia 2, F1-F2, F4-F5","P1: Equip 7 - Equip 5
 P2: Equip 2 - Equip 10
 F1-F2: Las potras salvajes - Tocapelotas
 F4-F5: Birra sana - Dynamos",
-20/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F2-F5, F3-F4","F2-F5: Tocapelotas - Dynamos
-F3-F4: Motomamis - Birra sana",
+20/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
+F5-F3: Dynamos - Motomamis",
 20/08/2026,22:00-23:00,,Poliesportiu,Masculí,Voleibol pista,"Prèvia 1, Prèvia 2","P1: Equip 2 - Equip 3
 P2: Equip 4 - Equip 9",
 21/08/2026,18:00-19:00,,Club de Begues,Femení,Waterpolo,F1-F2,Las potras salvajes - Tocapelotas,
 21/08/2026,19:00-20:00,,Club de Begues,Femení,Waterpolo,F4-F5,Birra sana - Dynamos,
 21/08/2026,19:00-20:00,,Club de Begues,Masculí,Waterpolo,Prèvia 1,Equip 10 - Equip 7,
 21/08/2026,22:00-23:00,,Poliesportiu,Masculí,Bàsquet,"Semifinal consolació 1, Semifinal consolació 2",,
-21/08/2026,19:00-20:00,,Poliesportiu,Femení,Voleibol pista,"F1-F2, F4-F5","F1-F2: Las potras salvajes - Tocapelotas
-F4-F5: Birra sana - Dynamos",
-21/08/2026,20:00-21:00,,Club de Begues,Masculí,Waterpolo,Prèvia 2,Equip 6 - Equip 2,
-21/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F1-F5, F2-F3","F1-F5: Las potras salvajes - Dynamos
+21/08/2026,19:00-20:00,,Poliesportiu,Femení,Voleibol pista,"F1-F5, F2-F3","F1-F5: Las potras salvajes - Dynamos
 F2-F3: Tocapelotas - Motomamis",
-21/08/2026,20:00-01:00,,Altres,,Futbolí,"Quarts 1, Quarts 2, Quarts 3, Quarts 4, Semifinal consolació 1, Semifinal consolació 2, Semifinal 1, Semifinal 2, F2-F5, F3-F4, F1-F5, F2-F3","QF1: Guanyador P1 - Equip 2
+21/08/2026,20:00-21:00,,Club de Begues,Masculí,Waterpolo,Prèvia 2,Equip 6 - Equip 2,
+21/08/2026,21:00-22:00,,Poliesportiu,Femení,Bàsquet,"F1-F3, F4-F2","F1-F3: Las potras salvajes - Motomamis
+F4-F2: Birra sana - Tocapelotas",
+21/08/2026,20:00-01:00,,Altres,,Futbolí,"Quarts 1, Quarts 2, Quarts 3, Quarts 4, Semifinal consolació 1, Semifinal consolació 2, Semifinal 1, Semifinal 2, F1-F5, F2-F3, F1-F4, F5-F3","QF1: Guanyador P1 - Equip 2
 QF2: Equip 10 - Equip 3
 QF3: Guanyador P2 - Equip 8
 QF4: Equip 5 - Equip 1
-F2-F5: Tocapelotas - Dynamos
-F3-F4: Motomamis - Birra sana
 F1-F5: Las potras salvajes - Dynamos
-F2-F3: Tocapelotas - Motomamis",
+F2-F3: Tocapelotas - Motomamis
+F1-F4: Las potras salvajes - Birra sana
+F5-F3: Dynamos - Motomamis",
 21/08/2026,20:00-01:00,,Altres,,Dards,"Quarts 1, Quarts 2, Quarts 3, Quarts 4, Semifinal consolació 1, Semifinal consolació 2, Semifinal 1, Semifinal 2, F2-F5, F3-F4, F1-F5, F2-F3","QF1: Guanyador P1 - Equip 6
 QF2: Equip 1 - Equip 3
 QF3: Guanyador P2 - Equip 8
@@ -113,22 +113,22 @@ F2-F3: Tocapelotas - Motomamis",
 QF2: Equip 1 - Equip 4
 QF3: Guanyador P2 - Equip 5
 QF4: Equip 8 - Equip 9",
-22/08/2026,16:00-17:00,,Poliesportiu,Femení,Voleibol pista,"F2-F5, F3-F4","F2-F5: Tocapelotas - Dynamos
-F3-F4: Motomamis - Birra sana",
+22/08/2026,16:00-17:00,,Poliesportiu,Femení,Voleibol pista,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
+F5-F3: Dynamos - Motomamis",
 22/08/2026,17:00-18:00,,Poliesportiu,Masculí,Voleibol pista,9è i 10è lloc,,
 22/08/2026,18:00-19:00,,Poliesportiu,Masculí,Voleibol pista,"Semifinal consolació 1, Semifinal consolació 2",,
 22/08/2026,19:00-22:00,,Club de Begues,,Atletisme,Tot,,ATLETISME / PES / SALT LONGITUD
-22/08/2026,22:00-23:00,,Poliesportiu,Femení,Voleibol pista,"F1-F5, F2-F3","F1-F5: Las potras salvajes - Dynamos
-F2-F3: Tocapelotas - Motomamis",
+22/08/2026,22:00-23:00,,Poliesportiu,Femení,Voleibol pista,"F1-F3, F4-F2","F1-F3: Las potras salvajes - Motomamis
+F4-F2: Birra sana - Tocapelotas",
 22/08/2026,22:00-01:00,,Altres,,Futbolí,Tot,,
 22/08/2026,22:00-01:00,,Altres,,Dards,Tot,,
 22/08/2026,23:00-00:00,,Poliesportiu,Masculí,Voleibol pista,"Semifinal 1, Semifinal 2",,
 23/08/2026,10:00-13:00,,Altres,,Atletisme,Tot,,ATLETISME / 100m / RELLEUS
 23/08/2026,13:00-16:00,,Club de Begues,Masculí,Waterpolo,"Semifinal consolació 1, Semifinal consolació 2, Semifinal 1, Semifinal 2",,
-23/08/2026,13:00-14:00,,Poliesportiu,Femení,Bàsquet,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
-F5-F3: Dynamos - Motomamis",
-23/08/2026,14:00-15:00,,Poliesportiu,Femení,Handbol,F1-F4,Las potras salvajes - Birra sana,
-23/08/2026,15:00-16:00,,Poliesportiu,Femení,Handbol,F5-F3,Dynamos - Motomamis,
+23/08/2026,13:00-14:00,,Poliesportiu,Femení,Bàsquet,"F1-F2, F4-F5","F1-F2: Las potras salvajes - Tocapelotas
+F4-F5: Birra sana - Dynamos",
+23/08/2026,14:00-15:00,,Poliesportiu,Femení,Handbol,F2-F5,Tocapelotas - Dynamos,
+23/08/2026,15:00-16:00,,Poliesportiu,Femení,Handbol,F3-F4,Motomamis - Birra sana,
 23/08/2026,16:00-19:00,,Club de Begues,Femení,Waterpolo,"F1-F4, F5-F3, F1-F3, F4-F2","F1-F4: Las potras salvajes - Birra sana
 F5-F3: Dynamos - Motomamis
 F1-F3: Las potras salvajes - Motomamis
@@ -141,25 +141,25 @@ F4-F2: Birra sana - Tocapelotas",
 23/08/2026,23:00-00:00,,Poliesportiu,Masculí,Bàsquet,Final,,
 23/08/2026,00:00-01:00,,Poliesportiu,Masculí,Bàsquet,9è i 10è lloc,,
 24/08/2026,18:00-21:00,,Club de Begues,Masculí,Waterpolo,"Final consolació · 5è i 6è lloc, Final, 7è i 8è lloc, 3r i 4t lloc",,
-24/08/2026,18:00-19:00,,Poliesportiu,Femení,Voleibol pista,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
-F5-F3: Dynamos - Motomamis",
-24/08/2026,19:00-20:00,,Poliesportiu,Femení,Voleibol pista,"F1-F3, F4-F2","F1-F3: Las potras salvajes - Motomamis
-F4-F2: Birra sana - Tocapelotas",
+24/08/2026,18:00-19:00,,Poliesportiu,Femení,Voleibol pista,"F1-F2, F4-F5","F1-F2: Las potras salvajes - Tocapelotas
+F4-F5: Birra sana - Dynamos",
+24/08/2026,19:00-20:00,,Poliesportiu,Femení,Voleibol pista,"F2-F5, F3-F4","F2-F5: Tocapelotas - Dynamos
+F3-F4: Motomamis - Birra sana",
 24/08/2026,20:00-21:00,,Poliesportiu,Masculí,Voleibol pista,"7è i 8è lloc, 3r i 4t lloc",,
 24/08/2026,21:00-22:00,,Poliesportiu,Masculí,Voleibol pista,"Final consolació · 5è i 6è lloc, Final",,
-24/08/2026,22:00-23:00,,Poliesportiu,Femení,Futbol sala,F1-F2,Las potras salvajes - Tocapelotas,
-24/08/2026,23:00-00:00,,Poliesportiu,Femení,Futbol sala,F4-F5,Birra sana - Dynamos,
-25/08/2026,18:00-19:00,,Poliesportiu,Femení,Futbol sala,F2-F5,Tocapelotas - Dynamos,
-25/08/2026,19:00-20:00,,Poliesportiu,Femení,Futbol sala,F3-F4,Motomamis - Birra sana,
+24/08/2026,22:00-23:00,,Poliesportiu,Femení,Futbol sala,F1-F5,Las potras salvajes - Dynamos,
+24/08/2026,23:00-00:00,,Poliesportiu,Femení,Futbol sala,F2-F3,Tocapelotas - Motomamis,
+25/08/2026,18:00-19:00,,Poliesportiu,Femení,Futbol sala,F1-F4,Las potras salvajes - Birra sana,
+25/08/2026,19:00-20:00,,Poliesportiu,Femení,Futbol sala,F5-F3,Dynamos - Motomamis,
 25/08/2026,,Límit,,Masculí,"Petanca, Dòmino, Tennis, Frontó, Pàdel, Billar","Semifinal consolació 1, Semifinal consolació 2, Semifinal 1, Semifinal 2, 9è i 10è lloc",,LIMIT SEMIS I 9ª - 10ª LLOC
 26/08/2026,18:00-19:00,,Poliesportiu,Masculí,Futbol sala,Quarts 1,Guanyador P1 - Equip 4,
 26/08/2026,19:00-20:00,,Poliesportiu,Masculí,Futbol sala,Quarts 2,Equip 3 - Equip 5,
-26/08/2026,20:00-21:00,,Poliesportiu,Femení,Futbol sala,F1-F5,Las potras salvajes - Dynamos,
-26/08/2026,21:00-22:00,,Poliesportiu,Femení,Futbol sala,F2-F3,Tocapelotas - Motomamis,
+26/08/2026,20:00-21:00,,Poliesportiu,Femení,Futbol sala,F1-F3,Las potras salvajes - Motomamis,
+26/08/2026,21:00-22:00,,Poliesportiu,Femení,Futbol sala,F4-F2,Birra sana - Tocapelotas,
 26/08/2026,22:00-23:00,,Poliesportiu,Masculí,Futbol sala,Quarts 3,Guanyador P2 - Equip 7,
 26/08/2026,23:00-00:00,,Poliesportiu,Masculí,Futbol sala,Quarts 4,Equip 6 - Equip 9,
-27/08/2026,18:00-19:00,,Poliesportiu,Femení,Futbol sala,F1-F4,Las potras salvajes - Birra sana,
-27/08/2026,19:00-20:00,,Poliesportiu,Femení,Futbol sala,F5-F3,Dynamos - Motomamis,
+27/08/2026,18:00-19:00,,Poliesportiu,Femení,Futbol sala,F1-F2,Las potras salvajes - Tocapelotas,
+27/08/2026,19:00-20:00,,Poliesportiu,Femení,Futbol sala,F4-F5,Birra sana - Dynamos,
 27/08/2026,20:00-21:00,,Altres,Femení,Dards,"F1-F4, F5-F3","F1-F4: Las potras salvajes - Birra sana
 F5-F3: Dynamos - Motomamis",
 27/08/2026,21:00-22:00,,Altres,Masculí,Dards,"7è i 8è lloc, 3r i 4t lloc",,
@@ -173,21 +173,21 @@ F4-F2: Birra sana - Tocapelotas",LIMIT FINALITZACIÓ LLIGA
 28/08/2026,20:00-21:00,,Poliesportiu,Masculí,Futbol sala,Semifinal consolació 2,,
 28/08/2026,20:00-21:00,,Altres,Femení,Dards,"F1-F3, F4-F2","F1-F3: Las potras salvajes - Motomamis
 F4-F2: Birra sana - Tocapelotas",
-28/08/2026,21:00-22:00,,Poliesportiu,Femení,Futbol sala,F1-F3,Las potras salvajes - Motomamis,
+28/08/2026,21:00-22:00,,Poliesportiu,Femení,Futbol sala,F2-F5,Tocapelotas - Dynamos,
 28/08/2026,21:00-22:00,,Altres,Masculí,Dards,"Final consolació · 5è i 6è lloc, Final",,
-28/08/2026,22:00-23:00,,Poliesportiu,Femení,Futbol sala,F4-F2,Birra sana - Tocapelotas,
+28/08/2026,22:00-23:00,,Poliesportiu,Femení,Futbol sala,F3-F4,Motomamis - Birra sana,
 28/08/2026,23:00-00:00,,Poliesportiu,Masculí,Futbol sala,Semifinal 1,,
 28/08/2026,00:00-01:00,,Poliesportiu,Masculí,Futbol sala,Semifinal 2,,
 28/08/2026,,Límit,,Masculí,"Petanca, Dòmino, Tennis, Frontó, Pàdel, Billar","7è i 8è lloc, 3r i 4t lloc, Final consolació · 5è i 6è lloc, Final",,LIMIT 3ª-4ª I FINALS
 29/08/2026,11:00-12:00,,Poliesportiu,Masculí,Futbol sala,7è i 8è lloc,,
 29/08/2026,12:00-13:00,,Poliesportiu,Masculí,Futbol sala,3r i 4t lloc,,
-29/08/2026,13:00-14:00,,Poliesportiu,Femení,Bàsquet,"F1-F3, F4-F2","F1-F3: Las potras salvajes - Motomamis
-F4-F2: Birra sana - Tocapelotas",
+29/08/2026,13:00-14:00,,Poliesportiu,Femení,Bàsquet,"F2-F5, F3-F4","F2-F5: Tocapelotas - Dynamos
+F3-F4: Motomamis - Birra sana",
 29/08/2026,14:00-15:00,,Poliesportiu,Masculí,Handbol,9è i 10è lloc,,
 29/08/2026,15:00-16:00,,Poliesportiu,Masculí,Handbol,Final consolació · 5è i 6è lloc,,
 29/08/2026,16:00-17:00,,Poliesportiu,Masculí,Handbol,Final,,
-29/08/2026,17:00-18:00,,Poliesportiu,Femení,Handbol,F1-F3,Las potras salvajes - Motomamis,
-29/08/2026,18:00-19:00,,Poliesportiu,Femení,Handbol,F4-F2,Birra sana - Tocapelotas,
+29/08/2026,17:00-18:00,,Poliesportiu,Femení,Handbol,F1-F5,Las potras salvajes - Dynamos,
+29/08/2026,18:00-19:00,,Poliesportiu,Femení,Handbol,F2-F3,Tocapelotas - Motomamis,
 29/08/2026,19:00-20:00,,Poliesportiu,Masculí,Futbol sala,Final consolació · 5è i 6è lloc,,
 29/08/2026,20:00-21:00,,Poliesportiu,Masculí,Futbol sala,Final,,
 29/08/2026,21:00-06:00,Acte,Club de Begues,,,,,SOPAR CLOENDA

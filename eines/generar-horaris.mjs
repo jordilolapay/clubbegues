@@ -854,6 +854,29 @@ function buscarRotacions(files) {
   return millor;
 }
 
+/**
+ * Avisa si la pestanya Calendari encara no té la lliga femenina repartida. Passa cada cop que
+ * es baixa el calendari de Google: si el CSV repartit no s'ha importat al full, el que hi ha
+ * allà mana i tornaria a deixar tots els esports jugant les mateixes jornades els mateixos dies.
+ */
+function comprovarLligaFemenina(files, avisos) {
+  const { franges } = franjesFemenines(files);
+  const toca = repartirLliga(franges, LLIGA_FEMENINA.rotacio);
+
+  let fora = 0;
+  for (const franja of franges) {
+    toca.get(franja).forEach((id, n) => { if (id !== franja.partits[n]) fora++; });
+  }
+  if (fora) {
+    avisos.push(
+      `La pestanya "${FULL.pestanyes.calendari}" té ${fora} partits de la lliga femenina fora de lloc: ` +
+      `no segueix la "rotacion" de datos/femenino.json. Passa --lliga-femenina i importa el CSV al full ` +
+      `(apartat 5 del README); mentre no ho facis, la web ensenya el repartiment del full.`
+    );
+  }
+  return fora;
+}
+
 /* -------------------------------------------------------------------- Marxa */
 
 /** Guarda la xarxa de seguretat: el mateix calendari, en el format que llegeix la web. */
@@ -874,12 +897,15 @@ const avisos = [];
 
 if (process.argv.includes('--json')) {
   // Torna a fer datos/horarios.json amb el que hi hagi ara mateix a la pestanya Calendari.
-  const horaris = guardarJSON(await baixarCalendari(), avisos);
+  const calendari = await baixarCalendari();
+  comprovarLligaFemenina(calendari, avisos);
+  const horaris = guardarJSON(calendari, avisos);
   console.log(`Fet: datos/horarios.json · ${horaris.length} franges`);
 } else if (process.argv.includes('--qui-juga')) {
   // Agafa la pestanya Calendari tal com està i només hi refà la columna "Qui juga".
-  const quadres = json('cuadros.json');
-  const files = ambQuiJuga(await baixarCalendari(), await nomsEquips(), quadres, avisos);
+  const calendari = await baixarCalendari();
+  comprovarLligaFemenina(calendari, avisos);
+  const files = ambQuiJuga(calendari, await nomsEquips(), json('cuadros.json'), avisos);
   guardarCSV(files);
   guardarJSON(files, []); // els problemes d'aquestes files ja surten més amunt
   const on = files[0].indexOf('Qui juga');

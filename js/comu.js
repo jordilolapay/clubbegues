@@ -16,16 +16,39 @@ export const COMPETICIONS = {
   },
 };
 
-/** Llegeix la competició de l'adreça (?comp=femenina). */
-export function competicioDeLaAdreca(cerca = location.search) {
-  const valor = new URLSearchParams(cerca).get('comp');
-  return valor === 'femenina' ? 'femenina' : 'masculina';
+// On es recorda l'última competició triada. El navegador d'algú pot tenir
+// l'emmagatzematge bloquejat, i llavors simplement no es recorda res.
+const CLAU_RECORD = 'clubbegues.competicio';
+
+function recordar(competicio) {
+  try { localStorage.setItem(CLAU_RECORD, competicio); } catch { /* sense memòria, tant se val */ }
+  return competicio;
 }
 
-/** Adreça d'una pàgina mantenint la competició actual. */
+function recordada() {
+  try { return localStorage.getItem(CLAU_RECORD) === 'femenina' ? 'femenina' : 'masculina'; }
+  catch { return 'masculina'; }
+}
+
+/**
+ * Llegeix la competició de l'adreça (?comp=femenina). Si l'adreça no en diu res
+ * —el menú, la portada, un enllaç compartit sense paràmetre— es fa servir l'última
+ * que va triar aquesta persona; de bon principi, la masculina.
+ */
+export function competicioDeLaAdreca(cerca = location.search) {
+  const valor = new URLSearchParams(cerca).get('comp');
+  if (valor === 'femenina' || valor === 'masculina') return recordar(valor);
+  return recordada();
+}
+
+/**
+ * Adreça d'una pàgina mantenint la competició actual. Sempre hi posa el paràmetre,
+ * també en masculí: si no, un enllaç a la masculina des de la femenina no diria res
+ * i la pàgina de destí recuperaria la femenina que hi ha recordada.
+ */
 export function adreca(pagina, competicio, extra = {}) {
   const params = new URLSearchParams(extra);
-  if (competicio === 'femenina') params.set('comp', 'femenina');
+  params.set('comp', competicio === 'femenina' ? 'femenina' : 'masculina');
   const cua = params.toString();
   return cua ? `${pagina}?${cua}` : pagina;
 }
