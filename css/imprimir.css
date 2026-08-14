@@ -1,0 +1,409 @@
+/* imprimir.css — fulls A4 d'una cara: el quadre d'un esport i els horaris d'un dia.
+   Mides en mm i en punts, perquè el que es veu a la pantalla sigui el que surt al paper. */
+
+:root {
+  --fosc: #1b1917;
+  --text: #1b1917;
+  --text-suau: #55504a;
+  --linia: #c9c1b7;
+  --linia-forta: #8d8378;
+  --fons: #f6f4f1;
+  --vermell: #a32c2c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 0 24px;
+  background: var(--fons);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  /* Els fons grisos de les capçaleres han de sortir impresos: si no, no es distingeixen. */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ---------- Barra de dalt (no s'imprimeix) ---------- */
+
+.barra-imprimir {
+  background: #fff;
+  border-bottom: 2px solid var(--fosc);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.barra-imprimir__contingut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+}
+.barra-imprimir .tornar { font-weight: 600; text-decoration: none; color: var(--fosc); padding-bottom: 8px; }
+.barra-imprimir .tornar:hover { text-decoration: underline; }
+.ajuda-imprimir { margin: 10px 0 0; font-size: 0.82rem; color: var(--text-suau); max-width: 80ch; }
+
+.tria { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; flex: 1; }
+.pestanyes { display: inline-flex; border: 2px solid var(--fosc); border-radius: 999px; overflow: hidden; }
+.pestanya {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--fosc);
+}
+.pestanya + .pestanya { border-left: 2px solid var(--fosc); }
+.pestanya[aria-current="true"] { background: var(--fosc); color: #fff; }
+
+.tria-camps { display: flex; flex-wrap: wrap; gap: 12px; }
+.tria-camp { display: flex; flex-direction: column; gap: 3px; }
+.tria-camp > span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-suau);
+}
+.tria-camp select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 7px 9px;
+  border: 2px solid var(--fosc);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  max-width: 240px;
+}
+
+.boto-imprimir {
+  font: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+  padding: 10px 20px;
+  border: 2px solid var(--fosc);
+  border-radius: 6px;
+  background: var(--fosc);
+  color: #fff;
+  cursor: pointer;
+}
+.boto-imprimir:hover { background: #3a3733; }
+
+.avis {
+  border: 2px solid var(--vermell);
+  border-left-width: 8px;
+  background: #fdf3f3;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 16px;
+}
+.avis h3 { margin: 0 0 6px; font-size: 1rem; color: var(--vermell); }
+.avis ul { margin: 6px 0 0; padding-left: 20px; font-size: 0.9rem; }
+.avis .ajuda { margin: 10px 0 0; font-size: 0.85rem; color: var(--text-suau); }
+.carregant { padding: 40px; text-align: center; color: var(--text-suau); }
+.buit { border: 2px dashed var(--linia-forta); border-radius: 6px; padding: 20px; text-align: center; color: var(--text-suau); }
+
+/* ---------- El full ---------- */
+
+main { overflow-x: auto; padding: 20px 16px; }
+
+.full {
+  background: #fff;
+  color: #000;
+  margin: 0 auto;
+  padding: 8mm;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  font-size: 9pt;
+}
+.full--landscape { width: 297mm; min-height: 210mm; }
+.full--portrait { width: 210mm; min-height: 297mm; }
+/* Un esport pot necessitar més d'una cara (quadre principal i consolació). */
+.full + .full { margin-top: 20px; }
+
+.full h1, .full h2, .full h3 { margin: 0; line-height: 1.15; }
+
+.full-cap {
+  display: flex;
+  align-items: center;
+  gap: 7mm;
+  border-bottom: 1.2mm solid #000;
+  padding-bottom: 2mm;
+  margin-bottom: 3mm;
+}
+/* El logotip és de color crema, fet per anar sobre la barra fosca de la web: damunt del
+   paper blanc no es veuria. Invertit queda fosc i es llegeix. */
+.full-logo { height: 13mm; width: auto; filter: invert(1); }
+.full-titol { flex: 1; min-width: 0; }
+.full-sobre {
+  margin: 0;
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #444;
+}
+.full-cap h1 { font-size: 18pt; letter-spacing: -0.01em; }
+/* Als fulls que poden allargar-se (els horaris d'un dia) la capçalera fa nosa: com més
+   petita, més files caben a la primera cara. */
+.full--creix .full-cap { padding-bottom: 1.5mm; margin-bottom: 2.5mm; }
+.full--creix .full-logo { height: 10mm; }
+.full--creix .full-cap h1 { font-size: 15pt; }
+.full-info { text-align: right; font-size: 7.5pt; color: #333; }
+.full-info p { margin: 0; }
+.full-info p:first-child { font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; font-size: 8pt; color: #000; }
+
+.cos { flex: 1; }
+
+.full-peu {
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+  border-top: 0.4mm solid var(--linia);
+  margin-top: 3mm;
+  padding-top: 1.5mm;
+  font-size: 6.5pt;
+  color: #555;
+}
+
+.full h2 {
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 0.6mm solid #000;
+  padding-bottom: 1mm;
+  margin-bottom: 2mm;
+}
+.full h3 {
+  font-size: 6.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #444;
+  margin-bottom: 1.5mm;
+}
+.p-nota { font-size: 7pt; color: #444; margin: 1.5mm 0 0; }
+.zona > .p-nota { margin-bottom: 2.5mm; }
+
+/* ---------- Quadre ---------- */
+
+/* Cara 1: el quadre principal sencer, amb la taula de llocs a la dreta. */
+.cos--quadre {
+  display: grid;
+  grid-template-columns: 1fr 66mm;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "principal taula"
+    "llocs     taula";
+  gap: 4mm 5mm;
+}
+/* Cara 2: la consolació, que no cabria a la primera. */
+.cos--consolacio {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "principal llocs";
+  gap: 4mm 6mm;
+}
+.zona--principal { grid-area: principal; min-width: 0; }
+.zona--llocs { grid-area: llocs; min-width: 0; }
+.zona--taula { grid-area: taula; display: flex; flex-direction: column; }
+/* La taula de llocs s'estira fins a baix: així hi ha lloc per escriure-hi els noms. */
+.zona--taula .p-taula { flex: 1; }
+.zona--principal { display: flex; flex-direction: column; }
+.zona--principal .p-quadre { flex: 1; }
+
+.p-quadre { display: flex; gap: 8mm; align-items: stretch; }
+.p-ronda { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.p-ronda > h3 { text-align: center; border-bottom: 0.4mm solid var(--linia); padding-bottom: 1mm; }
+/* Centrades: si sobra espai (la consolació només té dues rondes), les línies que uneixen
+   una ronda amb la següent continuen quadrant. */
+.p-caselles { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+/* Les caselles s'estiren fins a omplir el full, però amb un límit: a la consolació només
+   n'hi ha dues per columna i, sense topall, quedarien uns forats enormes. */
+.p-casella { flex: 1 0 20mm; max-height: 42mm; display: flex; align-items: center; position: relative; }
+.p-casella > .p-partit { width: 100%; }
+
+/* Les línies que porten d'una ronda a la següent. */
+.p-casella--surt::after,
+.p-casella--rep::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 4mm;
+  border-top: 0.35mm solid var(--linia-forta);
+}
+.p-casella--surt::after { left: 100%; }
+.p-casella--rep::before { right: 100%; }
+.p-unio {
+  position: absolute;
+  left: calc(100% + 4mm);
+  top: 50%;
+  height: 100%;
+  border-left: 0.35mm solid var(--linia-forta);
+}
+
+/* ---------- Targeta de partit ---------- */
+
+.p-partit { border: 0.4mm solid #000; border-radius: 1mm; overflow: hidden; background: #fff; }
+.p-cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2mm;
+  background: #ebe7e2;
+  border-bottom: 0.4mm solid #000;
+  padding: 0.6mm 1.5mm;
+  font-size: 6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #333;
+  min-height: 4mm;
+}
+.p-cap .p-quan { font-weight: 600; text-transform: none; letter-spacing: 0; white-space: nowrap; }
+.p-costat {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1.5mm;
+  font-size: 8.5pt;
+  min-height: 6mm;
+}
+.p-costat + .p-costat { border-top: 0.3mm solid var(--linia); }
+.p-costat .p-nom {
+  flex: 1;
+  min-width: 0;
+  padding: 1.2mm 1.5mm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.p-costat--guanya .p-nom { font-weight: 800; }
+.p-costat--guanya .p-nom::after { content: " ✓"; }
+.p-nom--buit { color: #777; font-style: italic; font-size: 7.5pt; }
+/* Els equips que encara no se saben: una línia per escriure-hi. */
+.p-nom--linia { border-bottom: 0.3mm dotted #b4aca2; margin: 1.5mm 1.5mm 1.2mm; padding: 0; }
+/* La casella buida on s'apunta el resultat a mà. */
+.p-caixa {
+  flex: none;
+  width: 11mm;
+  border-left: 0.3mm solid var(--linia);
+  background: #fafafa;
+  text-align: center;
+  padding: 1.2mm 0.5mm;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.p-blocs { display: flex; flex-direction: column; gap: 2.5mm; }
+.p-blocs--fila { flex-direction: row; gap: 8mm; }
+.p-blocs--fila > .p-bloc { flex: 1 1 0; min-width: 0; max-width: 85mm; }
+.p-bloc h3 { margin-bottom: 1mm; }
+
+/* ---------- Taules ---------- */
+
+.p-taula { width: 100%; border-collapse: collapse; }
+.p-taula th, .p-taula td {
+  border: 0.3mm solid var(--linia);
+  padding: 1.2mm 1.5mm;
+  text-align: left;
+  font-size: 8pt;
+}
+.p-taula thead th {
+  background: #1b1917;
+  color: #fff;
+  border-color: #1b1917;
+  font-size: 6.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.p-taula .p-num { text-align: right; font-variant-numeric: tabular-nums; }
+.p-taula .p-lloc { font-weight: 700; color: #444; width: 10mm; }
+.p-taula .p-buida { background: #fafafa; }
+.p-taula tbody tr { height: 6.4mm; }
+.p-taula--ampla tbody tr { height: 8.5mm; }
+
+/* ---------- Graella de la lliga ---------- */
+
+.p-graella { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.p-graella th, .p-graella td { border: 0.3mm solid #000; padding: 1mm; font-size: 7.5pt; }
+.p-graella thead th {
+  background: #1b1917;
+  color: #fff;
+  border-color: #1b1917;
+  font-size: 7pt;
+  text-align: center;
+}
+.p-graella .p-cantonada { background: #fff; border-color: var(--linia); width: 34mm; }
+.p-graella .p-equip-fila { text-align: left; font-size: 7.5pt; font-weight: 700; background: #efece8; }
+/* Totes les files igual d'altes, també l'última, que només té caselles mortes. */
+.p-graella tbody tr { height: 14mm; }
+.p-graella .p-cel { vertical-align: top; }
+.p-graella .p-cel-jornada { display: block; font-size: 5.5pt; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+.p-graella .p-cel-text { display: block; text-align: center; font-weight: 700; font-size: 9pt; padding-top: 1mm; }
+.p-graella .p-cel-morta { background: #1b1917; }
+.p-graella .p-cel-buida { background: #eeeae5; }
+
+.p-jornades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm 4mm; }
+.p-jornada .p-partit + .p-partit { margin-top: 1.5mm; }
+.p-descansa { margin: 1.5mm 0 0; font-size: 6.5pt; color: #555; font-style: italic; }
+
+.cos--lliga { display: flex; flex-direction: column; gap: 5mm; }
+.cos--classificacio { display: flex; flex-direction: column; gap: 5mm; }
+.p-llista { margin: 0; padding-left: 5mm; font-size: 8pt; }
+
+/* ---------- Horaris d'un dia ---------- */
+
+.p-taula--dia { table-layout: fixed; }
+.p-taula--dia tbody tr { height: 6.2mm; }
+.p-taula--dia td { padding: 1mm 1.5mm; font-size: 7.5pt; }
+.p-taula--dia .p-hora { width: 21mm; font-weight: 800; font-variant-numeric: tabular-nums; }
+.p-taula--dia .p-lloc { width: 24mm; color: #333; }
+.p-taula--dia .p-comp { width: 8mm; text-align: center; font-weight: 800; font-size: 7pt; }
+.p-taula--dia .p-resultat { width: 32mm; background: #fafafa; }
+.p-taula--dia .p-esport { font-weight: 800; }
+.p-taula--dia .p-detall { color: #222; }
+.p-taula--dia .p-detall::before { content: " · "; color: #888; }
+.p-taula--dia .p-acte { font-weight: 800; text-transform: uppercase; font-size: 7.5pt; letter-spacing: 0.04em; }
+/* Les línies que continuen una franja no repeteixen l'hora: la ratlla de sobre es dissimula. */
+.p-taula--dia .p-seguit td { border-top-color: #ececec; }
+.p-taula--dia .p-inici td { border-top: 0.5mm solid #999; }
+
+/* ---------- Impressió ---------- */
+
+@media print {
+  .barra-imprimir, #errors, noscript { display: none !important; }
+  body { background: #fff; padding: 0; }
+  main { overflow: visible; padding: 0; }
+  /* El marge del paper el posa @page: aquí el full ocupa tot el que li donen. */
+  .full, .full--landscape, .full--portrait {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+  /* A la pantalla els fulls van separats; al paper cada un comença a la seva cara. */
+  .full + .full { break-before: page; margin-top: 0; }
+  /* Els fulls d'una sola cara ocupen tot el paper: el que hi ha dins s'hi estira.
+     Un parell de mil·límetres de marge perquè els arrodoniments no facin caure el peu
+     a una segona pàgina. */
+  .full--fixa.full--landscape { height: 191mm; }
+  .full--fixa.full--portrait { height: 278mm; }
+  /* El que no s'ha de partir mai pel mig. Les taules llargues sí que es poden partir. */
+  .zona, .p-quadre, .p-partit, .p-jornada, tr { break-inside: avoid; }
+}
+
+/* ---------- Pantalla estreta ---------- */
+
+@media screen and (max-width: 780px) {
+  .barra-imprimir { position: static; }
+  .boto-imprimir { width: 100%; }
+}

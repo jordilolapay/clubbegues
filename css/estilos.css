@@ -304,6 +304,25 @@ tr.lider .nom-equip { font-weight: 800; }
 .repartiment { font-size: 0.9rem; color: var(--text-suau); margin: 6px 0 0; }
 .repartiment b { color: var(--text); font-variant-numeric: tabular-nums; }
 
+/* ---------- Enllaç als fulls per imprimir ---------- */
+
+.accions { margin: 12px 0 0; }
+.boto-petit {
+  display: inline-block;
+  border: 2px solid var(--fosc);
+  border-radius: var(--radi);
+  background: var(--paper);
+  color: var(--fosc);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+}
+.boto-petit:hover { background: var(--fosc); color: #fff; }
+.boto-petit--dia { margin-left: auto; font-size: 0.72rem; padding: 5px 11px; }
+
 /* ---------- Quadre ---------- */
 
 .quadre-scroll {
@@ -724,7 +743,7 @@ tr.lider .nom-equip { font-weight: 800; }
 }
 
 @media print {
-  .barra, .filtres, .peu, .tornar { display: none; }
+  .barra, .filtres, .peu, .tornar, .boto-petit { display: none; }
   body { background: #fff; }
   .quadre-scroll { overflow: visible; }
 }

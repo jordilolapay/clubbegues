@@ -435,6 +435,7 @@ què i tornar enrere.
 | `datos/resultados-femenino.json` | Resultats femenins de reserva | Només si no hi ha full de càlcul |
 | `datos/horarios.json` | Els horaris de reserva | Només si no hi ha full de càlcul |
 | `datos/plantilla-full/*.csv` | Les plantilles per crear el full de càlcul | Un cop, al principi |
+| `imprimir.html`, `js/imprimir.js`, `css/imprimir.css` | Els fulls A4 per imprimir (apartat 11) | No |
 | `eines/generar-plantilla.mjs` | Torna a generar aquestes plantilles si canvia la llista d'esports | Gairebé mai |
 | `eines/generar-horaris.mjs` | Passa la graella d'horaris a la pestanya Calendari, reparteix la lliga femenina i omple la columna *Qui juga* (apartat 5) | Si canvia la graella o el calendari |
 | `js/config.js` | Quin full de càlcul es llegeix i com es diuen les pestanyes | Un cop, al principi |
@@ -468,6 +469,41 @@ python3 -m http.server 8000
 ```
 
 I obre `http://localhost:8000` al navegador.
+
+---
+
+## 11. Els fulls per imprimir
+
+Per penjar a la paret i anar apuntant els resultats a mà hi ha dos fulls A4, tots dos amb les
+dades del moment (els equips que ja se saben hi surten escrits):
+
+| Full | D'on se surt | Cares |
+|---|---|---|
+| **El quadre d'un esport** | Botó *Full per imprimir* a la fitxa de l'esport | 2 (quadre principal i consolació) |
+| **Els horaris d'un dia** | Botó *Imprimir aquest dia* a cada dia de la pàgina d'Horaris | 1 o 2, segons el dia |
+
+Del botó se surt a `imprimir.html`, que ensenya el full tal com quedarà i té un botó
+**Imprimir / Desar com a PDF**. A la finestra d'impressió, per guardar-lo, tria *Desa com a PDF*;
+deixa els marges i l'escala tal com vénen (la mida del paper ja la demana la mateixa pàgina).
+A dalt del tot hi ha dos desplegables per canviar d'esport o de dia sense haver de tornar enrere.
+
+**El quadre masculí** ocupa una cara sencera: prèvies, quarts, semifinals, final, els partits pel
+3r/4t i pel 9è/10è lloc, i la taula de les 10 posicions. Només hi van escrits els equips que ja
+diu el sorteig —les dues prèvies i els rivals de quarts— i els partits que ja s'hagin jugat; la
+resta són línies buides per anar-hi escrivint qui va passant. La **consolació** (llocs 5è a 8è) va
+a la cara següent, amb les semifinals també per omplir.
+
+**En femení**, com que els esports es juguen per lliga, el full porta la **graella de tots contra
+totes** (una casella per parella, amb la jornada que li toca), els deu partits repartits per
+jornades i una taula de classificació per anar-la omplint.
+
+Ciclisme, atletisme, natació i minigolf tenen el seu propi full: la taula de llocs, amb una
+columna per apuntar-hi la marca de cada equip.
+
+**El full d'un dia** porta el masculí i el femení junts, per hores, amb el lloc de cada franja i
+una columna en blanc per apuntar-hi el resultat. La columna estreta del mig diu de qui és cada
+partit: `M` masculí, `F` femení i `M+F` quan es juguen alhora (natació, minigolf…). Els dies més
+carregats ocupen dues cares.
 
 ---
 

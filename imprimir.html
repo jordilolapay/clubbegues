@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full per imprimir · Olimpíades 2026 - Club de Begues</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/imprimir.css">
+</head>
+<body>
+
+    <div class="barra-imprimir" id="barra">
+        <div class="barra-imprimir__contingut">
+            <a class="tornar" id="tornar" href="index.html">← Tornar</a>
+            <div class="tria" id="tria"></div>
+            <button type="button" class="boto-imprimir" id="boto-imprimir">Imprimir / Desar com a PDF</button>
+        </div>
+        <p class="ajuda-imprimir">
+            Es fa un full A4 per una cara. A la finestra d'impressió tria <b>Desa com a PDF</b> si el
+            vols guardar, i deixa els marges i l'escala tal com venen.
+        </p>
+    </div>
+
+    <div id="errors" hidden></div>
+
+    <noscript>
+        <div class="avis">
+            <h3>Cal activar el JavaScript</h3>
+            <p>Aquesta pàgina munta el full al mateix navegador. Sense JavaScript no es pot mostrar.</p>
+        </div>
+    </noscript>
+
+    <main id="full"><p class="carregant">Preparant el full…</p></main>
+
+    <script type="module" src="js/imprimir.js"></script>
+</body>
+</html>

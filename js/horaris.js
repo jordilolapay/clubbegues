@@ -143,6 +143,12 @@ function pintarCalendari() {
       el('h2', {}, [
         el('span', { text: nomDia(data) }),
         data === avui && el('span', { class: 'etiqueta etiqueta--avui', text: 'Avui' }),
+        // El full porta les dues competicions, tant se val des d'on es demani.
+        el('a', {
+          class: 'boto-petit boto-petit--dia',
+          href: adreca('imprimir.html', competicio, { tipus: 'dia', data }),
+          text: '🖨 Imprimir aquest dia',
+        }),
       ]),
       el('div', { class: 'franges' }, slots.map((slot) => targetaHorari(slot, ara))),
     ]);

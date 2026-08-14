@@ -77,6 +77,13 @@ function pintarCapcalera(estat, dades) {
       'Reparteix ',
       el('b', { text: estat.taulaPunts.join(' · ') }),
       ` punts, del 1r al ${ordinal(estat.taulaPunts.length)} lloc.`,
+    ]),
+    el('p', { class: 'accions' }, [
+      el('a', {
+        class: 'boto-petit',
+        href: adreca('imprimir.html', dades.competicio, { tipus: 'esport', id: estat.id }),
+        text: '🖨 Full per imprimir (A4)',
+      }),
     ])
   );
 }
