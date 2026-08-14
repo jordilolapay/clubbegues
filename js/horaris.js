@@ -192,9 +192,15 @@ function contingut(slot) {
     });
 
     if (slot.tipus === 'limit') {
+      // Els enfrontaments concrets diuen molt més que el nom de la ronda.
+      const pendents = partitsDe(estat, slot);
+      if (slot.partits.length && !pendents.length) return null; // la franja és de l'altra competició
+
       return el('div', {}, [
         titol,
-        el('p', { class: 'nota', text: `S'ha d'haver jugat: ${llistaPartits(slot)}.` }),
+        el('p', { class: 'nota', text: "S'ha d'haver jugat:" }),
+        ...pendents.map((idPartit) => partitEnLlista(estat, idPartit)),
+        slot.nota && el('p', { class: 'nota', text: slot.nota }),
       ]);
     }
 
@@ -212,10 +218,6 @@ function contingut(slot) {
     ]);
   }).filter(Boolean);
 }
-
-/** Els noms dels partits d'una data límit: "Quarts 1, Quarts 2…". */
-const llistaPartits = (slot) =>
-  slot.partits.map((id) => NOMS_PARTITS[id]?.llarg ?? id).join(', ');
 
 function partitEnLlista(estat, idPartit) {
   const noms = NOMS_PARTITS[idPartit];
