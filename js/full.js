@@ -17,10 +17,17 @@ export function idDelFull(valor) {
   return trobat ? trobat[1] : text;
 }
 
-/** Adreça de descàrrega d'una pestanya en format CSV. */
+/**
+ * Adreça de descàrrega d'una pestanya en format CSV.
+ *
+ * El `headers=1` és important: sense això Google endevina quantes files són la capçalera i,
+ * si les primeres files d'una columna són text (com "Petanca", "Petanca"…), se les empassa
+ * totes com a capçalera i les ajunta en un sol títol. Llavors la columna "Esport" passa a
+ * dir-se "Esport Petanca Petanca…" i sembla que hi falti.
+ */
 export function adrecaPestanya(id, pestanya) {
   return `https://docs.google.com/spreadsheets/d/${encodeURIComponent(idDelFull(id))}/gviz/tq` +
-    `?tqx=out:csv&sheet=${encodeURIComponent(pestanya)}`;
+    `?tqx=out:csv&headers=1&sheet=${encodeURIComponent(pestanya)}`;
 }
 
 /** Compara textos sense distingir majúscules, accents ni espais: "Voleibol platja" = "voleibolplatja". */
