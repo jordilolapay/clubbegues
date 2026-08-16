@@ -4,12 +4,13 @@ import {
   COMPETICIONS, acaba, adreca, buida, campioDe, carregarTorneig, celaEquip, competicioDeLaAdreca,
   diaCurt, el, franja, inicia, mostrarErrorGreu, mostrarErrors, selectorCompeticio, textIncognita,
 } from './comu.js';
-import { calcularGeneral } from './motor.js';
-import { NOMS_CATEGORIES, NOMS_PARTITS, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
+import { calcularGeneral, resumirEsports } from './motor.js';
+import { MEDALLES, NOMS_CATEGORIES, NOMS_PARTITS, nomCategoria, nomEsport, nomGrup, ordinal } from './textos.js';
 
 const zonaSelector = document.querySelector('#selector');
 const zonaErrors = document.querySelector('#errors');
 const zonaGeneral = document.querySelector('#general');
+const zonaResum = document.querySelector('#resum-esports');
 const zonaFiltres = document.querySelector('#filtres');
 const zonaReixa = document.querySelector('#reixa');
 const zonaTitol = document.querySelector('#subtitol');
@@ -39,12 +40,14 @@ async function init() {
   } catch (e) {
     mostrarErrorGreu(zonaErrors, e);
     buida(zonaGeneral);
+    buida(zonaResum);
     buida(zonaReixa);
     return;
   }
   mostrarErrors(zonaErrors, dades.errors);
   pintarAra();
   pintarGeneral();
+  pintarResum();
   pintarFiltres();
   pintarReixa();
 }
@@ -145,7 +148,10 @@ function pintarGeneral() {
     el('th', { text: 'Equip' }),
     el('th', { class: 'num', text: 'Punts' }),
     ...categories.map((cat) => el('th', { class: 'num', text: nomCategoria(cat, true) })),
-    el('th', { class: 'num', text: 'Or' }),
+    ...MEDALLES.map((medalla) =>
+      el('th', { class: `num medalla medalla--${medalla.id}`, title: medalla.titol },
+        [el('span', { class: 'medalla-icona', text: medalla.icona }), el('span', { class: 'medalla-nom', text: medalla.nom })])
+    ),
   ]);
 
   const cos = el('tbody');
@@ -158,7 +164,12 @@ function pintarGeneral() {
         ...categories.map((cat) =>
           el('td', { class: fila.perCategoria[cat] ? 'num' : 'num apagat', text: String(fila.perCategoria[cat] ?? 0) })
         ),
-        el('td', { class: fila.recompte[0] ? 'num' : 'num apagat', text: String(fila.recompte[0]) }),
+        ...MEDALLES.map((medalla, i) =>
+          el('td', {
+            class: fila.recompte[i] ? `num medalla medalla--${medalla.id}` : 'num medalla apagat',
+            text: String(fila.recompte[i] ?? 0),
+          })
+        ),
       ])
     );
   }
@@ -167,9 +178,88 @@ function pintarGeneral() {
     el('div', { class: 'taula-scroll' }, [el('table', {}, [el('thead', {}, [capcalera]), cos])]),
     el('p', {
       class: 'nota',
-      text: "Els esports a mig fer ja sumen els llocs decidits. En cas d'empat a punts, va davant qui té més primers llocs. «Or» = esports guanyats.",
+      text: "Els esports a mig fer ja sumen els llocs decidits. En cas d'empat a punts, va davant qui té més ors, després més plates, i així fins al desè lloc. Or, plata i bronze = primers, segons i tercers llocs.",
     })
   );
+}
+
+/* ---------- D'on surten els punts ---------- */
+
+/**
+ * Els esports agrupats per estat, perquè es vegi què ja compta a la general i què encara no.
+ * Els que no han començat només surten si n'hi ha.
+ */
+function pintarResum() {
+  const { esports, equips, competicio } = dades;
+  const resum = resumirEsports(esports);
+
+  const blocs = [
+    {
+      id: 'tancats',
+      files: resum.tancats,
+      titol: (n) => (n === 1 ? 'esport tancat' : 'esports tancats'),
+      peu: 'Ja han repartit tots els punts i no poden canviar.',
+    },
+    {
+      id: 'mig',
+      files: resum.enJoc,
+      titol: (n) => (n === 1 ? 'esport a mig fer' : 'esports a mig fer'),
+      peu: 'Els quadres ja sumen els llocs decidits; les lligues no reparteixen res fins que s\'acaben.',
+    },
+    {
+      id: 'pendents',
+      files: resum.perComencar,
+      titol: (n) => (n === 1 ? 'esport per començar' : 'esports per començar'),
+      peu: 'Encara no sumen res a la general.',
+    },
+  ].filter((bloc) => bloc.files.length);
+
+  buida(zonaResum);
+  // Abans que comenci res no hi ha res a explicar: el llistat sencer d'esports ja és la reixa.
+  if (!resum.tancats.length && !resum.enJoc.length) return;
+
+  zonaResum.append(
+    el('h3', { class: 'resum-titol', text: "D'on surten els punts" }),
+    el('div', { class: 'resum-esports' }, blocs.map((bloc) =>
+      el('article', { class: `resum-bloc resum-bloc--${bloc.id}` }, [
+        el('h4', {}, [
+          el('span', { class: 'resum-comptador', text: String(bloc.files.length) }),
+          ` ${bloc.titol(bloc.files.length)}`,
+        ]),
+        el('ul', { class: 'resum-llista' }, bloc.files.map((fila) => {
+          const detall = detallEsport(fila, equips);
+          return el('li', {}, [
+            el('a', {
+              class: 'resum-esport',
+              href: adreca('deporte.html', competicio, { id: fila.estat.id }),
+              text: nomEsport(fila.estat.esport),
+            }),
+            detall && el('span', { class: 'resum-detall', text: detall }),
+          ]);
+        })),
+        el('p', { class: 'nota', text: bloc.peu }),
+      ])
+    ))
+  );
+}
+
+/** Una línia curta per esport: qui l'ha guanyat, o quant s'ha jugat i què ja compta. */
+function detallEsport(fila, equips) {
+  const { estat, jugats, total, llocsAmbPunts, totalLlocs } = fila;
+
+  if (total > 0 && jugats === total) {
+    const campio = campioDe(estat);
+    return campio ? `🥇 ${equips.get(campio)?.nombre ?? campio}` : 'Acabat';
+  }
+  if (!jugats) return ''; // el peu del bloc ja diu que encara no sumen res
+
+  // Als esports que van per ordre d'arribada, cada lloc decidit ja és un lloc que puntua.
+  if (estat.format === 'clasificacion') return `${jugats} de ${total} llocs decidits`;
+
+  const fet = `${jugats} de ${total} partits`;
+  return llocsAmbPunts
+    ? `${fet} · ${llocsAmbPunts} de ${totalLlocs} llocs ja sumen`
+    : `${fet} · encara no suma punts`;
 }
 
 /* ---------- Reixa d'esports ---------- */

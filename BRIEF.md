@@ -212,8 +212,12 @@ Un error en un deporte **no debe romper el resto de la página**.
 
 ### 7.1 `index.html`
 
-- **Clasificación general**: tabla ordenada, posición, nombre, puntos totales, y desglose por
-  categoría (equipo / resistencia / individual). Destacar el líder.
+- **Clasificación general**: tabla ordenada, posición, nombre, puntos totales, desglose por
+  categoría (equipo / resistencia / individual) y medallero (oros / platas / bronces = primeros,
+  segundos y terceros puestos). Destacar el líder.
+- **De dónde salen los puntos**: bajo la tabla, los deportes agrupados en cerrados (ya han
+  repartido todos sus puntos), a medias (los cuadros ya suman los puestos decididos; las ligas
+  no reparten nada hasta acabar) y por empezar.
 - **Rejilla de deportes**: una tarjeta por deporte con su nombre, color del grupo afín, un
   indicador de progreso (partidos jugados / total) y, si ya hay campeón, quién es. Enlaza a
   `deporte.html?id=...`.

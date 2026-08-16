@@ -390,6 +390,44 @@ export function calcularGeneral(config, esports) {
   return files;
 }
 
+/**
+ * Com està cada esport de cara a la general. Serveix per explicar d'on surten els punts:
+ *
+ * - `tancats`: s'han acabat i ja han repartit tots els punts; no poden canviar més.
+ * - `enJoc`: han començat però no s'han acabat. Un quadre ja reparteix els llocs decidits;
+ *            una lliga no reparteix res fins que s'acaba (la taula encara pot moure's).
+ * - `perComencar`: encara no s'ha jugat res.
+ *
+ * @param {object[]} esports estats sortits de `calcularEsport`
+ */
+export function resumirEsports(esports) {
+  const resum = { tancats: [], enJoc: [], perComencar: [], totalPunts: 0, puntsRepartits: 0 };
+
+  for (const estat of esports) {
+    const { jugats = 0, total = 0 } = estat.progres ?? {};
+    // Els llocs que ja puntuen: en un quadre són els decidits, en una lliga a mig fer, cap.
+    const llocsAmbPunts = Object.keys(estat.punts ?? {}).length;
+    const fila = {
+      estat,
+      jugats,
+      total,
+      llocsAmbPunts,
+      totalLlocs: estat.posicions.length,
+      punts: Object.values(estat.punts ?? {}).reduce((suma, p) => suma + p, 0),
+      maxim: (estat.taulaPunts ?? []).reduce((suma, p) => suma + p, 0),
+    };
+
+    resum.totalPunts += fila.maxim;
+    resum.puntsRepartits += fila.punts;
+
+    if (total > 0 && jugats === total) resum.tancats.push(fila);
+    else if (jugats > 0) resum.enJoc.push(fila);
+    else resum.perComencar.push(fila);
+  }
+
+  return resum;
+}
+
 /** Més punts; si empaten, més primers llocs, després més segons, i així fins al desè. */
 function comparaEquips(a, b) {
   if (b.punts !== a.punts) return b.punts - a.punts;

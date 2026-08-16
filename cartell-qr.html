@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<title>Cartell QR · Olimpíades 2026</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    background: #f6f4f1;
+    color: #1b1917;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Franja superior amb el logo del club (el logo és crema, necessita fons fosc) */
+  .capcalera {
+    background: #4a382d;
+    padding: 9mm 0 8mm;
+    text-align: center;
+  }
+  .capcalera img { height: 15mm; display: block; margin: 0 auto; }
+
+  .cos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6mm 18mm;
+  }
+
+  .aros { height: 20mm; margin-bottom: 6mm; }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23mm;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .any {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14mm;
+    line-height: 1.1;
+    color: #6b5344;
+    margin-top: 1mm;
+  }
+
+  .separador {
+    width: 30mm;
+    height: 1.2mm;
+    background: #b8860b;
+    margin: 6mm 0 5mm;
+  }
+
+  .invitacio {
+    font-size: 6mm;
+    line-height: 1.35;
+    font-weight: 700;
+    max-width: 130mm;
+  }
+
+  .detall {
+    font-size: 4.4mm;
+    color: #55504a;
+    margin-top: 2.5mm;
+  }
+
+  .targeta-qr {
+    background: #ffffff;
+    border: 0.8mm solid #1b1917;
+    border-radius: 3mm;
+    padding: 5mm;
+    margin: 6mm 0 4mm;
+  }
+  .targeta-qr img { width: 70mm; height: 70mm; display: block; }
+
+  .instruccio {
+    font-size: 5.2mm;
+    font-weight: 700;
+  }
+
+  .url {
+    font-family: "DejaVu Sans Mono", Consolas, monospace;
+    font-size: 3.9mm;
+    color: #55504a;
+    margin-top: 2.5mm;
+    word-break: break-all;
+  }
+
+  /* Peu: fons fosc perquè el logo de l'Ajuntament és blanc */
+  .peu {
+    background: #4a382d;
+    padding: 7mm 0 9mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3mm;
+  }
+  .peu .etiqueta {
+    font-size: 3.4mm;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #d8cec2;
+  }
+  .peu img { height: 13mm; display: block; }
+</style>
+</head>
+<body>
+
+  <div class="capcalera">
+    <img src="img/logo_club.png" alt="Club de Begues">
+  </div>
+
+  <div class="cos">
+    <img src="img/aros_olimpicos.png" alt="" class="aros">
+
+    <h1>OLIMPÍADES</h1>
+    <p class="any">2026</p>
+
+    <div class="separador"></div>
+
+    <p class="invitacio">Segueix les Olimpíades des del mòbil</p>
+    <p class="detall">Classificació general · Quadres dels 21 esports · Horaris · Reglament</p>
+
+    <div class="targeta-qr">
+      <img src="img/qr-clubbegues.svg" alt="Codi QR del web de les Olimpíades">
+    </div>
+
+    <p class="instruccio">Escaneja el codi amb la càmera del mòbil</p>
+    <p class="url">jordilolapay.github.io/clubbegues</p>
+  </div>
+
+  <div class="peu">
+    <p class="etiqueta">Amb el suport de</p>
+    <img src="img/logo_ajuntament.png" alt="Ajuntament de Begues">
+  </div>
+
+</body>
+</html>

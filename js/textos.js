@@ -36,6 +36,13 @@ export const NOMS_CATEGORIES = {
   individual: { llarg: 'Esports individuals', curt: 'Individual' },
 };
 
+/** Les tres medalles de la general: primers, segons i tercers llocs de cada esport. */
+export const MEDALLES = [
+  { id: 'or', nom: 'Or', icona: '🥇', titol: 'Primers llocs' },
+  { id: 'plata', nom: 'Plata', icona: '🥈', titol: 'Segons llocs' },
+  { id: 'bronze', nom: 'Bronze', icona: '🥉', titol: 'Tercers llocs' },
+];
+
 /** Nom de cada grup afí (esports que s'assemblen). */
 export const NOMS_GRUPS = {
   voleibol: 'Voleibol',
