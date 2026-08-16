@@ -275,6 +275,10 @@ Una fila és **una franja**: una estona, en un lloc, amb una cosa que s'hi juga.
 **No cal omplir-ho tot.** Un esport sense cap franja simplement no ensenya horaris; la resta de
 la web funciona igual.
 
+La pàgina d'Horaris **només ensenya d'avui en endavant**: el dia en curs es veu sencer fins que
+s'acaba (els partits ja jugats es veuen apagats) i els dies anteriors queden amagats darrere el
+botó «Mostra els dies ja jugats». Res no s'esborra: la informació hi continua sent.
+
 ### Els esports que es juguen quan es vol
 
 Petanca, dòmino, tennis, frontó, pàdel i billar no tenen hora: cada partit es juga quan les dues

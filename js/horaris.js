@@ -1,8 +1,8 @@
 // horaris.js — pinta horaris.html: el calendari dia a dia, amb filtres.
 
 import {
-  COMPETICIONS, acaba, adreca, buida, carregarTorneig, competicioDeLaAdreca, el, franja, inicia,
-  mostrarErrorGreu, mostrarErrors, nomDia, selectorCompeticio, textIncognita,
+  COMPETICIONS, acaba, adreca, avuiLocal, buida, carregarTorneig, competicioDeLaAdreca, el, franja,
+  inicia, mostrarErrorGreu, mostrarErrors, nomDia, selectorCompeticio, textIncognita,
 } from './comu.js';
 import { NOMS_PARTITS, nomEsport } from './textos.js';
 
@@ -18,6 +18,7 @@ const params = new URLSearchParams(location.search);
 
 let dades = null;
 let filtres = { esport: params.get('esport') ?? '', equip: params.get('equip') ?? '' };
+let mostrarPassats = false;
 
 /** Els filtres que estan posats, per portar-los a l'adreça. */
 const netejar = (valors) => Object.fromEntries(Object.entries(valors).filter(([, v]) => v));
@@ -115,6 +116,7 @@ function hiJuga(slot, idEquip) {
 
 function pintarCalendari() {
   const ara = new Date();
+  const avui = avuiLocal(ara);
   const visibles = dades.horaris.llista.filter((slot) =>
     (!filtres.esport || slot.esports.includes(filtres.esport)) && hiJuga(slot, filtres.equip)
   );
@@ -134,10 +136,29 @@ function pintarCalendari() {
     dies.get(slot.data).push(slot);
   }
 
-  const avui = new Date().toISOString().slice(0, 10);
+  /*
+   * El dia d'avui es veu sencer encara que ja se n'hagi jugat mig: la gent vol repassar què ha
+   * passat aquest matí. Un dia només desapareix quan ja és d'abans d'avui i, a més, se n'ha
+   * acabat l'última franja — les de matinada (00:00–05:59) `inicia()` les tira al dia següent,
+   * i mentre encara s'estiguin jugant el dia continua viu.
+   */
+  const acabat = ([data, slots]) => data < avui && slots.every((slot) => acaba(slot) <= ara);
+  const tots = [...dies];
+  const passats = tots.filter(acabat);
+  const aMostrar = mostrarPassats ? tots : tots.filter((dia) => !acabat(dia));
+
+  if (passats.length) zonaCalendari.append(botoPassats(passats.length));
+
+  if (!aMostrar.length) {
+    zonaCalendari.append(el('div', { class: 'buit' }, [
+      el('p', { text: "Ja s'ha jugat tot el que hi ha al calendari." }),
+    ]));
+    return;
+  }
+
   let primerDiaViu = null;
 
-  for (const [data, slots] of dies) {
+  for (const [data, slots] of aMostrar) {
     const passat = slots.every((slot) => acaba(slot) < ara);
     const bloc = el('section', { class: `dia${passat ? ' dia--passat' : ''}`, id: `dia-${data}` }, [
       el('h2', {}, [
@@ -156,10 +177,27 @@ function pintarCalendari() {
     zonaCalendari.append(bloc);
   }
 
-  // Es va directament al primer dia que encara no ha passat, que és el que interessa.
-  if (primerDiaViu && !filtres.esport && !filtres.equip) {
+  // Amb els dies passats amagats, el primer dia viu ja és a dalt: moure-hi la pantalla només
+  // taparia el títol i els filtres.
+  if (mostrarPassats && primerDiaViu && !filtres.esport && !filtres.equip) {
     primerDiaViu.scrollIntoView({ block: 'start' });
   }
+}
+
+/** L'enllaç per recuperar els dies que ja s'han jugat, per a qui vulgui mirar enrere. */
+function botoPassats(quants) {
+  const boto = el('button', {
+    type: 'button',
+    class: 'boto-petit boto-passats',
+    text: mostrarPassats
+      ? 'Amaga els dies ja jugats'
+      : `Mostra ${quants === 1 ? 'el dia ja jugat' : `els ${quants} dies ja jugats`}`,
+  });
+  boto.addEventListener('click', () => {
+    mostrarPassats = !mostrarPassats;
+    pintarCalendari();
+  });
+  return boto;
 }
 
 function targetaHorari(slot, ara) {

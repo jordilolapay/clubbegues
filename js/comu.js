@@ -190,6 +190,16 @@ export function acaba(slot) {
   return quan;
 }
 
+/**
+ * La data d'avui tal com s'escriuen les del calendari (2026-08-22). Va per l'hora del
+ * rellotge de qui mira la web: `toISOString()` faria servir l'hora de Londres i aquí, de
+ * matinada, encara diria ahir.
+ */
+export function avuiLocal(ara = new Date()) {
+  const dosDigits = (n) => String(n).padStart(2, '0');
+  return `${ara.getFullYear()}-${dosDigits(ara.getMonth() + 1)}-${dosDigits(ara.getDate())}`;
+}
+
 /** "Dissabte 22 d'agost" */
 export function nomDia(data) {
   const quan = new Date(`${data}T12:00:00`);

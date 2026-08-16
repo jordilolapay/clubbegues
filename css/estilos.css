@@ -380,6 +380,9 @@ td.medalla--bronze { color: var(--bronze); }
 .boto-petit:hover { background: var(--fosc); color: #fff; }
 .boto-petit--dia { margin-left: auto; font-size: 0.72rem; padding: 5px 11px; }
 
+/* Recuperar els dies del calendari que ja s'han jugat. És un <button>, no hereta la lletra. */
+.boto-passats { font-family: inherit; cursor: pointer; margin: 0 0 16px; }
+
 /* ---------- Quadre ---------- */
 
 .quadre-scroll {

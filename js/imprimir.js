@@ -7,7 +7,7 @@
 //   imprimir.html?tipus=dia&data=2026-08-22               → els horaris d'un dia, masculí i femení
 
 import {
-  COMPETICIONS, adreca, buida, carregarTorneig, competicioDeLaAdreca, diaCurt, el, franja,
+  COMPETICIONS, adreca, avuiLocal, buida, carregarTorneig, competicioDeLaAdreca, diaCurt, el, franja,
   inicia, mostrarErrorGreu, mostrarErrors, nomDia, textIncognita,
 } from './comu.js';
 import {
@@ -515,7 +515,7 @@ async function pintarDia() {
     .sort((a, b) => inicia(a) - inicia(b));
 
   const dies = [...new Set(totes.map((slot) => slot.data))].sort();
-  const avui = new Date().toISOString().slice(0, 10);
+  const avui = avuiLocal();
   const data = params.get('data') ?? dies.find((dia) => dia >= avui) ?? dies[0];
 
   enllacTornar.href = adreca('horaris.html', competicio);
